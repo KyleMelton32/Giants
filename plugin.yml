@@ -1,0 +1,26 @@
+name: Giants
+main: me.Mammothskier.Giants.Giants
+version: 6.1
+author: Mammothskier
+
+commands:
+    giants:
+        description: Shows list of commands.
+
+permissions:
+    giants.*:
+        description: Gives all permissions.
+        default: false
+        children:
+            giants.reload: true
+            giants.debug: true
+            giants.spawn: true
+    giants.reload:
+        description: Reloads the config file.
+        default: false
+    giants.debug:
+        description: Shows Debug messages.
+        default: false
+    giants.spawn:
+        description: Spawns a Giant at the given location.
+        default: false
