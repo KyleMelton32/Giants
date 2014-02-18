@@ -1,6 +1,6 @@
 name: Giants
 main: me.Mammothskier.Giants.Giants
-version: 6.1
+version: ${project.version}
 author: Mammothskier
 
 commands:
