@@ -38,6 +38,8 @@ local.properties
 #################
 /.idea
 /target
+*.iml
+*.eml
 
 #################
 ## Visual Studio
