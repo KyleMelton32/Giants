@@ -38,4 +38,22 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <name>Bukkit Repository</name>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.7.2-R0.3</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
 </project>
