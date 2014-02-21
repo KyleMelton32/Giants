@@ -109,21 +109,15 @@ public class Listeners implements Listener {
 				}
 			}
 		}
-	}
-
-	@EventHandler
-	public void GiantHealth(EntityRegainHealthEvent event) {
-		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Giant Stats.Health");
-		int health;
+		double health;
 		try {
 			health = Integer.parseInt(string);
 		} catch (Exception e) {
 			health = 100;
 		}
-
-		if (API.isGiant(entity)) {
-			event.setAmount(health + 0.0);
+		if(event.getEntityType() == EntityType.GIANT){
+			event.getEntity().setMaxHealth(health);
 		}
 	}
 
