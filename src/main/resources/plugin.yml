@@ -1,5 +1,5 @@
 name: Giants
-main: me.Mammothskier.Giants.Giants
+main: main.java.me.Mammothskier.Giants.Giants
 version: ${project.version}
 author: Mammothskier
 
