@@ -17,6 +17,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -166,6 +167,35 @@ public class Listeners implements Listener {
 					try {
 						target.getLocation().getWorld().strikeLightning(target.getLocation());
 					} catch (Exception e) {
+					}
+				} else {
+					event.setTarget(target);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void ZombieAttack(EntityTargetEvent event) {
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+		int Amt;
+		if ((entity instanceof LivingEntity)) {
+			if (API.isGiant(entity)) {
+				if (API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Attack Mechanisms.Zombie Attack.Enabled").equalsIgnoreCase("true")) {
+					String config = API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn");
+					try {
+						Amt = Integer.parseInt(config);
+					} catch (Exception e) {
+						Amt = 3;
+					}
+					for (int i = 1; i <= Amt; i++){
+						if (API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Attack Mechanisms.Zombie Attack.Baby Zombies").equalsIgnoreCase("true")) {
+							((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
+						}
+						else{
+							event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
+						}
 					}
 				} else {
 					event.setTarget(target);

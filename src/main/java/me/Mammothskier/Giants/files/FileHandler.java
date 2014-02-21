@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
 import main.java.me.Mammothskier.Giants.Giants;
 
 public class FileHandler {
@@ -102,6 +104,9 @@ public class FileHandler {
 				Config.set("Giants Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Config.set("Giants Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Config.set("Giants Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
+				Config.set("Giants Configuration.Attack Mechanisms.Zombie Attack.Enabled", false);
+				Config.set("Giants Configuration.Attack Mechanisms.Zombie Attack.Baby Zombies", false);
+				Config.set("Giants Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn", new Integer(3));
 				Config.set("Giants Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
 				Config.set("Giants Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
 				Config.set("Giants Configuration.Spawn Settings.Chance", new Integer(10));
