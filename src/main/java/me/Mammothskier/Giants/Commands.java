@@ -1,6 +1,6 @@
-package me.Mammothskier.Giants;
+package main.java.me.Mammothskier.Giants;
 
-import me.Mammothskier.Giants.utils.API;
+import main.java.me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

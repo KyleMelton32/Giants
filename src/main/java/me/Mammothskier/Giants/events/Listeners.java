@@ -1,12 +1,12 @@
-package me.Mammothskier.Giants.events;
+package main.java.me.Mammothskier.Giants.events;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Config;
-import me.Mammothskier.Giants.utils.API;
+import main.java.me.Mammothskier.Giants.Giants;
+import main.java.me.Mammothskier.Giants.files.Config;
+import main.java.me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -60,47 +60,51 @@ public class Listeners implements Listener {
 		Entity entity = event.getEntity();
 		EntityType type = event.getEntityType();
 		SpawnReason spawnReason = event.getSpawnReason();
-
-		if (!API.getGiantSpawnWorlds().contains(entity.getWorld().getName())) {
+		if(event.isCancelled()){
 			return;
 		}
+		else{
+			if (!API.getGiantSpawnWorlds().contains(entity.getWorld().getName())) {
+				return;
+			}
 
-		if ((spawnReason == SpawnReason.NATURAL)) {
-			if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN)) {
-				String string = API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Spawn Settings.Chance");
-				float sRate;
-				try {
-					sRate = Float.parseFloat(string);
-				} catch (NumberFormatException e) {
-					sRate = 0;
-				}
-				float chance = 100 - sRate;
-
-				Random rand = new Random();
-				double choice = rand.nextInt(100) < chance ? 1 : 0;
-				if (choice == 0) {
-					Location location = event.getEntity().getLocation();
-					double x = location.getX();
-					double y = location.getY();
-					double z = location.getZ();
-
-					int x2 = (int) x;
-					int y2 = (int) y;
-					int z2 = (int) z;
-
-					int spawngiant  = 1;
-					double checkcount = 0.01;
-					while (checkcount < 10) {
-						y2 += checkcount;
-
-						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
-							spawngiant = 0;
-						}
-						checkcount++;
+			if ((spawnReason == SpawnReason.NATURAL)) {
+				if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN)) {
+					String string = API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Spawn Settings.Chance");
+					float sRate;
+					try {
+						sRate = Float.parseFloat(string);
+					} catch (NumberFormatException e) {
+						sRate = 0;
 					}
-					if (spawngiant == 1) {
-						SpawnEvent SE = new SpawnEvent(location);
-						Bukkit.getServer().getPluginManager().callEvent(SE);
+					float chance = 100 - sRate;
+
+					Random rand = new Random();
+					double choice = rand.nextInt(100) < chance ? 1 : 0;
+					if (choice == 0) {
+						Location location = event.getEntity().getLocation();
+						double x = location.getX();
+						double y = location.getY();
+						double z = location.getZ();
+
+						int x2 = (int) x;
+						int y2 = (int) y;
+						int z2 = (int) z;
+
+						int spawngiant  = 1;
+						double checkcount = 0.01;
+						while (checkcount < 10) {
+							y2 += checkcount;
+
+							if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
+								spawngiant = 0;
+							}
+							checkcount++;
+						}
+						if (spawngiant == 1) {
+							SpawnEvent SE = new SpawnEvent(location);
+							Bukkit.getServer().getPluginManager().callEvent(SE);
+						}
 					}
 				}
 			}

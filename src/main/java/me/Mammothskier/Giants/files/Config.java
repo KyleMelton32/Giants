@@ -1,4 +1,4 @@
-package me.Mammothskier.Giants.files;
+package main.java.me.Mammothskier.Giants.files;
 
 public enum Config {
 	CONFIG("plugins/Giants/config.yml");

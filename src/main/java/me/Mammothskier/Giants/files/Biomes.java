@@ -1,4 +1,4 @@
-package me.Mammothskier.Giants.files;
+package main.java.me.Mammothskier.Giants.files;
 
 public enum Biomes {
 	BIOMES("plugins/Giants/biomes.yml");

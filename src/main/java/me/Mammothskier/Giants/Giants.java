@@ -1,10 +1,10 @@
-package me.Mammothskier.Giants;
+package main.java.me.Mammothskier.Giants;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import me.Mammothskier.Giants.utils.API;
-import me.Mammothskier.Giants.utils.Metrics;
+import main.java.me.Mammothskier.Giants.utils.API;
+import main.java.me.Mammothskier.Giants.utils.Metrics;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
