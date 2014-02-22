@@ -35,7 +35,9 @@ public class Commands implements CommandExecutor {
 						player = (Player) sender;
 						if ((player.hasPermission("giants.reload")) || (player.isOp())) {
 							API.getFileHandler().loadConfig();
+							API.getFileHandler().loadBiomes();
 							sender.sendMessage(ChatColor.GREEN + "Giants config file reloaded.");
+							sender.sendMessage(ChatColor.GREEN + "Giants biomes file reloaded.");
 						} else {
 							sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 						}
