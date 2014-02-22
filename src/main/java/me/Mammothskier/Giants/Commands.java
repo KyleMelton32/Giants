@@ -43,7 +43,9 @@ public class Commands implements CommandExecutor {
 						}
 					} else {
 						API.getFileHandler().loadConfig();
+						API.getFileHandler().loadBiomes();
 						_giants.log.info("Giants config file reloaded.");
+						_giants.log.info("Giants biomes file reloaded.");
 					}
 				}
 				if (args[0].equalsIgnoreCase("spawn")){
