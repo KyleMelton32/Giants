@@ -1,0 +1,14 @@
+Giants Configuration:
+  Spawn Settings:
+    Chance: 10
+    Worlds:
+    - world
+    - world_nether
+    - world_the_end
+  Giant Stats:
+    Size: 12
+    Experience: 5
+    Drops:
+    - '1:0:1'
+  Sounds:
+    Death: true

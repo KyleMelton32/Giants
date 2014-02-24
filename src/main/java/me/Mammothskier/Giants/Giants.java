@@ -22,4 +22,7 @@ public class Giants extends JavaPlugin{
 		    // Failed to submit the stats :-(
 		}
 	}
+	@Override
+	public void onDisable(){
+	}
 }

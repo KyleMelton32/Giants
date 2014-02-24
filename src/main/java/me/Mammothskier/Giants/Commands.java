@@ -8,7 +8,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 
 public class Commands implements CommandExecutor {
@@ -23,7 +25,7 @@ public class Commands implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("giants")) {
 			if (args.length == 0) {
 				if (sender.hasPermission("giants.reload") || sender.hasPermission("giants.*") || sender.hasPermission("giants.debug") || sender.hasPermission("giants.spawn") || sender.isOp()) {
-				sender.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" + "/giants reload:  Reloads the config file.\n" + "/giants spawn <x> <y> <z>");
+				sender.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" + "/giants reload:  Reloads the config file.\n" + "/giants spawn [entitytype] <x> <y> <z>");
 				} else {
 					sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 				}
@@ -35,17 +37,19 @@ public class Commands implements CommandExecutor {
 						player = (Player) sender;
 						if ((player.hasPermission("giants.reload")) || (player.isOp())) {
 							API.getFileHandler().loadConfig();
-							API.getFileHandler().loadBiomes();
+							API.getFileHandler().loadGiant();
+							API.getFileHandler().loadGiantBiomes();
+							API.getFileHandler().loadSlime();
+							API.getFileHandler().loadSlimeBiomes();
+							API.getFileHandler().loadMagmaCube();
+							API.getFileHandler().loadMagmaCubeBiomes();
 							sender.sendMessage(ChatColor.GREEN + "Giants config file reloaded.");
-							sender.sendMessage(ChatColor.GREEN + "Giants biomes file reloaded.");
 						} else {
 							sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 						}
 					} else {
 						API.getFileHandler().loadConfig();
-						API.getFileHandler().loadBiomes();
 						_giants.log.info("Giants config file reloaded.");
-						_giants.log.info("Giants biomes file reloaded.");
 					}
 				}
 				if (args[0].equalsIgnoreCase("spawn")){
@@ -53,43 +57,122 @@ public class Commands implements CommandExecutor {
 					if (sender instanceof Player){
 						player = (Player) sender;
 						if((player.hasPermission("giants.spawn")) || (player.isOp())){
-							if (args.length == 1){
+							if(args[1].equalsIgnoreCase("giant")){
+								if(args.length ==  2){
+									Location loc = (Location) player.getLocation();
+									Location location = loc;
+									loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									player.sendMessage(ChatColor.GREEN + "A Giant has been spawned");
+								}
+								if(args.length == 5){
+									Location location = player.getLocation();
+									double locx = player.getLocation().getX();
+									double locy = player.getLocation().getY();
+									double locz = player.getLocation().getZ();
+									
+									try {
+										locx = Integer.parseInt(args[2]);
+									} catch (Exception e) {
+									}
+									location.setX(locx);
+									try {
+										locy = Integer.parseInt(args[3]);
+									} catch (Exception e) {
+									}
+									location.setY(locy);
+									try {
+										locz = Integer.parseInt(args[4]);
+									} catch (Exception e) {
+									}
+									location.setZ(locz);
+									Location loc = location;
+									loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									player.sendMessage(ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
+								}
+							}
+							if(args[1].equalsIgnoreCase("slime")){
 								Location loc = (Location) player.getLocation();
 								Location location = loc;
-								loc.getWorld().spawnEntity(location, EntityType.GIANT);
-								player.sendMessage(ChatColor.GREEN + "A Giant has been spawned");
+								String string = API.getFileHandler().getSlimeProperty(main.java.me.Mammothskier.Giants.files.Slime.SLIME, "Giants Configuration.Giant Stats.Size");
+								int size;
+								try {
+									size = Integer.parseInt(string);
+								} catch (Exception e) {
+									size = 12;
+								}
+								if(args.length ==  2){
+									Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
+									entity.setSize(size);
+									player.sendMessage(ChatColor.GREEN + "A Giant Slime has been spawned");
+								}
+								if(args.length == 5){
+									double locx = player.getLocation().getX();
+									double locy = player.getLocation().getY();
+									double locz = player.getLocation().getZ();
+									
+									try {
+										locx = Integer.parseInt(args[2]);
+									} catch (Exception e) {
+									}
+									loc.setX(locx);
+									try {
+										locy = Integer.parseInt(args[3]);
+									} catch (Exception e) {
+									}
+									loc.setY(locy);
+									try {
+										locz = Integer.parseInt(args[4]);
+									} catch (Exception e) {
+									}
+									loc.setZ(locz);
+									Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
+									entity.setSize(size);
+									player.sendMessage(ChatColor.GREEN + "A Giant Slime has been spawned");
+								}
 							}
-							if (args.length == 4){
-								Location location = player.getLocation();
-								double locx = player.getLocation().getX();
-								double locy = player.getLocation().getY();
-								double locz = player.getLocation().getZ();
-								
+							if(args[1].equalsIgnoreCase("magma") && args[2].equalsIgnoreCase("cube")){
+								Location loc = (Location) player.getLocation();
+								Location location = loc;
+								String string = API.getFileHandler().getMagmaCubeProperty(main.java.me.Mammothskier.Giants.files.MagmaCube.MAGMACUBE, "Giants Configuration.Giant Stats.Size");
+								int size;
 								try {
-									locx = Integer.parseInt(args[1]);
+									size = Integer.parseInt(string);
 								} catch (Exception e) {
-									player.sendMessage("Invalid arguements");
+									size = 12;
 								}
-								location.setX(locx);
-								try {
-									locy = Integer.parseInt(args[2]);
-								} catch (Exception e) {
-									player.sendMessage("Invalid arguements");
+								if(args.length == 3){
+									MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
+									entity.setSize(size);
+									player.sendMessage(ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 								}
-								location.setY(locy);
-								try {
-									locz = Integer.parseInt(args[3]);
-								} catch (Exception e) {
-									player.sendMessage("Invalid arguements");
+								if(args.length == 6){
+									double locx = player.getLocation().getX();
+									double locy = player.getLocation().getY();
+									double locz = player.getLocation().getZ();
+									
+									try {
+										locx = Integer.parseInt(args[3]);
+									} catch (Exception e) {
+									}
+									loc.setX(locx);
+									try {
+										locy = Integer.parseInt(args[4]);
+									} catch (Exception e) {
+									}
+									loc.setY(locy);
+									try {
+										locz = Integer.parseInt(args[5]);
+									} catch (Exception e) {
+									}
+									loc.setZ(locz);
+									MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
+									entity.setSize(size);
+									player.sendMessage(ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 								}
-								location.setZ(locz);
-								Location loc = location;
-								loc.getWorld().spawnEntity(location, EntityType.GIANT);
-								player.sendMessage(ChatColor.GREEN + "A Giant has been spawned");
 							}
-						}
-						else{
-							sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+							else{
+								sender.sendMessage(ChatColor.RED + "Please specify which giant entity you would like spawned! Giant, Slime, Magma Cube");
+							}
 						}
 					}
 				}
