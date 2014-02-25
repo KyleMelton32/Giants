@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -105,7 +107,21 @@ public class SlimeListeners implements Listener {
 			}
 		}
 	}
-
+	
+	@EventHandler
+	public void ArrowDamage(EntityDamageByEntityEvent event){
+		Entity entity = event.getEntity();
+		if((event.getDamager() instanceof Arrow) && (API.isGiantSlime(entity))){
+			int damage;
+			String string = API.getFileHandler().getSlimeProperty(Slime.SLIME, "Giants Configuration.Damage Settings.Arrows.Damage done by arrow");
+			try {
+				damage = Integer.parseInt(string);
+			} catch (Exception e) {
+				damage = 10;
+			}
+			event.setDamage(damage + 0.0);
+		}
+	}
 
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {

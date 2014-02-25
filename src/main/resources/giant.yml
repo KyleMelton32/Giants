@@ -4,6 +4,9 @@ Giants Configuration:
     Experience: 5
     Drops:
     - '1:0:1'
+  Damage Settings:
+    Arrows:
+      Damage done by arrow: 10
   Attack Mechanisms:
     Lightning Attack: false
     Throw Boulder Attack: false

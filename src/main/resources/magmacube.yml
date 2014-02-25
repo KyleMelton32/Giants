@@ -5,6 +5,9 @@ Giants Configuration:
     - world
     - world_nether
     - world_the_end
+  Damage Settings:
+    Arrows:
+      Damage done by arrow: 10
   Giant Stats:
     Size: 12
     Experience: 5

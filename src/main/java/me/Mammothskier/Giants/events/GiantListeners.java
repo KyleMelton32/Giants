@@ -13,6 +13,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -24,6 +26,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -119,6 +122,21 @@ public class GiantListeners implements Listener {
 		}
 		if(event.getEntityType() == EntityType.GIANT){
 			event.getEntity().setMaxHealth(health);
+		}
+	}
+	
+	@EventHandler
+	public void ArrowDamage(EntityDamageByEntityEvent event){
+		Entity entity = event.getEntity();
+		if((event.getDamager() instanceof Arrow) && (API.isGiant(entity))){
+			int damage;
+			String string = API.getFileHandler().getGiantProperty(Giant.GIANT, "Giants Configuration.Damage Settings.Arrows.Damage done by arrow");
+			try {
+				damage = Integer.parseInt(string);
+			} catch (Exception e) {
+				damage = 10;
+			}
+			event.setDamage(damage + 0.0);
 		}
 	}
 

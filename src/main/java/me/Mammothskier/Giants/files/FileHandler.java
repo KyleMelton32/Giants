@@ -236,6 +236,7 @@ public class FileHandler {
 				Giant.set("Giants Configuration.Giant Stats.Health", new Integer(100));
 				Giant.set("Giants Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giants Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Giant.set("Giants Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Giant.set("Giants Configuration.Attack Mechanisms.Lightning Attack", false);
 				Giant.set("Giants Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				Giant.set("Giants Configuration.Attack Mechanisms.Stomp Attack", false);
@@ -344,6 +345,7 @@ public class FileHandler {
 				Slime.set("Giants Configuration.Giant Stats.Size", new Integer(12));
 				Slime.set("Giants Configuration.Giant Stats.Experience", new Integer(5));
 				Slime.set("Giants Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Slime.set("Giants Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Giants Configuration.Sounds.Death", true);
 				try {
 					Slime.save(file);
@@ -430,7 +432,8 @@ public class FileHandler {
 			case MAGMACUBE:
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
 				MagmaCube.set("Giants Configuration.Spawn Settings.Chance", new Integer(10));
-				MagmaCube.set("Giants Configuration.Spawn Settings.Worlds", loadWorlds());				
+				MagmaCube.set("Giants Configuration.Spawn Settings.Worlds", loadWorlds());	
+				MagmaCube.set("Giants Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Giants Configuration.Giant Stats.Size", new Integer(12));
 				MagmaCube.set("Giants Configuration.Giant Stats.Experience", new Integer(5));
 				MagmaCube.set("Giants Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
