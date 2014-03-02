@@ -58,7 +58,7 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-		<dependency>
+	<dependency>
             <groupId>org.mcstats.bukkit</groupId>
             <artifactId>metrics</artifactId>
             <version>R7</version>
