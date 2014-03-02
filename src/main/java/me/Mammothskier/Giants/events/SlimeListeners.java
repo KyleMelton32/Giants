@@ -135,7 +135,7 @@ public class SlimeListeners implements Listener {
 			exp = 5;
 		}
 
-		if (API.isGiant(entity)) {
+		if (API.isGiantSlime(entity)) {
 			if (API.getFileHandler().getSlimeProperty(Slime.SLIME, "Giants Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}

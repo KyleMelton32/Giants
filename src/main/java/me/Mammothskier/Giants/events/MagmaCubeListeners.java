@@ -135,7 +135,7 @@ public class MagmaCubeListeners implements Listener {
 			exp = 5;
 		}
 
-		if (API.isGiant(entity)) {
+		if (API.isGiantMagmaCube(entity)) {
 			if (API.getFileHandler().getMagmaCubeProperty(MagmaCube.MAGMACUBE, "Giants Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
