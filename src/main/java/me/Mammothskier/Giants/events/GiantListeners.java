@@ -41,7 +41,7 @@ public class GiantListeners implements Listener {
 
 	@EventHandler
 	public void onGiantSpawn(GiantSpawnEvent event) {
-		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug.Debug Mode").equalsIgnoreCase("true")) {
+		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Enabled").equalsIgnoreCase("true")) {
 			String message = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Debug Message");
 			if (message != null) {
 				for (Player player : Bukkit.getServer().getOnlinePlayers()) {

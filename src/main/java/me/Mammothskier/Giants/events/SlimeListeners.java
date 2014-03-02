@@ -35,8 +35,8 @@ public class SlimeListeners implements Listener {
 
 	@EventHandler
 	public void onSlimeSpawn(SlimeSpawnEvent event) {
-		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug Mode").equalsIgnoreCase("true")) {
-			String message = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Language.Debug Message");
+		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Enabled").equalsIgnoreCase("true")) {
+			String message = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Debug Message");
 			if (message != null) {
 				for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 					if (player.hasPermission("giants.debug") || player.hasPermission("giants.*") || player.isOp()) {
