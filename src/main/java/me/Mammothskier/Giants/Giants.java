@@ -1,12 +1,12 @@
-package me.Mammothskier.Giants;
-
-import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
+package main.java.me.Mammothskier.Giants;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import me.Mammothskier.Giants.utils.API;
+import main.java.me.Mammothskier.Giants.utils.API;
+import main.java.me.Mammothskier.Giants.utils.Metrics;
+
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Giants extends JavaPlugin{
 	

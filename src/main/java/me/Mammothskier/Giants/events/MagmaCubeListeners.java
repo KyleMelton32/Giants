@@ -1,4 +1,12 @@
-package me.Mammothskier.Giants.events;
+package main.java.me.Mammothskier.Giants.events;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import main.java.me.Mammothskier.Giants.Giants;
+import main.java.me.Mammothskier.Giants.files.Files;
+import main.java.me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,19 +20,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Config;
-import me.Mammothskier.Giants.files.MagmaCube;
-import me.Mammothskier.Giants.utils.API;
 
 public class MagmaCubeListeners implements Listener {
 	private Giants _magmacubes;
@@ -36,8 +35,8 @@ public class MagmaCubeListeners implements Listener {
 
 	@EventHandler
 	public void onMagmaCubeSpawn(MagmaCubeSpawnEvent event) {
-		if (API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Debug Mode").equalsIgnoreCase("true")) {
-			String message = API.getFileHandler().getProperty(Config.CONFIG, "Giants Configuration.Language.Debug Message");
+		if (API.getFileHandler().getProperty(Files.CONFIG, "Magma Cube Configuration.Debug Mode").equalsIgnoreCase("true")) {
+			String message = API.getFileHandler().getProperty(Files.CONFIG, "Magma Cube Configuration.Language.Debug Message");
 			if (message != null) {
 				for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 					if (player.hasPermission("giants.debug") || player.hasPermission("giants.*") || player.isOp()) {
@@ -67,8 +66,7 @@ public class MagmaCubeListeners implements Listener {
 
 			if ((spawnReason == SpawnReason.NATURAL)) {
 				if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.MAGMA_CUBE)) {
-					String string = API.getFileHandler().getMagmaCubeProperty(
-                                            MagmaCube.MAGMACUBE, "Giants Configuration.Spawn Settings.Chance");
+					String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Spawn Settings.Chance");
 					float sRate;
 					try {
 						sRate = Float.parseFloat(string);
@@ -99,8 +97,8 @@ public class MagmaCubeListeners implements Listener {
 							}
 							checkcount++;
 						}
-						if (spawnmagmacube == 1) {MagmaCubeSpawnEvent
-                                                            MCSE = new MagmaCubeSpawnEvent(location);
+						if (spawnmagmacube == 1) {
+							MagmaCubeSpawnEvent MCSE = new MagmaCubeSpawnEvent(location);
 							Bukkit.getServer().getPluginManager().callEvent(MCSE);
 						}
 					}
@@ -114,7 +112,7 @@ public class MagmaCubeListeners implements Listener {
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantMagmaCube(entity))){
 			int damage;
-			String string = API.getFileHandler().getMagmaCubeProperty(MagmaCube.MAGMACUBE, "Giants Configuration.Damage Settings.Arrows.Damage done by arrow");
+			String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow");
 			try {
 				damage = Integer.parseInt(string);
 			} catch (Exception e) {
@@ -127,7 +125,7 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getMagmaCubeProperty(MagmaCube.MAGMACUBE, "Giants Configuration.Giant Stats.Experience");
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Experience");
 		int exp;
 
 		try {
@@ -137,11 +135,11 @@ public class MagmaCubeListeners implements Listener {
 		}
 
 		if (API.isGiantMagmaCube(entity)) {
-			if (API.getFileHandler().getMagmaCubeProperty(MagmaCube.MAGMACUBE, "Giants Configuration.Sounds.Death").equalsIgnoreCase("true")) {
+			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getMagmaCubePropertyList(MagmaCube.MAGMACUBE, "Giants Configuration.Giant Stats.Drops");
+			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Drops");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}

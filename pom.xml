@@ -44,10 +44,6 @@
             <name>Bukkit Repository</name>
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>Plugin Metrics</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -56,12 +52,6 @@
             <artifactId>craftbukkit</artifactId>
             <version>1.7.2-R0.3</version>
             <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-	<dependency>
-            <groupId>org.mcstats.bukkit</groupId>
-            <artifactId>metrics</artifactId>
-            <version>R7</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
