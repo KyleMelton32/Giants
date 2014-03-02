@@ -1,4 +1,4 @@
-package main.java.me.Mammothskier.Giants.events;
+package me.Mammothskier.Giants.events;
 
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
@@ -7,9 +7,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import main.java.me.Mammothskier.Giants.files.Config;
-import main.java.me.Mammothskier.Giants.files.GiantBiomes;
-import main.java.me.Mammothskier.Giants.utils.API;
+import me.Mammothskier.Giants.files.Config;
+import me.Mammothskier.Giants.files.GiantBiomes;
+import me.Mammothskier.Giants.utils.API;
 
 public class GiantSpawnEvent extends Event {
 	private static boolean cancelled = false;

@@ -1,20 +1,10 @@
-package main.java.me.Mammothskier.Giants.events;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import main.java.me.Mammothskier.Giants.Giants;
-import main.java.me.Mammothskier.Giants.files.Config;
-import main.java.me.Mammothskier.Giants.files.Giant;
-import main.java.me.Mammothskier.Giants.utils.API;
+package me.Mammothskier.Giants.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -32,6 +22,15 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Config;
+import me.Mammothskier.Giants.files.Giant;
+import me.Mammothskier.Giants.utils.API;
 
 public class GiantListeners implements Listener {
 	private Giants _giants;
@@ -106,7 +105,8 @@ public class GiantListeners implements Listener {
 							checkcount++;
 						}
 						if (spawngiant == 1) {
-							GiantSpawnEvent GSE = new GiantSpawnEvent(location);
+							GiantSpawnEvent
+                                                            GSE = new GiantSpawnEvent(location);
 							Bukkit.getServer().getPluginManager().callEvent(GSE);
 						}
 					}
