@@ -1,4 +1,4 @@
-package main.java.me.Mammothskier.Giants.files;
+package me.Mammothskier.Giants.files;
 
 public enum MagmaCubeBiomes {
 	MAGMACUBEBIOMES("plugins/Giants/Magma Cube/biomes.yml");

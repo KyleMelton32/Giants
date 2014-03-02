@@ -1,4 +1,4 @@
-package main.java.me.Mammothskier.Giants.events;
+package me.Mammothskier.Giants.events;
 
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
@@ -8,9 +8,9 @@ import org.bukkit.entity.Slime;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import main.java.me.Mammothskier.Giants.files.Config;
-import main.java.me.Mammothskier.Giants.files.SlimeBiomes;
-import main.java.me.Mammothskier.Giants.utils.API;
+import me.Mammothskier.Giants.files.Config;
+import me.Mammothskier.Giants.files.SlimeBiomes;
+import me.Mammothskier.Giants.utils.API;
 
 public class SlimeSpawnEvent extends Event {
 	private static boolean cancelled = false;
@@ -21,7 +21,7 @@ public class SlimeSpawnEvent extends Event {
 	public SlimeSpawnEvent(Location loc) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
-		String string = API.getFileHandler().getSlimeProperty(main.java.me.Mammothskier.Giants.files.Slime.SLIME, "Giants Configuration.Giant Stats.Size");
+		String string = API.getFileHandler().getSlimeProperty(me.Mammothskier.Giants.files.Slime.SLIME, "Giants Configuration.Giant Stats.Size");
 		int size;
 		try {
 			size = Integer.parseInt(string);

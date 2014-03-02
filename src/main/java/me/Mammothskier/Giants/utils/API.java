@@ -1,19 +1,19 @@
-package main.java.me.Mammothskier.Giants.utils;
+package me.Mammothskier.Giants.utils;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
 
-import main.java.me.Mammothskier.Giants.Commands;
-import main.java.me.Mammothskier.Giants.Giants;
-import main.java.me.Mammothskier.Giants.events.GiantListeners;
-import main.java.me.Mammothskier.Giants.events.MagmaCubeListeners;
-import main.java.me.Mammothskier.Giants.events.SlimeListeners;
-import main.java.me.Mammothskier.Giants.files.FileHandler;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Giant;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.MagmaCube;
-import org.bukkit.entity.Slime;
+import me.Mammothskier.Giants.Commands;
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.events.GiantListeners;
+import me.Mammothskier.Giants.events.MagmaCubeListeners;
+import me.Mammothskier.Giants.events.SlimeListeners;
+import me.Mammothskier.Giants.files.FileHandler;
+import me.Mammothskier.Giants.files.Giant;
+import me.Mammothskier.Giants.files.MagmaCube;
+import me.Mammothskier.Giants.files.Slime;
 
 public class API {
 	private static Giants _giants;
@@ -35,39 +35,39 @@ public class API {
 	}
 
 	public static boolean isGiant(Entity entity) {
-		return entity instanceof Giant;
+		return entity instanceof org.bukkit.entity.Giant;
 	}
 
 	public static boolean isGiant(LivingEntity livingEntity) {
-		return livingEntity instanceof Giant;
+		return livingEntity instanceof org.bukkit.entity.Giant;
 	}
 	
 	public static boolean isGiantSlime(Entity entity) {
-		return entity instanceof Slime;
+		return entity instanceof org.bukkit.entity.Slime;
 	}
 
 	public static boolean isGiantSlime(LivingEntity livingEntity) {
-		return livingEntity instanceof Slime;
+		return livingEntity instanceof org.bukkit.entity.Slime;
 	}
 	
 	public static boolean isGiantMagmaCube(Entity entity) {
-		return entity instanceof MagmaCube;
+		return entity instanceof org.bukkit.entity.MagmaCube;
 	}
 	
 	public static boolean isGiantMagmaCube(LivingEntity livingEntity) {
-		return livingEntity instanceof MagmaCube;
+		return livingEntity instanceof org.bukkit.entity.MagmaCube;
 	}
 
 	public static List<String> getGiantSpawnWorlds() {
-		return getFileHandler().getGiantPropertyList(main.java.me.Mammothskier.Giants.files.Giant.GIANT, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getGiantPropertyList(Giant.GIANT, "Giants Configuration.Spawn Settings.Worlds");
 	}
 	
 	public static List<String> getSlimeSpawnWorlds() {
-		return getFileHandler().getSlimePropertyList(main.java.me.Mammothskier.Giants.files.Slime.SLIME, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getSlimePropertyList(Slime.SLIME, "Giants Configuration.Spawn Settings.Worlds");
 	}
 	
 	public static List<String> getMagmaCubeSpawnWorlds() {
-		return getFileHandler().getMagmaCubePropertyList(main.java.me.Mammothskier.Giants.files.MagmaCube.MAGMACUBE, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getMagmaCubePropertyList(MagmaCube.MAGMACUBE, "Giants Configuration.Spawn Settings.Worlds");
 	}
 
 	public static FileHandler getFileHandler() {

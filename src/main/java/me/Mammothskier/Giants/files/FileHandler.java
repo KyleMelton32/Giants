@@ -1,4 +1,8 @@
-package main.java.me.Mammothskier.Giants.files;
+package me.Mammothskier.Giants.files;
+
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,11 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import main.java.me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.Giants;
 
 public class FileHandler {
 	private final Giants _giants;
