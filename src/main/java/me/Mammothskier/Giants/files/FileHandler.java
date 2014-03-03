@@ -74,7 +74,7 @@ public class FileHandler {
 		switch (config) {
 			case CONFIG:
 				YamlConfiguration Config = YamlConfiguration.loadConfiguration(file);
-				Config.set("Giants Configuration.Entities.Giant", false);
+				Config.set("Giants Configuration.Entities.Giant", true);
 				Config.set("Giants Configuration.Entities.Giant Slime", false);
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);

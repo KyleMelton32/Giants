@@ -58,7 +58,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onGiantSpawnEvent(CreatureSpawnEvent event) {
+	public void GiantSpawnEvent(CreatureSpawnEvent event) {
 		Entity entity = event.getEntity();
 		EntityType type = event.getEntityType();
 		SpawnReason spawnReason = event.getSpawnReason();
