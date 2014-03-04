@@ -45,6 +45,7 @@ public class MagmaCubeListeners implements Listener {
 						String y = String.valueOf(Math.round(event.getLocation().getY()));
 						String z = String.valueOf(Math.round(event.getLocation().getZ()));
 						player.sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Magma Cube"));
+						Bukkit.getLogger().info(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Magma Cube"));
 					}
 				}
 			}
@@ -59,48 +60,47 @@ public class MagmaCubeListeners implements Listener {
 		if(event.isCancelled()){
 			return;
 		}
-		else{
-			if (!API.getGiantSpawnWorlds().contains(entity.getWorld().getName())) {
-				return;
-			}
+		
+		if (!API.getMagmaCubeSpawnWorlds().contains(entity.getWorld().getName())) {
+			return;
+		}
 
-			if ((spawnReason == SpawnReason.NATURAL)) {
-				if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.MAGMA_CUBE)) {
-					String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Spawn Settings.Chance");
-					float sRate;
-					try {
-						sRate = Float.parseFloat(string);
-					} catch (NumberFormatException e) {
-						sRate = 0;
+		if ((spawnReason == SpawnReason.NATURAL)) {
+			if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.MAGMA_CUBE)) {
+				String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Spawn Settings.Chance");
+				float sRate;
+				try {
+					sRate = Float.parseFloat(string);
+				} catch (NumberFormatException e) {
+					sRate = 10;
+				}
+				float chance = 100 - sRate;
+				
+				Random rand = new Random();
+				double choice = rand.nextInt(100) < chance ? 1 : 0;
+				if (choice == 0) {
+					Location location = event.getEntity().getLocation();
+					double x = location.getX();
+					double y = location.getY();
+					double z = location.getZ();
+					
+					int x2 = (int) x;
+					int y2 = (int) y;
+					int z2 = (int) z;
+
+					int spawnmagmacube  = 1;
+					double checkcount = 0.01;
+					while (checkcount < 10) {
+						y2 += checkcount;
+
+						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
+							spawnmagmacube = 0;
+						}
+						checkcount++;
 					}
-					float chance = 100 - sRate;
-
-					Random rand = new Random();
-					double choice = rand.nextInt(100) < chance ? 1 : 0;
-					if (choice == 0) {
-						Location location = event.getEntity().getLocation();
-						double x = location.getX();
-						double y = location.getY();
-						double z = location.getZ();
-
-						int x2 = (int) x;
-						int y2 = (int) y;
-						int z2 = (int) z;
-
-						int spawnmagmacube  = 1;
-						double checkcount = 0.01;
-						while (checkcount < 10) {
-							y2 += checkcount;
-
-							if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
-								spawnmagmacube = 0;
-							}
-							checkcount++;
-						}
-						if (spawnmagmacube == 1) {
-							MagmaCubeSpawnEvent MCSE = new MagmaCubeSpawnEvent(location);
-							Bukkit.getServer().getPluginManager().callEvent(MCSE);
-						}
+					if (spawnmagmacube == 1) {
+						MagmaCubeSpawnEvent MCSE = new MagmaCubeSpawnEvent(location);
+						Bukkit.getServer().getPluginManager().callEvent(MCSE);
 					}
 				}
 			}
