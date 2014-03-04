@@ -60,7 +60,7 @@ public class MagmaCubeListeners implements Listener {
 			return;
 		}
 		
-		if (!API.getGiantSpawnWorlds().contains(entity.getWorld().getName())) {
+		if (!API.getMagmaCubeSpawnWorlds().contains(entity.getWorld().getName())) {
 			return;
 		}
 
