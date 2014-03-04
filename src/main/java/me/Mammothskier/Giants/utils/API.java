@@ -1,14 +1,14 @@
-package main.java.me.Mammothskier.Giants.utils;
+package me.Mammothskier.Giants.utils;
 
 import java.util.List;
 
-import main.java.me.Mammothskier.Giants.Commands;
-import main.java.me.Mammothskier.Giants.Giants;
-import main.java.me.Mammothskier.Giants.events.GiantListeners;
-import main.java.me.Mammothskier.Giants.events.MagmaCubeListeners;
-import main.java.me.Mammothskier.Giants.events.SlimeListeners;
-import main.java.me.Mammothskier.Giants.files.FileHandler;
-import main.java.me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.Commands;
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.events.GiantListeners;
+import me.Mammothskier.Giants.events.MagmaCubeListeners;
+import me.Mammothskier.Giants.events.SlimeListeners;
+import me.Mammothskier.Giants.files.FileHandler;
+import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;

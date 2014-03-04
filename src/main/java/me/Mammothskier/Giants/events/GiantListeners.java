@@ -1,12 +1,12 @@
-package main.java.me.Mammothskier.Giants.events;
+package me.Mammothskier.Giants.events;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.java.me.Mammothskier.Giants.Giants;
-import main.java.me.Mammothskier.Giants.files.Files;
-import main.java.me.Mammothskier.Giants.utils.API;
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -58,7 +58,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void GiantSpawnEvent(CreatureSpawnEvent event) {
+	public void GiantsSpawnEvent(CreatureSpawnEvent event) {
 		Entity entity = event.getEntity();
 		EntityType type = event.getEntityType();
 		SpawnReason spawnReason = event.getSpawnReason();
@@ -77,7 +77,7 @@ public class GiantListeners implements Listener {
 				try {
 					sRate = Float.parseFloat(string);
 				} catch (NumberFormatException e) {
-					sRate = 0;
+					sRate = 10;
 				}
 				float chance = 100 - sRate;
 
@@ -110,6 +110,10 @@ public class GiantListeners implements Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler
+	public void GiantHealth(CreatureSpawnEvent event){
 		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
 		double health;
 		try {

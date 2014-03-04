@@ -1,12 +1,12 @@
-package main.java.me.Mammothskier.Giants.events;
+package me.Mammothskier.Giants.events;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.java.me.Mammothskier.Giants.Giants;
-import main.java.me.Mammothskier.Giants.files.Files;
-import main.java.me.Mammothskier.Giants.utils.API;
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
