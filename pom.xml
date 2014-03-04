@@ -88,6 +88,7 @@
             <groupId>org.mcstats.bukkit</groupId>
             <artifactId>metrics</artifactId>
             <version>R7</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
