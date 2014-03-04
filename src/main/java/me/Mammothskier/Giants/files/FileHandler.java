@@ -98,6 +98,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Zombie Attack.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn", new Integer(3));
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
+				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
 				Giant.set("Giant Configuration.Spawn Settings.Chance", new Integer(10));
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
