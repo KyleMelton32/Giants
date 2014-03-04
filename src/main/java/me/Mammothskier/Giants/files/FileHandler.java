@@ -11,6 +11,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.Giants;
 
 public class FileHandler {
@@ -59,19 +60,13 @@ public class FileHandler {
 				if (!parentFile.exists()) {
 					parentFile.mkdirs();
 				}
-				this.createConfig(file, confFile);
-				this.createGiant(file, confFile);
-				this.createGiantBiomes(file, confFile);
-				this.createMagmaCube(file, confFile);
-				this.createMagmaCubeBiomes(file, confFile);
-				this.createSlime(file, confFile);
-				this.createSlimeBiomes(file, confFile);
+				this.createFiles(file, confFile);
 			}
 		}
 	}
 
-	private void createConfig(Files config, File file) {
-		switch (config) {
+	private void createFiles(Files files, File file) {
+		switch (files) {
 			case CONFIG:
 				YamlConfiguration Config = YamlConfiguration.loadConfiguration(file);
 				Config.set("Giants Configuration.Entities.Giant", true);
@@ -83,15 +78,8 @@ public class FileHandler {
 					Config.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(config, Config);
+				_configurations.put(files, Config);
 				break;
-		default:
-			break;
-		}
-	}
-	
-	private void createGiant(Files giant, File file) {
-		switch (giant) {
 			case GIANT:
 				YamlConfiguration Giant = YamlConfiguration.loadConfiguration(file);
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
@@ -121,15 +109,8 @@ public class FileHandler {
 					Giant.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(giant, Giant);
+				_configurations.put(files, Giant);
 				break;
-		default:
-			break;
-		}
-	}
-	
-	private void createGiantBiomes(Files giantbiome, File file) {
-		switch (giantbiome) {
 			case GIANTBIOMES:
 				YamlConfiguration GiantBiomes = YamlConfiguration.loadConfiguration(file);
 				GiantBiomes.set("Giant Configuration.Biome Settings.Swampland.Swampland", true);
@@ -194,15 +175,8 @@ public class FileHandler {
 					GiantBiomes.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(giantbiome, GiantBiomes);
+				_configurations.put(files, GiantBiomes);
 				break;
-		default:
-			break;
-		}
-	}	
-	
-	private void createSlime(Files slime, File file) {
-		switch (slime) {
 			case SLIME:
 				YamlConfiguration Slime = YamlConfiguration.loadConfiguration(file);
 				Slime.set("Slime Configuration.Spawn Settings.Chance", new Integer(10));
@@ -216,15 +190,8 @@ public class FileHandler {
 					Slime.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(slime, Slime);
+				_configurations.put(files, Slime);
 				break;
-		default:
-			break;
-		}
-	}
-	
-	private void createSlimeBiomes(Files slimebiome, File file) {
-		switch (slimebiome) {
 			case SLIMEBIOMES:
 				YamlConfiguration SlimeBiomes = YamlConfiguration.loadConfiguration(file);
 				SlimeBiomes.set("Slime Configuration.Biome Settings.Swampland.Swampland", true);
@@ -289,15 +256,8 @@ public class FileHandler {
 					SlimeBiomes.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(slimebiome, SlimeBiomes);
+				_configurations.put(files, SlimeBiomes);
 				break;
-		default:
-			break;
-		}
-	}
-	
-	private void createMagmaCube(Files magmacube, File file) {
-		switch (magmacube) {
 			case MAGMACUBE:
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
 				MagmaCube.set("Slime Configuration.Spawn Settings.Chance", new Integer(10));
@@ -311,15 +271,8 @@ public class FileHandler {
 					MagmaCube.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(magmacube, MagmaCube);
+				_configurations.put(files, MagmaCube);
 				break;
-		default:
-			break;
-		}
-	}
-	
-	private void createMagmaCubeBiomes(Files magmacubebiome, File file) {
-		switch (magmacubebiome) {
 			case MAGMACUBEBIOMES:
 				YamlConfiguration MagmaCubeBiomes = YamlConfiguration.loadConfiguration(file);
 				MagmaCubeBiomes.set("Magma Cube Configuration.Biome Settings.Swampland.Swampland", false);
@@ -384,7 +337,7 @@ public class FileHandler {
 					MagmaCubeBiomes.save(file);
 				} catch (IOException e) {
 				}
-				_configurations.put(magmacubebiome, MagmaCubeBiomes);
+				_configurations.put(files, MagmaCubeBiomes);
 				break;
 		default:
 			break;
