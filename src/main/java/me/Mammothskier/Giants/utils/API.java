@@ -60,15 +60,15 @@ public class API {
 	}
 
 	public static List<String> getGiantSpawnWorlds() {
-		return getFileHandler().getPropertyList(Files.GIANT, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getPropertyList(Files.GIANT, "Giant Configuration.Spawn Settings.Worlds");
 	}
 	
 	public static List<String> getSlimeSpawnWorlds() {
-		return getFileHandler().getPropertyList(Files.SLIME, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Spawn Settings.Worlds");
 	}
 	
 	public static List<String> getMagmaCubeSpawnWorlds() {
-		return getFileHandler().getPropertyList(Files.MAGMACUBE, "Giants Configuration.Spawn Settings.Worlds");
+		return getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Spawn Settings.Worlds");
 	}
 
 	public static FileHandler getFileHandler() {
