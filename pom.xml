@@ -37,8 +37,29 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>org.mcstats.bukkit:metrics</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <minimizeJar>true</minimizeJar>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
