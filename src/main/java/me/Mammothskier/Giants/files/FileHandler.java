@@ -261,13 +261,13 @@ public class FileHandler {
 				break;
 			case MAGMACUBE:
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
-				MagmaCube.set("Slime Configuration.Spawn Settings.Chance", new Integer(10));
-				MagmaCube.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());
-				MagmaCube.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
-				MagmaCube.set("Slime Configuration.Giant Stats.Size", new Integer(12));
-				MagmaCube.set("Slime Configuration.Giant Stats.Experience", new Integer(5));
-				MagmaCube.set("Slime Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
-				MagmaCube.set("Slime Configuration.Sounds.Death", true);
+				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Chance", new Integer(10));
+				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Worlds", loadWorlds());
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
+				MagmaCube.set("Magma Cube Configuration.Giant Stats.Size", new Integer(12));
+				MagmaCube.set("Magma Cube Configuration.Giant Stats.Experience", new Integer(5));
+				MagmaCube.set("Magma Cube Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
 				try {
 					MagmaCube.save(file);
 				} catch (IOException e) {
