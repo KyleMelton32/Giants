@@ -118,7 +118,7 @@ public class SlimeListeners implements Listener {
 		int s;
 		try {
 			size = Integer.parseInt(string2);
-			health = Integer.parseInt(string);
+			health = Double.parseDouble(string);
 		} catch (Exception e) {
 			health = 100;
 			size = 12;
@@ -126,7 +126,6 @@ public class SlimeListeners implements Listener {
 		if(event.getEntityType() == EntityType.SLIME){
 			Entity slime = (Slime)event.getEntity();
 			s = ((Slime) slime).getSize();
-			Bukkit.broadcastMessage( "Spawned in slime size is:" + s + "The config is set to spawn in size:" + size);
 			if(s == size){
 				event.getEntity().setMaxHealth(health);
 			}
