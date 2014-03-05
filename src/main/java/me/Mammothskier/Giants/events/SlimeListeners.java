@@ -111,24 +111,24 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void SlimeHealth(CreatureSpawnEvent event){
-		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
 		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		double health;
-		int size = 0;
+		int size;
 		int s;
 		try {
 			size = Integer.parseInt(string2);
 			health = Integer.parseInt(string);
 		} catch (Exception e) {
 			health = 100;
+			size = 12;
 		}
 		if(event.getEntityType() == EntityType.SLIME){
 			Entity slime = (Slime)event.getEntity();
 			s = ((Slime) slime).getSize();
+			Bukkit.broadcastMessage( "Spawned in slime size is:" + s + "The config is set to spawn in size:" + size);
 			if(s == size){
 				event.getEntity().setMaxHealth(health);
-				event.getEntity().setHealth(health);
 			}
 		}
 	}
