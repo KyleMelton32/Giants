@@ -16,6 +16,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -105,6 +106,26 @@ public class SlimeListeners implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void SlimeHealth(CreatureSpawnEvent event){
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
+		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+		double health;
+		int size = 0;
+		int s;
+		try {
+			size = Integer.parseInt(string2);
+			health = Integer.parseInt(string);
+		} catch (Exception e) {
+			health = 100;
+		}
+		 Slime slime = (Slime)event.getEntity();
+		 s = slime.getSize();
+		if((event.getEntityType() == EntityType.SLIME) && (s ==  size)){
+			event.getEntity().setMaxHealth(health);
 		}
 	}
 	
