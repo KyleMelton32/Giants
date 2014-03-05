@@ -109,7 +109,7 @@ public class SlimeListeners implements Listener {
 		}
 	}
 	
-	@EventHandler
+/*	@EventHandler
 	public void SlimeHealth(CreatureSpawnEvent event){
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
 		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
@@ -122,12 +122,12 @@ public class SlimeListeners implements Listener {
 		} catch (Exception e) {
 			health = 100;
 		}
-		 Slime slime = (Slime)event.getEntity();
-		 s = slime.getSize();
+		 Entity slime = (Slime)event.getEntity();
+		 s = ((Slime) slime).getSize();
 		if((event.getEntityType() == EntityType.SLIME) && (s ==  size)){
 			event.getEntity().setMaxHealth(health);
 		}
-	}
+	}*/
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){

@@ -108,7 +108,7 @@ public class MagmaCubeListeners implements Listener {
 		}
 	}
 	
-	@EventHandler
+/*	@EventHandler
 	public void MagmaCubeHealth(CreatureSpawnEvent event){
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
 		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
@@ -126,7 +126,7 @@ public class MagmaCubeListeners implements Listener {
 		if((event.getEntityType() == EntityType.MAGMA_CUBE) && (s ==  size)){
 			event.getEntity().setMaxHealth(health);
 		}
-	}
+	}*/
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
