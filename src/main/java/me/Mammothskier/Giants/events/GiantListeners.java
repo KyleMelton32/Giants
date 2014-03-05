@@ -211,7 +211,7 @@ public class GiantListeners implements Listener {
 						chance = 1 + pick.nextInt(100);
 					}
 					if (chance == 50){
-						String config = API.getFileHandler().getProperty(Files.GIANT, "Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn");
+						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn");
 						try {
 							Amt = Integer.parseInt(config);
 						} catch (Exception e) {
