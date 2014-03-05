@@ -111,6 +111,7 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void SlimeHealth(CreatureSpawnEvent event){
+		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
 		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		double health;
@@ -127,6 +128,7 @@ public class SlimeListeners implements Listener {
 			s = ((Slime) slime).getSize();
 			if(s == size){
 				event.getEntity().setMaxHealth(health);
+				event.getEntity().setHealth(health);
 			}
 		}
 	}
@@ -159,7 +161,7 @@ public class SlimeListeners implements Listener {
 			exp = 5;
 		}
 
-		if (API.isGiant(entity)) {
+		if (API.isGiantSlime(entity)) {
 			if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}

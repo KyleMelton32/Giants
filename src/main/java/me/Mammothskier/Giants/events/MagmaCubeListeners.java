@@ -126,6 +126,7 @@ public class MagmaCubeListeners implements Listener {
 			 s = magmacube.getSize();
 			if(s == size){
 				event.getEntity().setMaxHealth(health);
+				event.getEntity().setHealth(health);
 			}
 		}
 	}
