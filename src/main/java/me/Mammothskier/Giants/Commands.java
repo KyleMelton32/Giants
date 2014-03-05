@@ -88,7 +88,7 @@ public class Commands implements CommandExecutor {
 						if(args[1].equalsIgnoreCase("slime")){
 							Location loc = (Location) player.getEyeLocation();
 							Location location = loc;
-							String string = API.getFileHandler().getProperty(Files.SLIME, "Giants Configuration.Giant Stats.Size");
+							String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 							int size;
 							try {
 								size = Integer.parseInt(string);
@@ -128,7 +128,7 @@ public class Commands implements CommandExecutor {
 						if(args[1].equalsIgnoreCase("magma") && args[2].equalsIgnoreCase("cube")){
 							Location loc = (Location) player.getEyeLocation();
 							Location location = loc;
-							String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Giants Configuration.Giant Stats.Size");
+							String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 							int size;
 							try {
 								size = Integer.parseInt(string);
