@@ -122,10 +122,12 @@ public class SlimeListeners implements Listener {
 		} catch (Exception e) {
 			health = 100;
 		}
-		 Entity slime = (Slime)event.getEntity();
-		 s = ((Slime) slime).getSize();
-		if((event.getEntityType() == EntityType.SLIME) && (s ==  size)){
-			event.getEntity().setMaxHealth(health);
+		if(event.getEntityType() == EntityType.SLIME){
+			Entity slime = (Slime)event.getEntity();
+			s = ((Slime) slime).getSize();
+			if(s == size){
+				event.getEntity().setMaxHealth(health);
+			}
 		}
 	}
 
