@@ -20,7 +20,7 @@ public class SlimeSpawnEvent extends Event {
 	public SlimeSpawnEvent(Location loc) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Giant Stats.Size");
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		int size;
 		try {
 			size = Integer.parseInt(string);

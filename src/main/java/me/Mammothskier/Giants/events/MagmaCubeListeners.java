@@ -15,6 +15,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -108,6 +109,26 @@ public class MagmaCubeListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void MagmaCubeHealth(CreatureSpawnEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
+		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		double health;
+		int size = 0;
+		int s;
+		try {
+			size = Integer.parseInt(string2);
+			health = Integer.parseInt(string);
+		} catch (Exception e) {
+			health = 100;
+		}
+		 MagmaCube magmacube = (MagmaCube)event.getEntity();
+		 s = magmacube.getSize();
+		if((event.getEntityType() == EntityType.MAGMA_CUBE) && (s ==  size)){
+			event.getEntity().setMaxHealth(health);
+		}
+	}
+	
+	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantMagmaCube(entity))){
@@ -125,7 +146,7 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Experience");
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Experience");
 		int exp;
 
 		try {
@@ -139,7 +160,7 @@ public class MagmaCubeListeners implements Listener {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Drops");
+			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Drops");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}

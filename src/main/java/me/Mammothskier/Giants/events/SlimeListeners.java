@@ -126,7 +126,7 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Giant Stats.Experience");
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
 		int exp;
 
 		try {
@@ -140,7 +140,7 @@ public class SlimeListeners implements Listener {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Giant Stats.Drops");
+			List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Slime Stats.Drops");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}

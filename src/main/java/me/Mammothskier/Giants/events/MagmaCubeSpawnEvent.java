@@ -20,7 +20,7 @@ public class MagmaCubeSpawnEvent extends Event {
 	public MagmaCubeSpawnEvent(Location loc) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Size");
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		int size;
 		try {
 			size = Integer.parseInt(string);
