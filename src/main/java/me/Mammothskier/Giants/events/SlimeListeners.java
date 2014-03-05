@@ -109,7 +109,7 @@ public class SlimeListeners implements Listener {
 		}
 	}
 	
-	@EventHandler
+/*	@EventHandler
 	public void SlimeHealth(CreatureSpawnEvent event){
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
 		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
@@ -130,7 +130,7 @@ public class SlimeListeners implements Listener {
 				event.getEntity().setMaxHealth(health);
 			}
 		}
-	}
+	}*/
 
 	
 	@EventHandler
