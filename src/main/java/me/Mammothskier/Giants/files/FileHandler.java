@@ -184,6 +184,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());	
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Slime Stats.Size", new Integer(12));
+				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Slime.set("Slime Configuration.Sounds.Death", true);
@@ -265,6 +266,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Worlds", loadWorlds());
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
+				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
