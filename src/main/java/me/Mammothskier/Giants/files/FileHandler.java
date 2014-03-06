@@ -266,6 +266,8 @@ public class FileHandler {
 				MagmaCube.set("Slime Configuration.Giant Stats.Size", new Integer(12));
 				MagmaCube.set("Slime Configuration.Giant Stats.Experience", new Integer(5));
 				MagmaCube.set("Slime Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time", new Integer(2));
 				MagmaCube.set("Slime Configuration.Sounds.Death", true);
 				try {
 					MagmaCube.save(file);
