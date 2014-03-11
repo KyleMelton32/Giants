@@ -150,6 +150,43 @@ public class MagmaCubeListeners implements Listener {
 			event.setDamage(damage + 0.0);
 		}
 	}
+	
+	@EventHandler
+	public void LavaAttack(EntityTargetEvent event){
+		Random pick = new Random();
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+		int chance = 0;
+		double time;
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time");
+		
+		try{
+			time = Double.parseDouble(string);
+		} catch (Exception e){
+			time = 3;
+		}
+		
+		if((API.isGiantMagmaCube(entity)) && (target instanceof Player)){
+			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled").equalsIgnoreCase("true")) {
+				for (int counter = 1; counter <= 1; counter++) {
+					chance = 1 + pick.nextInt(100);
+				}
+				if(chance == 50){
+					final Player player = (Player) event.getTarget();
+					int time2 = (int) (time * 20);
+					player.sendMessage(ChatColor.GOLD + "The magmacube will spawn lava under you in" + time + "seconds");
+					Bukkit.getServer().getScheduler()
+							.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
+
+						public void run() {
+							player.getEyeLocation().getBlock().setType(Material.LAVA);
+							player.sendMessage(ChatColor.GOLD + "The magma cube has now spawned lava under you");
+						}
+					}, time2*1L);
+				}
+			}
+		}
+	}
 
 	@EventHandler
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
