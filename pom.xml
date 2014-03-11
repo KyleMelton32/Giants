@@ -5,13 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
 
+
+
     <groupId>me.mammothskier</groupId>
     <artifactId>giants</artifactId>
     <version>6.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 
+
+
     <name>Giants</name>
+
+
 
 
     <build>
@@ -64,6 +70,8 @@
     </build>
 
 
+
+
     <repositories>
         <repository>
             <id>bukkit-repo</id>
@@ -75,6 +83,7 @@
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
+
 
     <dependencies>
         <dependency>
@@ -93,4 +102,7 @@
     </dependencies>
 
 
+
+
 </project>
+

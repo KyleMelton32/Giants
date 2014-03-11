@@ -16,6 +16,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -108,6 +109,30 @@ public class SlimeListeners implements Listener {
 		}
 	}
 	
+/*	@EventHandler
+	public void SlimeHealth(CreatureSpawnEvent event){
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
+		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+		double health;
+		int size;
+		int s;
+		try {
+			size = Integer.parseInt(string2);
+			health = Double.parseDouble(string);
+		} catch (Exception e) {
+			health = 100;
+			size = 12;
+		}
+		if(event.getEntityType() == EntityType.SLIME){
+			Entity slime = (Slime)event.getEntity();
+			s = ((Slime) slime).getSize();
+			if(s == size){
+				event.getEntity().setMaxHealth(health);
+			}
+		}
+	}*/
+
+	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
@@ -126,7 +151,7 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Giant Stats.Experience");
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
 		int exp;
 
 		try {
@@ -135,12 +160,12 @@ public class SlimeListeners implements Listener {
 			exp = 5;
 		}
 
-		if (API.isGiant(entity)) {
+		if (API.isGiantSlime(entity)) {
 			if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Giant Stats.Drops");
+			List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Slime Stats.Drops");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}

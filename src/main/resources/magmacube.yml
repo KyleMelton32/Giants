@@ -1,4 +1,4 @@
-Giants Configuration:
+Magma Cube Configuration:
   Spawn Settings:
     Chance: 10
     Worlds:
@@ -15,5 +15,3 @@ Giants Configuration:
     - '1:0:1'
   Sounds:
     Death: true
-
- 

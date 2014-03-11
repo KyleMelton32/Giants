@@ -88,16 +88,21 @@ public class Commands implements CommandExecutor {
 						if(args[1].equalsIgnoreCase("slime")){
 							Location loc = (Location) player.getEyeLocation();
 							Location location = loc;
-							String string = API.getFileHandler().getProperty(Files.SLIME, "Giants Configuration.Giant Stats.Size");
+							String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+							String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
 							int size;
+							double health;
 							try {
 								size = Integer.parseInt(string);
+								health = Double.parseDouble(string2);
 							} catch (Exception e) {
 								size = 12;
+								health = size^2;
 							}
 							if(args.length ==  2){
 								Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 								entity.setSize(size);
+								entity.setMaxHealth(health);
 								player.sendMessage(ChatColor.GREEN + "A Giant Slime has been spawned");
 							}
 							if(args.length == 5){
@@ -122,22 +127,28 @@ public class Commands implements CommandExecutor {
 								loc.setZ(locz);
 								Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 								entity.setSize(size);
+								entity.setMaxHealth(health);
 								player.sendMessage(ChatColor.GREEN + "A Giant Slime has been spawned");
 							}
 						}
 						if(args[1].equalsIgnoreCase("magma") && args[2].equalsIgnoreCase("cube")){
 							Location loc = (Location) player.getEyeLocation();
 							Location location = loc;
-							String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Giants Configuration.Giant Stats.Size");
+							String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+							String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
 							int size;
+							double health;
 							try {
 								size = Integer.parseInt(string);
+								health = Double.parseDouble(string2);
 							} catch (Exception e) {
 								size = 12;
+								health = size^2;
 							}
 							if(args.length == 3){
 								MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 								entity.setSize(size);
+								entity.setMaxHealth(health);
 								player.sendMessage(ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 							}
 							if(args.length == 6){
@@ -162,6 +173,7 @@ public class Commands implements CommandExecutor {
 								loc.setZ(locz);
 								MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 								entity.setSize(size);
+								entity.setMaxHealth(health);
 								player.sendMessage(ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 							}
 						}

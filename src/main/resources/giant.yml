@@ -1,4 +1,4 @@
-Giants Configuration:
+Giant Configuration:
   Giant Stats:
     Health: 100
     Experience: 5
@@ -24,6 +24,7 @@ Giants Configuration:
       Zombies to Spawn: 3
     Spawn Zombies On Death:
       Enabled: false
+      Baby Zombies: false
       Zombies to Spawn: 5
   Spawn Settings:
     Chance: 10

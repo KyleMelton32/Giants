@@ -16,6 +16,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -75,10 +76,11 @@ public class MagmaCubeListeners implements Listener {
 				try {
 					sRate = Float.parseFloat(string);
 				} catch (NumberFormatException e) {
-					sRate = 10;
+					sRate = 0;
 				}
-				float chance = 100 - sRate;
 				
+				float chance = 100 - sRate;
+
 				Random rand = new Random();
 				double choice = rand.nextInt(100) < chance ? 1 : 0;
 				if (choice == 0) {
@@ -86,7 +88,7 @@ public class MagmaCubeListeners implements Listener {
 					double x = location.getX();
 					double y = location.getY();
 					double z = location.getZ();
-					
+
 					int x2 = (int) x;
 					int y2 = (int) y;
 					int z2 = (int) z;
@@ -110,6 +112,30 @@ public class MagmaCubeListeners implements Listener {
 		}
 	}
 	
+/*	@EventHandler
+	public void MagmaCubeHealth(CreatureSpawnEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
+		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		double health;
+		int size = 0;
+		int s;
+		try {
+			size = Integer.parseInt(string2);
+			health = Integer.parseInt(string);
+		} catch (Exception e) {
+			health = 100;
+		}
+		if(event.getEntityType() == EntityType.MAGMA_CUBE){
+			 MagmaCube magmacube = (MagmaCube)event.getEntity();
+			 s = magmacube.getSize();
+			if(s == size){
+				event.getEntity().setMaxHealth(health);
+				event.getEntity().setHealth(health);
+			}
+		}
+	}*/
+
+	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
@@ -124,49 +150,11 @@ public class MagmaCubeListeners implements Listener {
 			event.setDamage(damage + 0.0);
 		}
 	}
-	
-	@EventHandler
-	public void LavaAttack(EntityTargetEvent event){
-		Random pick = new Random();
-		Entity entity = event.getEntity();
-		Entity target = event.getTarget();
-		int chance = 0;
-		double time;
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time");
-		
-		try{
-			time = Double.parseDouble(string);
-		} catch (Exception e){
-			time = 3;
-		}
-		
-		if((API.isGiantMagmaCube(entity)) && (target instanceof Player)){
-			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled").equalsIgnoreCase("true")) {
-				for (int counter = 1; counter <= 1; counter++) {
-					chance = 1 + pick.nextInt(100);
-				}
-				if(chance == 50){
-					Location targetloc = target.getLocation();
-					final Player player = (Player) event.getTarget();
-					int time2 = (int) (time * 20);
-					player.sendMessage(ChatColor.GOLD + "The magmacube will spawn lava under you in" + time + "seconds");
-					Bukkit.getServer().getScheduler()
-							.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
-
-						public void run() {
-							player.getEyeLocation().getBlock().setType(Material.LAVA);
-							player.sendMessage(ChatColor.GOLD + "The magma cube has now spawned lava under you");
-						}
-					}, time2*20L);
-				}
-			}
-		}
-	}
 
 	@EventHandler
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Experience");
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Experience");
 		int exp;
 
 		try {
@@ -180,7 +168,7 @@ public class MagmaCubeListeners implements Listener {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Giant Stats.Drops");
+			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Drops");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
