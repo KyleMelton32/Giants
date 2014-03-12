@@ -181,7 +181,8 @@ public class FileHandler {
 			case SLIME:
 				YamlConfiguration Slime = YamlConfiguration.loadConfiguration(file);
 				Slime.set("Slime Configuration.Spawn Settings.Chance", new Integer(10));
-				Slime.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());	
+				Slime.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());
+				Slime.set("Slime Configuration.Spawn Settings.Replace Normal Slime Spawn Only", false);
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Slime Stats.Size", new Integer(12));
 				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
@@ -269,6 +270,7 @@ public class FileHandler {
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Chance", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Worlds", loadWorlds());
+				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Replace Normal Magma Cube Spawn Only", false);
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
