@@ -16,6 +16,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -123,6 +124,25 @@ public class MagmaCubeListeners implements Listener {
 				damage = 10;
 			}
 			event.setDamage(damage + 0.0);
+		}
+	}
+	
+	@EventHandler
+	public void onLightningAttack(EntityTargetEvent event) {
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+
+		if ((entity instanceof LivingEntity)) {
+			if (API.isGiantMagmaCube(entity)) {
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
+					try {
+						target.getLocation().getWorld().strikeLightning(target.getLocation());
+					} catch (Exception e) {
+					}
+				} else {
+					event.setTarget(target);
+				}
+			}
 		}
 	}
 	
