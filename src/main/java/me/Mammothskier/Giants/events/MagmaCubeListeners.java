@@ -128,6 +128,42 @@ public class MagmaCubeListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void onFireAttack(EntityTargetEvent event) {
+		String ticks1 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
+		String ticks2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube");
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+		int ticksTarget;
+		int ticksGiant;
+		try {
+			ticksTarget = Integer.parseInt(ticks1);
+			ticksGiant = Integer.parseInt(ticks2);
+		} catch (Exception e) {
+			ticksTarget = 0;
+			ticksGiant = 0;
+		}
+
+		if ((entity instanceof LivingEntity)) {
+			if (API.isGiantMagmaCube(entity)) {
+				if(!(target == null)){
+					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled").equalsIgnoreCase("true")) {
+						if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Fire Attack").equalsIgnoreCase("true")) {
+							target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+						}
+						try {
+							event.getTarget().setFireTicks(ticksTarget);
+							event.getEntity().setFireTicks(ticksGiant);
+						} catch (Exception e) {
+						}
+					} else {
+						event.setTarget(target);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
 	public void onLightningAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
