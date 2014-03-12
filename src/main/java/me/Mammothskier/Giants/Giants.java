@@ -20,7 +20,7 @@ public class Giants extends JavaPlugin{
 		new API(this);
 		PluginDescriptionFile pdf = this.getDescription();
 		
-		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " Has Been Enabled!");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " Has Been Enabled!");
 		try {
 		    Metrics metrics = new Metrics(this);
 		    metrics.start();
