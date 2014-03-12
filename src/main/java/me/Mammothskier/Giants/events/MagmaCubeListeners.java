@@ -25,8 +25,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.Vector;
 
 public class MagmaCubeListeners implements Listener {
 	private Giants _magmacubes;
@@ -160,8 +162,45 @@ public class MagmaCubeListeners implements Listener {
 						public void run() {
 							player.getEyeLocation().getBlock().setType(Material.LAVA);
 							player.sendMessage(AttMessage);
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.EXPLODE, 1, 0);
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+							}
 						}
 					}, time2*1L);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onKickAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
+			String config = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+			double height;
+
+			try {
+				height = Double.parseDouble(config);
+			} catch (Exception e) {
+				height = 1;
+			}
+
+			Random pick = new Random();
+			int chance = 0;
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
+					if (API.isGiantMagmaCube(entity)) {
+						if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
+							player.setVelocity(new Vector(0, height, 0));
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+							}
+						}
+					}
 				}
 			}
 		}

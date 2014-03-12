@@ -273,12 +273,16 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled", true);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time", new Integer(2));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message", "&6The magmacube will spawn lava under you in {time} seconds!");
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Attack Message", "&6The magma cube has now spawned lava under you!");
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Kick Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Lava Attack", true);
 				try {
 					MagmaCube.save(file);
 				} catch (IOException e) {
