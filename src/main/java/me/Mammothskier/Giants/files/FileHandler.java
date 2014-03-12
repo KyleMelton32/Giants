@@ -187,6 +187,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
 				Slime.set("Slime Configuration.Sounds.Death", true);
 				try {
 					Slime.save(file);

@@ -15,6 +15,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -121,6 +123,25 @@ public class SlimeListeners implements Listener {
 				damage = 10;
 			}
 			event.setDamage(damage + 0.0);
+		}
+	}
+	
+	@EventHandler
+	public void onLightningAttack(EntityTargetEvent event) {
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+
+		if ((entity instanceof LivingEntity)) {
+			if (API.isGiantSlime(entity)) {
+				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
+					try {
+						target.getLocation().getWorld().strikeLightning(target.getLocation());
+					} catch (Exception e) {
+					}
+				} else {
+					event.setTarget(target);
+				}
+			}
 		}
 	}
 
