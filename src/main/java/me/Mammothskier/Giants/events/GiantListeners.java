@@ -51,7 +51,7 @@ public class GiantListeners implements Listener {
 						String y = String.valueOf(Math.round(event.getLocation().getY()));
 						String z = String.valueOf(Math.round(event.getLocation().getZ()));
 						player.sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
-						Bukkit.getLogger().info(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
+						Bukkit.getConsoleSender().sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
 					}
 				}
 			}

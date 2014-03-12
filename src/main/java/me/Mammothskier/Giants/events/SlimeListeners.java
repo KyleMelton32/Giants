@@ -46,7 +46,7 @@ public class SlimeListeners implements Listener {
 						String y = String.valueOf(Math.round(event.getLocation().getY()));
 						String z = String.valueOf(Math.round(event.getLocation().getZ()));
 						player.sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant Slime"));
-						Bukkit.getLogger().info(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant Slime"));
+						Bukkit.getConsoleSender().sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant Slime"));
 					}
 				}
 			}
