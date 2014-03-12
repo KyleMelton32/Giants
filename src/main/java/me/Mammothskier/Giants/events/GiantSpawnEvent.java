@@ -300,10 +300,8 @@ public class GiantSpawnEvent extends Event {
 				}
 			}
 			if (biome == Biome.SMALL_MOUNTAINS) {
-				if(API.getFileHandler().getProperty(Files.GIANTBIOMES, "Giant Configuration.Biome Settings.Other").equalsIgnoreCase("true")) {
-					if (API.getFileHandler().getProperty(Files.GIANTBIOMES, "Giant Configuration.Biome Settings.Other.Small Mountains").equalsIgnoreCase("true")) {
-						entity = loc.getWorld().spawnEntity(location, EntityType.GIANT);
-					}
+				if (API.getFileHandler().getProperty(Files.GIANTBIOMES, "Giant Configuration.Biome Settings.Other.Small Mountains").equalsIgnoreCase("true")) {
+					entity = loc.getWorld().spawnEntity(location, EntityType.GIANT);
 				}
 			}
 			if (biome == Biome.ICE_MOUNTAINS) {

@@ -421,7 +421,7 @@ public class MagmaCubeSpawnEvent extends Event {
 				}
 			}
 			if (biome == Biome.SMALL_MOUNTAINS) {
-				if(API.getFileHandler().getProperty(Files.MAGMACUBEBIOMES, "Magma Cube Configuration.Biome Settings.Other").equalsIgnoreCase("true")) {
+				if(API.getFileHandler().getProperty(Files.MAGMACUBEBIOMES, "Magma Cube Configuration.Biome Settings.Other.Small Mountains").equalsIgnoreCase("true")) {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
