@@ -267,10 +267,10 @@ public class GiantListeners implements Listener {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
 			String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Kick Attack.Kick Height");
-			int height;
+			double height;
 
 			try {
-				height = Integer.parseInt(config);
+				height = Double.parseDouble(config);
 			} catch (Exception e) {
 				height = 1;
 			}
