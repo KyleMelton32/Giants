@@ -198,7 +198,7 @@ public class GiantListeners implements Listener {
 	}
 	
 	@EventHandler
-	public void onZombieAttack(EntityTargetEvent event) {
+	public void onShrapnelAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int Amt;
@@ -206,19 +206,19 @@ public class GiantListeners implements Listener {
 		Random pick = new Random();
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiant(entity)) {
-				if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Zombie Attack.Enabled").equalsIgnoreCase("true")) {
+				if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled").equalsIgnoreCase("true")) {
 					for (int counter = 1; counter <= 1; counter++) {
 						chance = 1 + pick.nextInt(100);
 					}
 					if (chance == 50){
-						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn");
+						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
 						try {
 							Amt = Integer.parseInt(config);
 						} catch (Exception e) {
 							Amt = 3;
 						}
 						for (int i = 1; i <= Amt; i++){
-							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Zombie Attack.Baby Zombies").equalsIgnoreCase("true")) {
+							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
 								((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
 							}
 							else{

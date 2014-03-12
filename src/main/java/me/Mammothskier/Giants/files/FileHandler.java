@@ -94,9 +94,9 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Giant.set("Giant Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
-				Giant.set("Giant Configuration.Attack Mechanisms.Zombie Attack.Enabled", false);
-				Giant.set("Giant Configuration.Attack Mechanisms.Zombie Attack.Baby Zombies", false);
-				Giant.set("Giant Configuration.Attack Mechanisms.Zombie Attack.Zombies to Spawn", new Integer(3));
+				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled", false);
+				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies", false);
+				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn", new Integer(3));
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
@@ -264,11 +264,13 @@ public class FileHandler {
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Chance", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Worlds", loadWorlds());
-				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled", true);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time", new Integer(2));
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
 				try {
 					MagmaCube.save(file);
