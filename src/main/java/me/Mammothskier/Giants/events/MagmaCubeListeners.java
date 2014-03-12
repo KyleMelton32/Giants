@@ -133,6 +133,8 @@ public class MagmaCubeListeners implements Listener {
 		int chance = 0;
 		double time;
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time");
+		String attMessage = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message");
+		String message = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message");
 		
 		try{
 			time = Double.parseDouble(string);
@@ -148,13 +150,16 @@ public class MagmaCubeListeners implements Listener {
 				if(chance == 50){
 					final Player player = (Player) event.getTarget();
 					int time2 = (int) (time * 20);
-					player.sendMessage(ChatColor.GOLD + "The magmacube will spawn lava under you in" + time + "seconds");
+					String time3 = String.valueOf(Math.round(time));
+					message = ChatColor.translateAlternateColorCodes('&', message);
+					final String AttMessage = ChatColor.translateAlternateColorCodes('&', attMessage);
+					player.sendMessage(message.replace("{time}", time3));
 					Bukkit.getServer().getScheduler()
 							.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
 
 						public void run() {
 							player.getEyeLocation().getBlock().setType(Material.LAVA);
-							player.sendMessage(ChatColor.GOLD + "The magma cube has now spawned lava under you");
+							player.sendMessage(AttMessage);
 						}
 					}, time2*1L);
 				}
