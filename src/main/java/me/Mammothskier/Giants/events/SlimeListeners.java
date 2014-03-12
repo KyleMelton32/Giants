@@ -61,78 +61,51 @@ public class SlimeListeners implements Listener {
 		if(event.isCancelled()){
 			return;
 		}
-		else{
-			if (!API.getSlimeSpawnWorlds().contains(entity.getWorld().getName())) {
-				return;
-			}
+		if (!API.getSlimeSpawnWorlds().contains(entity.getWorld().getName())) {
+			return;
+		}
+		if ((spawnReason == SpawnReason.NATURAL)) {
+			if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.SLIME)) {
+				String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Chance");
+				float sRate;
+				try {
+					sRate = Float.parseFloat(string);
+				} catch (NumberFormatException e) {
+					sRate = 0;
+				}
+				float chance = 100 - sRate;
+				
+				Random rand = new Random();
+				double choice = rand.nextInt(100) < chance ? 1 : 0;
+				if (choice == 0) {
+					Location location = event.getEntity().getLocation();
+					double x = location.getX();
+					double y = location.getY();
+					double z = location.getZ();
 
-			if ((spawnReason == SpawnReason.NATURAL)) {
-				if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.SLIME)) {
-					String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Chance");
-					float sRate;
-					try {
-						sRate = Float.parseFloat(string);
-					} catch (NumberFormatException e) {
-						sRate = 0;
+					int x2 = (int) x;
+					int y2 = (int) y;
+					int z2 = (int) z;
+
+					int spawnslime  = 1;
+					double checkcount = 0.01;
+					while (checkcount < 10) {
+						y2 += checkcount;
+						
+						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
+							spawnslime = 0;
+						}
+						checkcount++;
 					}
-					float chance = 100 - sRate;
-
-					Random rand = new Random();
-					double choice = rand.nextInt(100) < chance ? 1 : 0;
-					if (choice == 0) {
-						Location location = event.getEntity().getLocation();
-						double x = location.getX();
-						double y = location.getY();
-						double z = location.getZ();
-
-						int x2 = (int) x;
-						int y2 = (int) y;
-						int z2 = (int) z;
-
-						int spawnslime  = 1;
-						double checkcount = 0.01;
-						while (checkcount < 10) {
-							y2 += checkcount;
-
-							if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
-								spawnslime = 0;
-							}
-							checkcount++;
-						}
-						if (spawnslime == 1) {
-							SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
-							Bukkit.getServer().getPluginManager().callEvent(SSE);
-						}
+					if (spawnslime == 1) {
+						SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
+						Bukkit.getServer().getPluginManager().callEvent(SSE);
 					}
 				}
 			}
 		}
 	}
-	
-/*	@EventHandler
-	public void SlimeHealth(CreatureSpawnEvent event){
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
-		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
-		double health;
-		int size;
-		int s;
-		try {
-			size = Integer.parseInt(string2);
-			health = Double.parseDouble(string);
-		} catch (Exception e) {
-			health = 100;
-			size = 12;
-		}
-		if(event.getEntityType() == EntityType.SLIME){
-			Entity slime = (Slime)event.getEntity();
-			s = ((Slime) slime).getSize();
-			if(s == size){
-				event.getEntity().setMaxHealth(health);
-			}
-		}
-	}*/
 
-	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();

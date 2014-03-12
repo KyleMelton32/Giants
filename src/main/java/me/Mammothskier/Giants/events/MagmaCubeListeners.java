@@ -16,7 +16,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -111,30 +110,6 @@ public class MagmaCubeListeners implements Listener {
 			}
 		}
 	}
-	
-/*	@EventHandler
-	public void MagmaCubeHealth(CreatureSpawnEvent event){
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
-		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
-		double health;
-		int size = 0;
-		int s;
-		try {
-			size = Integer.parseInt(string2);
-			health = Integer.parseInt(string);
-		} catch (Exception e) {
-			health = 100;
-		}
-		if(event.getEntityType() == EntityType.MAGMA_CUBE){
-			 MagmaCube magmacube = (MagmaCube)event.getEntity();
-			 s = magmacube.getSize();
-			if(s == size){
-				event.getEntity().setMaxHealth(health);
-				event.getEntity().setHealth(health);
-			}
-		}
-	}*/
-
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
