@@ -188,7 +188,11 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				Slime.set("Slime Configuration.Sounds.Death", true);
+				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
+				
 				try {
 					Slime.save(file);
 				} catch (IOException e) {

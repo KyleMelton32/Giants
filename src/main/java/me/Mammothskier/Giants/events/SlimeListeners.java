@@ -26,7 +26,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class SlimeListeners implements Listener {
 	private Giants _slimes;
@@ -140,6 +142,39 @@ public class SlimeListeners implements Listener {
 					}
 				} else {
 					event.setTarget(target);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onKickAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
+			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+			double height;
+
+			try {
+				height = Double.parseDouble(config);
+			} catch (Exception e) {
+				height = 1;
+			}
+
+			Random pick = new Random();
+			int chance = 0;
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
+					if (API.isGiantSlime(entity)) {
+						if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
+							player.setVelocity(new Vector(0, height, 0));
+							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+							}
+						}
+					}
 				}
 			}
 		}
