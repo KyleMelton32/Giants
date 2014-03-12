@@ -202,31 +202,24 @@ public class GiantListeners implements Listener {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int Amt;
-		int chance = 0;
-		Random pick = new Random();
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiant(entity)) {
 				if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled").equalsIgnoreCase("true")) {
-					for (int counter = 1; counter <= 1; counter++) {
-						chance = 1 + pick.nextInt(100);
+					String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
+					try {
+						Amt = Integer.parseInt(config);
+					} catch (Exception e) {
+						Amt = 3;
 					}
-					if (chance == 50){
-						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
-						try {
-							Amt = Integer.parseInt(config);
-						} catch (Exception e) {
-							Amt = 3;
+					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+					}
+					for (int i = 1; i <= Amt; i++){
+						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
+							((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
 						}
-						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
-							target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
-						}
-						for (int i = 1; i <= Amt; i++){
-							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
-								((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
-							}
-							else{
-								event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
-							}
+						else{
+							event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
 						}
 					}
 				}
