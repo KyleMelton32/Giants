@@ -17,6 +17,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -64,90 +65,46 @@ public class SlimeListeners implements Listener {
 		if(event.isCancelled()){
 			return;
 		}
-		else{
-			if (!API.getSlimeSpawnWorlds().contains(entity.getWorld().getName())) {
-				return;
-			}
+		if (!API.getSlimeSpawnWorlds().contains(entity.getWorld().getName())) {
+			return;
+		}
 
-			if ((spawnReason == SpawnReason.NATURAL)) {
-				if(API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Replace Normal Slime Spawn Only").equalsIgnoreCase("false")){
-					if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.SLIME)) {
-						String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Chance");
-						float sRate;
-						try {
-							sRate = Float.parseFloat(string);
-						} catch (NumberFormatException e) {
-							sRate = 0;
-						}
-						float chance = 100 - sRate;
-
-						Random rand = new Random();
-						double choice = rand.nextInt(100) < chance ? 1 : 0;
-						if (choice == 0) {
-							Location location = event.getEntity().getLocation();
-							double x = location.getX();
-							double y = location.getY();
-							double z = location.getZ();
-
-							int x2 = (int) x;
-							int y2 = (int) y;
-							int z2 = (int) z;
-
-							int spawnslime  = 1;
-							double checkcount = 0.01;
-							while (checkcount < 10) {
-								y2 += checkcount;
-
-								if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
-									spawnslime = 0;
-								}
-								checkcount++;
-							}
-							if (spawnslime == 1) {
-								SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
-								Bukkit.getServer().getPluginManager().callEvent(SSE);
-							}
-						}
-					}
+		if ((spawnReason == SpawnReason.NATURAL)) {
+			if ((type == EntityType.ZOMBIE) || (type == EntityType.COW) || (type == EntityType.MUSHROOM_COW) || (type == EntityType.PIG_ZOMBIE) || (type == EntityType.ENDERMAN) || (type == EntityType.SLIME)) {
+				String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Chance");
+				float sRate;
+				try {
+					sRate = Float.parseFloat(string);
+				} catch (NumberFormatException e) {
+					sRate = 0;
 				}
-				if(API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Replace Normal Slime Spawn Only").equalsIgnoreCase("true")){
-					if ((type == EntityType.SLIME) && (spawnReason != SpawnReason.SLIME_SPLIT)) {
-						String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Spawn Settings.Chance");
-						float sRate;
-						try {
-							sRate = Float.parseFloat(string);
-						} catch (NumberFormatException e) {
-							sRate = 0;
+				float chance = 100 - sRate;
+
+				Random rand = new Random();
+				double choice = rand.nextInt(100) < chance ? 1 : 0;
+				if (choice == 0) {
+					Location location = event.getEntity().getLocation();
+					double x = location.getX();
+					double y = location.getY();
+					double z = location.getZ();
+
+					int x2 = (int) x;
+					int y2 = (int) y;
+					int z2 = (int) z;
+
+					int spawnslime  = 1;
+					double checkcount = 0.01;
+					while (checkcount < 10) {
+						y2 += checkcount;
+						
+						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
+							spawnslime = 0;
 						}
-						float chance = 100 - sRate;
-
-						Random rand = new Random();
-						double choice = rand.nextInt(100) < chance ? 1 : 0;
-						if (choice == 0) {
-							Location location = event.getEntity().getLocation();
-							double x = location.getX();
-							double y = location.getY();
-							double z = location.getZ();
-
-							int x2 = (int) x;
-							int y2 = (int) y;
-							int z2 = (int) z;
-
-							int spawnslime  = 1;
-							double checkcount = 0.01;
-							while (checkcount < 10) {
-								y2 += checkcount;
-
-								if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
-									spawnslime = 0;
-								}
-								checkcount++;
-							}
-							if (spawnslime == 1) {
-								SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
-								Bukkit.getServer().getPluginManager().callEvent(SSE);
-							}
-						}
+						checkcount++;
+					}
+					if (spawnslime == 1) {
+						SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
+						Bukkit.getServer().getPluginManager().callEvent(SSE);
 					}
 				}
 			}
