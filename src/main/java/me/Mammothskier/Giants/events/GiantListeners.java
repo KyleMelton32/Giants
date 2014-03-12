@@ -217,6 +217,9 @@ public class GiantListeners implements Listener {
 						} catch (Exception e) {
 							Amt = 3;
 						}
+						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
+							target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+						}
 						for (int i = 1; i <= Amt; i++){
 							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
 								((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);

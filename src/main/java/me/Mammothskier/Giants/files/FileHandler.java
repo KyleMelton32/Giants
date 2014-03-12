@@ -104,6 +104,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Sounds.Fire Attack", true);
 				Giant.set("Giant Configuration.Sounds.Throw Boulder Attack", true);
+				Giant.set("Giant Configuration.Sounds.Shrapnel Attack", true);
 				Giant.set("Giant Configuration.Sounds.Kick Attack", true);
 				Giant.set("Giant Configuration.Sounds.Death", true);
 				try {
