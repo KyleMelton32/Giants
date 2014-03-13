@@ -190,37 +190,14 @@ public class MagmaCubeListeners implements Listener {
 	public void LavaAttack(EntityTargetEvent event){
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
-		double time;
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time");
-		String attMessage = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message");
-		String message = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message");
-		
-		try{
-			time = Double.parseDouble(string);
-		} catch (Exception e){
-			time = 3;
-		}
 		
 		if((API.isGiantMagmaCube(entity)) && (target instanceof Player)){
 			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled").equalsIgnoreCase("true")) {
-				final Player player = (Player) event.getTarget();
-				int time2 = (int) (time * 20);
-				String time3 = String.valueOf(Math.round(time));
-				message = ChatColor.translateAlternateColorCodes('&', message);
-				final String AttMessage = ChatColor.translateAlternateColorCodes('&', attMessage);
-				player.sendMessage(message.replace("{time}", time3));
-				Bukkit.getServer().getScheduler()
-						.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
-
-					public void run() {
-						player.getEyeLocation().getBlock().setType(Material.LAVA);
-						player.sendMessage(AttMessage);
-						if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
-							player.getLocation().getWorld().playSound(player.getLocation(), Sound.EXPLODE, 1, 0);
-							player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
-						}
-					}
-				}, time2*1L);
+				target.getLocation().getBlock().setType(Material.LAVA);
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
+					target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+					target.getLocation().getWorld().playSound(target.getLocation(), Sound.LAVA_POP, 1, 0);
+				}
 			}
 		}
 	}

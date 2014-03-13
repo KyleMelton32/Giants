@@ -279,10 +279,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled", false);
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Time", new Integer(2));
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Warning Message", "&6The magmacube will spawn lava under you in {time} seconds!");
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack.Attack Message", "&6The magma cube has now spawned lava under you!");
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
