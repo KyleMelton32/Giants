@@ -88,6 +88,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
+				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Giant.set("Giant Configuration.Attack Mechanisms.Lightning Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack", false);
@@ -189,6 +190,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
+				Slime.set("Slime Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));

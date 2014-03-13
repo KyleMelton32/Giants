@@ -25,6 +25,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -128,7 +130,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler
-	public void onArrowDamage(EntityDamageByEntityEvent event){
+	public void arrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiant(entity))){
 			int damage;
@@ -138,7 +140,23 @@ public class GiantListeners implements Listener {
 			} catch (Exception e) {
 				damage = 10;
 			}
+			if(damage == 0){
+				event.setCancelled(true);
+				return;
+			}
 			event.setDamage(damage + 0.0);
+		}
+	}
+	
+	@EventHandler
+	public void fireDamage(EntityDamageEvent event){
+		Entity entity = event.getEntity();
+		if (API.isGiant(entity)){
+			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Damage Settings.Fire.Allow Fire Damage").equalsIgnoreCase("false")){	
+				if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK){
+					event.setCancelled(true);
+				}
+			}
 		}
 	}
 	

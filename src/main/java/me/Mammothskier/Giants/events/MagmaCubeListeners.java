@@ -123,6 +123,10 @@ public class MagmaCubeListeners implements Listener {
 			} catch (Exception e) {
 				damage = 10;
 			}
+			if(damage == 0){
+				event.setCancelled(true);
+				return;
+			}
 			event.setDamage(damage + 0.0);
 		}
 	}
