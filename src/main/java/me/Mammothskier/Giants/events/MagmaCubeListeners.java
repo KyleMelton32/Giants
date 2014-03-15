@@ -163,6 +163,29 @@ public class MagmaCubeListeners implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void cactiDamage(EntityDamageEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		Entity entity = event.getEntity();
+		int size = 1;
+		int s;
+		if (API.isGiantMagmaCube(entity)){
+			try {
+				size = Integer.parseInt(string);
+			} catch (Exception e) {
+			}
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage").equalsIgnoreCase("false")){
+					if (event.getCause() == DamageCause.THORNS){
+						event.setCancelled(true);
+					}
+				}
+			}
+		}
+	}
 
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {

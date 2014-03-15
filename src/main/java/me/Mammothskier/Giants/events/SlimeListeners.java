@@ -16,7 +16,6 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -180,6 +179,29 @@ public class SlimeListeners implements Listener {
 			if (s == size){
 				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Block Damage.Allow Suffocation").equalsIgnoreCase("false")){
 					if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK){
+						event.setCancelled(true);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void cactiDamage(EntityDamageEvent event){
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+		Entity entity = event.getEntity();
+		int size = 1;
+		int s;
+		if (API.isGiantSlime(entity)){
+			try {
+				size = Integer.parseInt(string);
+			} catch (Exception e) {
+			}
+			Slime slime = (Slime) event.getEntity();
+			s = slime.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Block Damage.Allow Cacti Damage").equalsIgnoreCase("false")){
+					if (event.getCause() == DamageCause.THORNS){
 						event.setCancelled(true);
 					}
 				}

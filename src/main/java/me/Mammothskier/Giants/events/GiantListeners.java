@@ -173,6 +173,18 @@ public class GiantListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void cactiDamage(EntityDamageEvent event){
+		Entity entity = event.getEntity();
+		if (API.isGiant(entity)){
+			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Damage Settings.Block Damage.Allow Cacti Damage").equalsIgnoreCase("false")){
+				if (event.getCause() == DamageCause.THORNS){
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
 		String ticks1 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
 		String ticks2 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant");
