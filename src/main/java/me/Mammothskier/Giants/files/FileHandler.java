@@ -89,6 +89,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
+				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Lightning Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack", false);
@@ -191,6 +192,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Damage Settings.Fire.Allow Fire Damage", true);
+				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
@@ -277,6 +279,8 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", true);
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);

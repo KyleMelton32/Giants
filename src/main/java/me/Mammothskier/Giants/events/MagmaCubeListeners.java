@@ -24,7 +24,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -135,6 +137,29 @@ public class MagmaCubeListeners implements Listener {
 					return;
 				}
 				event.setDamage(damage + 0.0);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void suffocationDamage(EntityDamageEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		Entity entity = event.getEntity();
+		int size = 1;
+		int s;
+		if (API.isGiantMagmaCube(entity)){
+			try {
+				size = Integer.parseInt(string);
+			} catch (Exception e) {
+			}
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation").equalsIgnoreCase("false")){
+					if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK){
+						event.setCancelled(true);
+					}
+				}
 			}
 		}
 	}

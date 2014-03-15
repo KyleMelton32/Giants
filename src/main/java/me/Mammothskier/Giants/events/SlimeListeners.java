@@ -116,7 +116,7 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
-		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantSlime(entity))){
 			int damage;
@@ -143,7 +143,7 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void fireDamage(EntityDamageEvent event){
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
 		int size = 1;
 		int s;
@@ -165,12 +165,35 @@ public class SlimeListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void suffocationDamage(EntityDamageEvent event){
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+		Entity entity = event.getEntity();
+		int size = 1;
+		int s;
+		if (API.isGiantSlime(entity)){
+			try {
+				size = Integer.parseInt(string);
+			} catch (Exception e) {
+			}
+			Slime slime = (Slime) event.getEntity();
+			s = slime.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Block Damage.Allow Suffocation").equalsIgnoreCase("false")){
+					if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK){
+						event.setCancelled(true);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
 	public void onLightningAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int size = 1;
 		int s;
-		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiantSlime(entity)) {
@@ -199,7 +222,7 @@ public class SlimeListeners implements Listener {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
 			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height");
-			String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+			String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 			double height;
 			int size = 1;
 			int s;
@@ -239,7 +262,7 @@ public class SlimeListeners implements Listener {
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
-		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		int exp;
 		int size = 1;
 		int s2;
