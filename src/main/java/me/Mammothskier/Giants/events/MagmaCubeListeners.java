@@ -192,7 +192,7 @@ public class MagmaCubeListeners implements Listener {
 		Entity target = event.getTarget();
 		
 		if((API.isGiantMagmaCube(entity)) && (target instanceof Player)){
-			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack.Enabled").equalsIgnoreCase("true")) {
+			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack").equalsIgnoreCase("true")) {
 				target.getLocation().getBlock().setType(Material.LAVA);
 				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
 					target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
