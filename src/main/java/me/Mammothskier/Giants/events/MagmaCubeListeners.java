@@ -122,8 +122,8 @@ public class MagmaCubeListeners implements Listener {
 			int s;
 			String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow");
 			try {
-				damage = Integer.parseInt(string);
-				size = Integer.parseInt(string2);
+				damage = Integer.parseInt(string2);
+				size = Integer.parseInt(string);
 			} catch (Exception e) {
 				damage = 10;
 			}
@@ -138,7 +138,7 @@ public class MagmaCubeListeners implements Listener {
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");

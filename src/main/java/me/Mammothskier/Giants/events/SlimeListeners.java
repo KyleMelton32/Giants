@@ -16,6 +16,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -115,30 +116,49 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
+		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantSlime(entity))){
 			int damage;
+			int size = 1;
+			int s;
 			String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Arrows.Damage done by arrow");
 			try {
 				damage = Integer.parseInt(string);
+				size = Integer.parseInt(string2);
 			} catch (Exception e) {
 				damage = 10;
 			}
-			if(damage == 0){
-				event.setCancelled(true);
-				return;
+			Slime slime = (Slime) event.getEntity();
+			s = slime.getSize();
+			if (s == size){
+				if(damage == 0){
+					event.setCancelled(true);
+					return;
+				}
+				event.setDamage(damage + 0.0);
 			}
-			event.setDamage(damage + 0.0);
 		}
 	}
 	
 	@EventHandler
 	public void fireDamage(EntityDamageEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		Entity entity = event.getEntity();
+		int size = 1;
+		int s;
 		if (API.isGiantSlime(entity)){
-			if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Fire.Allow Fire Damage").equalsIgnoreCase("false")){	
-				if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK){
-					event.setCancelled(true);
+			try {
+				size = Integer.parseInt(string);
+			} catch (Exception e) {
+			}
+			Slime slime = (Slime) event.getEntity();
+			s = slime.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Fire.Allow Fire Damage").equalsIgnoreCase("false")){	
+					if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK){
+						event.setCancelled(true);
+					}
 				}
 			}
 		}
@@ -148,16 +168,27 @@ public class SlimeListeners implements Listener {
 	public void onLightningAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
+		int size = 1;
+		int s;
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiantSlime(entity)) {
-				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
-					try {
-						target.getLocation().getWorld().strikeLightning(target.getLocation());
-					} catch (Exception e) {
+				try {
+					size = Integer.parseInt(string);
+				} catch (Exception e) {
+				}
+				Slime slime = (Slime) event.getEntity();
+				s = slime.getSize();
+				if (s == size){
+					if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
+						try {
+							target.getLocation().getWorld().strikeLightning(target.getLocation());
+						} catch (Exception e) {
+						}
+					} else {
+						event.setTarget(target);
 					}
-				} else {
-					event.setTarget(target);
 				}
 			}
 		}
@@ -168,10 +199,14 @@ public class SlimeListeners implements Listener {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
 			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+			String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 			double height;
+			int size = 1;
+			int s;
 
 			try {
 				height = Double.parseDouble(config);
+				size = Integer.parseInt(string);
 			} catch (Exception e) {
 				height = 1;
 			}
@@ -184,10 +219,14 @@ public class SlimeListeners implements Listener {
 			if (chance == 50) {
 				for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
 					if (API.isGiantSlime(entity)) {
-						if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
-							player.setVelocity(new Vector(0, height, 0));
-							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
-								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+						Slime slime = (Slime) entity;
+						s = slime.getSize();
+						if (s == size){
+							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
+								player.setVelocity(new Vector(0, height, 0));
+								if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+								}
 							}
 						}
 					}
@@ -200,83 +239,91 @@ public class SlimeListeners implements Listener {
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
+		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		int exp;
+		int size = 1;
+		int s2;
 
 		try {
 			exp = Integer.parseInt(string);
+			size = Integer.parseInt(string2);
 		} catch (Exception e) {
 			exp = 5;
 		}
 
 		if (API.isGiantSlime(entity)) {
-			if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {
-				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
-			}
-			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Slime Stats.Drops");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
-				return;
-			}
-			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String s : newDrop) {
-				int id = 0;
-				int amt = 0;
-				short dmg = 0;
-				try {
-					String[] split = s.split(":");
-					if (split.length == 2) {
-						String idS = split[0];
-						String amtS = split[1];
-						id = Integer.parseInt(idS);
-						if (amtS.contains("-")) {
-							String[] newSplit = amtS.split("-");
-							int range;
-							int loc;
-							Random rand = new Random();
-							if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-								range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-								loc = (int) (Double.valueOf(newSplit[1]) * 100);
-							} else {
-								range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-								loc = (int) (Double.valueOf(newSplit[0]) * 100);
-							}
-							amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-						} else {
-							amt = Integer.parseInt(amtS);
-						}
-						dmg = 0;
-					} else if (split.length == 3) {
-						String idS = split[0];
-						String dmgS = split[1];
-						String amtS = split[2];
-						id = Integer.parseInt(idS);
-						if (amtS.contains("-")) {
-							String[] newSplit = amtS.split("-");
-							int range;
-							int loc;
-							Random rand = new Random();
-							if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-								range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-								loc = (int) (Double.valueOf(newSplit[1]) * 100);
-							} else {
-								range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-								loc = (int) (Double.valueOf(newSplit[0]) * 100);
-							}
-							amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-						} else {
-							amt = Integer.parseInt(amtS);
-						}
-						dmg = Short.parseShort(dmgS);
-					}
-				} catch (Exception e) {
-					id = 1;
-					amt = 1;
-					dmg = 0;
+			Slime slime = (Slime) event.getEntity();
+			s2 = slime.getSize();
+			if (s2 == size){
+				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {
+					entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 				}
-				ItemStack newItem = new ItemStack(id, amt, dmg);
-				drops.add(newItem);
+				event.setDroppedExp(exp);
+				List<String> newDrop = API.getFileHandler().getPropertyList(Files.SLIME, "Slime Configuration.Slime Stats.Drops");
+				if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+					return;
+				}
+				List<ItemStack> drops = new ArrayList<ItemStack>();
+				for (String s : newDrop) {
+					int id = 0;
+					int amt = 0;
+					short dmg = 0;
+					try {
+						String[] split = s.split(":");
+						if (split.length == 2) {
+							String idS = split[0];
+							String amtS = split[1];
+							id = Integer.parseInt(idS);
+							if (amtS.contains("-")) {
+								String[] newSplit = amtS.split("-");
+								int range;
+								int loc;
+								Random rand = new Random();
+								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
+									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
+									loc = (int) (Double.valueOf(newSplit[1]) * 100);
+								} else {
+									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
+									loc = (int) (Double.valueOf(newSplit[0]) * 100);
+								}
+								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
+							} else {
+								amt = Integer.parseInt(amtS);
+							}
+							dmg = 0;
+						} else if (split.length == 3) {
+							String idS = split[0];
+							String dmgS = split[1];
+							String amtS = split[2];
+							id = Integer.parseInt(idS);
+							if (amtS.contains("-")) {
+								String[] newSplit = amtS.split("-");
+								int range;
+								int loc;
+								Random rand = new Random();
+								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
+									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
+									loc = (int) (Double.valueOf(newSplit[1]) * 100);
+								} else {
+									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
+									loc = (int) (Double.valueOf(newSplit[0]) * 100);
+								}
+								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
+							} else {
+								amt = Integer.parseInt(amtS);
+							}
+							dmg = Short.parseShort(dmgS);
+						}
+					} catch (Exception e) {
+						id = 1;
+						amt = 1;
+						dmg = 0;
+					}
+					ItemStack newItem = new ItemStack(id, amt, dmg);
+					drops.add(newItem);
+				}
+				event.getDrops().addAll(drops);
 			}
-			event.getDrops().addAll(drops);
 		}
 	}
 }
