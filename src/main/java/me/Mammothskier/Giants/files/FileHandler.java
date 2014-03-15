@@ -277,10 +277,10 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube", new Integer(100));
