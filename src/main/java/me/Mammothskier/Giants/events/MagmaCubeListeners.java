@@ -114,20 +114,28 @@ public class MagmaCubeListeners implements Listener {
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantMagmaCube(entity))){
 			int damage;
-			String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow");
+			int size = 1;
+			int s;
+			String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow");
 			try {
 				damage = Integer.parseInt(string);
+				size = Integer.parseInt(string2);
 			} catch (Exception e) {
 				damage = 10;
 			}
-			if(damage == 0){
-				event.setCancelled(true);
-				return;
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s == size){
+				if(damage == 0){
+					event.setCancelled(true);
+					return;
+				}
+				event.setDamage(damage + 0.0);
 			}
-			event.setDamage(damage + 0.0);
 		}
 	}
 	
@@ -157,7 +165,6 @@ public class MagmaCubeListeners implements Listener {
 					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled").equalsIgnoreCase("true")) {
 						MagmaCube magmacube = (MagmaCube) event.getEntity();
 						s = magmacube.getSize();
-						Bukkit.broadcastMessage("set size:" + size + "   slime size:" + s);
 						if (s == size){
 							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Fire Attack").equalsIgnoreCase("true")) {
 								target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
@@ -180,16 +187,27 @@ public class MagmaCubeListeners implements Listener {
 	public void onLightningAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		int size = 1;
+		int s;
+		try{
+			size = Integer.parseInt(string);
+		} catch (Exception e) {
+		}
 
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiantMagmaCube(entity)) {
-				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
-					try {
-						target.getLocation().getWorld().strikeLightning(target.getLocation());
-					} catch (Exception e) {
+				MagmaCube magmacube = (MagmaCube) event.getEntity();
+				s = magmacube.getSize();
+				if (s == size){
+					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
+						try {
+							target.getLocation().getWorld().strikeLightning(target.getLocation());
+						} catch (Exception e) {
+						}
+					} else {
+						event.setTarget(target);
 					}
-				} else {
-					event.setTarget(target);
 				}
 			}
 		}
@@ -199,13 +217,24 @@ public class MagmaCubeListeners implements Listener {
 	public void LavaAttack(EntityTargetEvent event){
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		int size = 1;
+		int s;
+		try{
+			size = Integer.parseInt(string);
+		} catch (Exception e) {
+		}
 		
 		if((API.isGiantMagmaCube(entity)) && (target instanceof Player)){
-			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack").equalsIgnoreCase("true")) {
-				target.getLocation().getBlock().setType(Material.LAVA);
-				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
-					target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
-					target.getLocation().getWorld().playSound(target.getLocation(), Sound.LAVA_POP, 1, 0);
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s == size){
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Lava Attack").equalsIgnoreCase("true")) {
+					target.getLocation().getBlock().setType(Material.LAVA);
+					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.LAVA_POP, 1, 0);
+					}
 				}
 			}
 		}
@@ -215,10 +244,14 @@ public class MagmaCubeListeners implements Listener {
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
+			String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+			int size = 1;
+			int s;
 			String config = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height");
 			double height;
 
 			try {
+				size = Integer.parseInt(string);
 				height = Double.parseDouble(config);
 			} catch (Exception e) {
 				height = 1;
@@ -232,10 +265,14 @@ public class MagmaCubeListeners implements Listener {
 			if (chance == 50) {
 				for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
 					if (API.isGiantMagmaCube(entity)) {
-						if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
-							player.setVelocity(new Vector(0, height, 0));
-							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
-								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+						MagmaCube magmacube = (MagmaCube) entity;
+						s = magmacube.getSize();
+						if (s == size){
+							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
+								player.setVelocity(new Vector(0, height, 0));
+								if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+								}
 							}
 						}
 					}
@@ -248,83 +285,91 @@ public class MagmaCubeListeners implements Listener {
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Experience");
+		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		int exp;
+		int size = 1;
+		int s2;
 
 		try {
 			exp = Integer.parseInt(string);
+			size = Integer.parseInt(string2);
 		} catch (Exception e) {
 			exp = 5;
 		}
 
 		if (API.isGiantMagmaCube(entity)) {
-			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {
-				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
-			}
-			event.setDroppedExp(exp);
-			List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Drops");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
-				return;
-			}
-			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String s : newDrop) {
-				int id = 0;
-				int amt = 0;
-				short dmg = 0;
-				try {
-					String[] split = s.split(":");
-					if (split.length == 2) {
-						String idS = split[0];
-						String amtS = split[1];
-						id = Integer.parseInt(idS);
-						if (amtS.contains("-")) {
-							String[] newSplit = amtS.split("-");
-							int range;
-							int loc;
-							Random rand = new Random();
-							if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-								range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-								loc = (int) (Double.valueOf(newSplit[1]) * 100);
-							} else {
-								range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-								loc = (int) (Double.valueOf(newSplit[0]) * 100);
-							}
-							amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-						} else {
-							amt = Integer.parseInt(amtS);
-						}
-						dmg = 0;
-					} else if (split.length == 3) {
-						String idS = split[0];
-						String dmgS = split[1];
-						String amtS = split[2];
-						id = Integer.parseInt(idS);
-						if (amtS.contains("-")) {
-							String[] newSplit = amtS.split("-");
-							int range;
-							int loc;
-							Random rand = new Random();
-							if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-								range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-								loc = (int) (Double.valueOf(newSplit[1]) * 100);
-							} else {
-								range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-								loc = (int) (Double.valueOf(newSplit[0]) * 100);
-							}
-							amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-						} else {
-							amt = Integer.parseInt(amtS);
-						}
-						dmg = Short.parseShort(dmgS);
-					}
-				} catch (Exception e) {
-					id = 1;
-					amt = 1;
-					dmg = 0;
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s2 = magmacube.getSize();
+			if (s2 == size){
+				if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {
+					entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 				}
-				ItemStack newItem = new ItemStack(id, amt, dmg);
-				drops.add(newItem);
+				event.setDroppedExp(exp);
+				List<String> newDrop = API.getFileHandler().getPropertyList(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Drops");
+				if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+					return;
+				}
+				List<ItemStack> drops = new ArrayList<ItemStack>();
+				for (String s : newDrop) {
+					int id = 0;
+					int amt = 0;
+					short dmg = 0;
+					try {
+						String[] split = s.split(":");
+						if (split.length == 2) {
+							String idS = split[0];
+							String amtS = split[1];
+							id = Integer.parseInt(idS);
+							if (amtS.contains("-")) {
+								String[] newSplit = amtS.split("-");
+								int range;
+								int loc;
+								Random rand = new Random();
+								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
+									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
+									loc = (int) (Double.valueOf(newSplit[1]) * 100);
+								} else {
+									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
+									loc = (int) (Double.valueOf(newSplit[0]) * 100);
+								}
+								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
+							} else {
+								amt = Integer.parseInt(amtS);
+							}
+							dmg = 0;
+						} else if (split.length == 3) {
+							String idS = split[0];
+							String dmgS = split[1];
+							String amtS = split[2];
+							id = Integer.parseInt(idS);
+							if (amtS.contains("-")) {
+								String[] newSplit = amtS.split("-");
+								int range;
+								int loc;
+								Random rand = new Random();
+								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
+									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
+									loc = (int) (Double.valueOf(newSplit[1]) * 100);
+								} else {
+									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
+									loc = (int) (Double.valueOf(newSplit[0]) * 100);
+								}
+								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
+							} else {
+								amt = Integer.parseInt(amtS);
+							}
+							dmg = Short.parseShort(dmgS);
+						}
+					} catch (Exception e) {
+						id = 1;
+						amt = 1;
+						dmg = 0;
+					}
+					ItemStack newItem = new ItemStack(id, amt, dmg);
+					drops.add(newItem);
+				}
+				event.getDrops().addAll(drops);
 			}
-			event.getDrops().addAll(drops);
 		}
 	}
 }
