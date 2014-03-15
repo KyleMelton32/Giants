@@ -17,6 +17,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,7 +29,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 public class MagmaCubeListeners implements Listener {
@@ -133,15 +133,19 @@ public class MagmaCubeListeners implements Listener {
 	
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		String ticks1 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
 		String ticks2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube");
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int ticksTarget;
 		int ticksGiant;
+		int size = 1;
+		int s;
 		try {
 			ticksTarget = Integer.parseInt(ticks1);
 			ticksGiant = Integer.parseInt(ticks2);
+			size = Integer.parseInt(string);
 		} catch (Exception e) {
 			ticksTarget = 0;
 			ticksGiant = 0;
@@ -151,16 +155,21 @@ public class MagmaCubeListeners implements Listener {
 			if (API.isGiantMagmaCube(entity)) {
 				if(!(target == null)){
 					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled").equalsIgnoreCase("true")) {
-						if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Fire Attack").equalsIgnoreCase("true")) {
-							target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+						MagmaCube magmacube = (MagmaCube) event.getEntity();
+						s = magmacube.getSize();
+						Bukkit.broadcastMessage("set size:" + size + "   slime size:" + s);
+						if (s == size){
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Fire Attack").equalsIgnoreCase("true")) {
+								target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+							}
+							try {
+								event.getTarget().setFireTicks(ticksTarget);
+								event.getEntity().setFireTicks(ticksGiant);
+							} catch (Exception e) {
+							}
+						} else {
+							event.setTarget(target);
 						}
-						try {
-							event.getTarget().setFireTicks(ticksTarget);
-							event.getEntity().setFireTicks(ticksGiant);
-						} catch (Exception e) {
-						}
-					} else {
-						event.setTarget(target);
 					}
 				}
 			}
