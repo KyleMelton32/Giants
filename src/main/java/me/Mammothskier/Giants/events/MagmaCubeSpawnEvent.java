@@ -24,13 +24,12 @@ public class MagmaCubeSpawnEvent extends Event {
 
 		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
 		int size;
-		double health;
+		double health = 1;
 		try {
 			size = Integer.parseInt(string);
 			health = Double.parseDouble(string2);
 		} catch (Exception e) {
 			size = 12;
-			health = size^2;
 		}
 
 		if (!API.getMagmaCubeSpawnWorlds().contains(loc.getWorld().getName())) {
