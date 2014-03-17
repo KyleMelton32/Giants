@@ -63,7 +63,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <minimizeJar>true</minimizeJar>
                 </configuration>
             </plugin>
         </plugins>
@@ -101,7 +100,7 @@
         </dependency>
     </dependencies>
     
-        <properties>
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.number>UNKNOWN</project.build.number>
         <project.build.version>UNKNOWN</project.build.version>
@@ -166,4 +165,3 @@
 
 
 </project>
-
