@@ -14,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -184,6 +185,17 @@ public class MagmaCubeListeners implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void damage(EntityDamageByEntityEvent event){
+		Entity entity = event.getEntity();
+		double damage = event.getDamage();
+		double health = ((Damageable) event.getEntity()).getHealth();
+		if (API.isGiantMagmaCube(entity)){
+			event.setCancelled(true);
+			((Damageable) entity).setHealth(health - damage);
 		}
 	}
 
