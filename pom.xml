@@ -133,7 +133,7 @@
             <activation>
                 <property>
                     <name>env.JOB_NAME</name>
-                    <value>MythicDrops-Bleeding</value>
+                    <value>Giants-Bleeding</value>
                 </property>
             </activation>
             <properties>
