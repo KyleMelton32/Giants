@@ -191,11 +191,16 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void damage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
-		double damage = event.getDamage();
-		double health = ((Damageable) event.getEntity()).getHealth();
-		if (API.isGiantMagmaCube(entity)){
-			event.setCancelled(true);
-			((Damageable) entity).setHealth(health - damage);
+		int s;
+		if ((event.getDamager() instanceof Player) && (API.isGiantMagmaCube(entity))){
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s >= 9){
+				event.setCancelled(true);
+				double health = ((Damageable) event.getEntity()).getHealth();
+				double damage = event.getDamage();
+				((Damageable) entity).setHealth(health - damage);
+			}
 		}
 	}
 
