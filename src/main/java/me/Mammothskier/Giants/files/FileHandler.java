@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -56,7 +54,6 @@ public class FileHandler {
 				}
 				YamlConfiguration conf = YamlConfiguration.loadConfiguration(confFile);
 				_configurations.put(file, conf);
-				Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Configuration files have been loaded!");
 			} else {
 				File parentFile = confFile.getParentFile();
 
@@ -64,7 +61,6 @@ public class FileHandler {
 					parentFile.mkdirs();
 				}
 				this.createFiles(file, confFile);
-				Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Configuration files have been created!");
 			}
 		}
 	}
