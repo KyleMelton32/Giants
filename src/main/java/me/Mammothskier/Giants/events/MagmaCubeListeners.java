@@ -198,7 +198,7 @@ public class MagmaCubeListeners implements Listener {
 			if (s >= 9){
 				double damage = event.getDamage();
 				double health =  ((Damageable) event.getEntity()).getHealth();
-				((Damageable) entity).setHealth(Math.min(health-damage, ((Damageable) entity).getMaxHealth()));
+				((Damageable) entity).setHealth(Math.max(0, Math.min(health - damage, ((Damageable) entity).getMaxHealth())));
 				event.setCancelled(true);
 			}
 		}
