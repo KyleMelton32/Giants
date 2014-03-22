@@ -196,6 +196,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
@@ -204,7 +205,6 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Sounds.Death", true);
 				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
 				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
-				
 				try {
 					Slime.save(file);
 				} catch (IOException e) {

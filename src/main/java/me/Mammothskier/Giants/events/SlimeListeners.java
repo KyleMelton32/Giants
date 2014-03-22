@@ -320,6 +320,32 @@ public class SlimeListeners implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void onStompAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
+			Random pick = new Random();
+			int chance = 0;
+			int s;
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (API.isGiantSlime(entity)) {
+						Slime slime = (Slime) entity;
+						s = slime.getSize();
+						if (s > 4){
+							if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
+								player.getLocation().getWorld().createExplosion(player.getLocation(), 1.0F);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
