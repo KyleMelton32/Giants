@@ -17,6 +17,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
@@ -299,6 +300,48 @@ public class MagmaCubeListeners implements Listener {
 					if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Lava Attack").equalsIgnoreCase("true")) {
 						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
 						target.getLocation().getWorld().playSound(target.getLocation(), Sound.LAVA_POP, 1, 0);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void ThrownBoulderAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		boolean inRange = false;
+		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+		Random pick = new Random();
+		int chance = 0;
+		int s;
+		int size = 0;
+		for (int counter = 1; counter <= 1; counter++) {
+			chance = 1 + pick.nextInt(100);
+		}
+		try{
+			size = Integer.parseInt(string);
+		} catch (Exception e) {
+		}
+
+		for (Entity entity : player.getNearbyEntities(15, 12, 15)) {
+			if (API.isGiantMagmaCube(entity)) {
+				MagmaCube magmacube = (MagmaCube) entity;
+				s = magmacube.getSize();
+				if (s == size){
+					if (entity.getNearbyEntities(15, 12, 15).contains(player) && !entity.getNearbyEntities(5, 3, 5).contains(player)) {
+						inRange = true;
+					}
+					if (inRange == true) {
+						if (chance == 50) {
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+								Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
+								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
+								fireball.setShooter((LivingEntity) entity);
+								if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
+								}
+							}
+						}
 					}
 				}
 			}

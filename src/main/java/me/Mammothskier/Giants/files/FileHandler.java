@@ -285,6 +285,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
@@ -295,6 +296,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Sounds.Kick Attack", true);
 				MagmaCube.set("Magma Cube Configuration.Sounds.Lava Attack", true);
 				MagmaCube.set("Magma Cube Configuration.Sounds.Fire Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Throw Boulder Attack", true);
 				try {
 					MagmaCube.save(file);
 				} catch (IOException e) {
