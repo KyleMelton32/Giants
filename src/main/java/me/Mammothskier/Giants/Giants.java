@@ -12,9 +12,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 public class Giants extends JavaPlugin{
-
+	
 	public final Logger log = Logger.getLogger("Minecraft");
-
+	
 	@Override
 	public void onEnable(){
 		new API(this);

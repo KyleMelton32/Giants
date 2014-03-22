@@ -16,7 +16,6 @@ import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-
 public class Commands implements CommandExecutor {
 	private Giants _giants;
 
@@ -44,6 +43,7 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage(ChatColor.GREEN + "Giants config file reloaded.");
 						_giants.log.info(ChatColor.GREEN + "Giants config file reloaded.");
 						Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + sender + "has reloaded the giants config");
+						
 					} else {
 						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 					}
@@ -68,7 +68,7 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-
+								
 								try {
 									locx = Integer.parseInt(args[2]);
 									locy = Integer.parseInt(args[3]);
@@ -107,7 +107,7 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-
+									
 								try {
 									locx = Integer.parseInt(args[2]);
 									locy = Integer.parseInt(args[3]);
@@ -147,7 +147,7 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-
+									
 								try {
 									locx = Integer.parseInt(args[3]);
 									locy = Integer.parseInt(args[4]);
@@ -189,4 +189,3 @@ public class Commands implements CommandExecutor {
 		return true;
 	}
 }
-
