@@ -240,6 +240,47 @@ public class SlimeListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void onFireAttack(EntityTargetEvent event) {
+		String ticks1 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
+		String ticks2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant");
+		Entity entity = event.getEntity();
+		Entity target = event.getTarget();
+		int ticksTarget;
+		int ticksGiant;
+		int s;
+		try {
+			ticksTarget = Integer.parseInt(ticks1);
+			ticksGiant = Integer.parseInt(ticks2);
+		} catch (Exception e) {
+			ticksTarget = 0;
+			ticksGiant = 0;
+		}
+
+		if ((entity instanceof LivingEntity)) {
+			if (API.isGiantSlime(entity)) {
+				Slime slime = (Slime) event.getEntity();
+				s = slime.getSize();
+				if (s > 4){
+					if(!(target == null)){
+						if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Enabled").equalsIgnoreCase("true")) {
+							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Fire Attack").equalsIgnoreCase("true")) {
+								target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+							}
+							try {
+								event.getTarget().setFireTicks(ticksTarget);
+								event.getEntity().setFireTicks(ticksGiant);
+							} catch (Exception e) {
+							}
+						} else {
+							event.setTarget(target);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
