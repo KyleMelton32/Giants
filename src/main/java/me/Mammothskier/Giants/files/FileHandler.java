@@ -82,10 +82,15 @@ public class FileHandler {
 				break;
 			case GIANT:
 				YamlConfiguration Giant = YamlConfiguration.loadConfiguration(file);
+				Giant.set("Giant Configuration.Spawn Settings.Chance", new Integer(10));
+				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
+				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
+				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
+				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Lightning Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack", false);
@@ -100,10 +105,9 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
-				Giant.set("Giant Configuration.Spawn Settings.Chance", new Integer(10));
-				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Sounds.Fire Attack", true);
 				Giant.set("Giant Configuration.Sounds.Throw Boulder Attack", true);
+				Giant.set("Giant Configuration.Sounds.Shrapnel Attack", true);
 				Giant.set("Giant Configuration.Sounds.Kick Attack", true);
 				Giant.set("Giant Configuration.Sounds.Death", true);
 				try {
@@ -181,13 +185,26 @@ public class FileHandler {
 			case SLIME:
 				YamlConfiguration Slime = YamlConfiguration.loadConfiguration(file);
 				Slime.set("Slime Configuration.Spawn Settings.Chance", new Integer(10));
+				Slime.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());
 				Slime.set("Slime Configuration.Spawn Settings.Worlds", loadWorlds());	
-				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Slime Stats.Size", new Integer(12));
 				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
+				Slime.set("Slime Configuration.Damage Settings.Fire.Allow Fire Damage", true);
+				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
+				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
+				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
+				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				Slime.set("Slime Configuration.Sounds.Death", true);
+				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
+				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
 				try {
 					Slime.save(file);
 				} catch (IOException e) {
@@ -264,12 +281,26 @@ public class FileHandler {
 				YamlConfiguration MagmaCube = YamlConfiguration.loadConfiguration(file);
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Chance", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Spawn Settings.Worlds", loadWorlds());
-				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", true);
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
+				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Kick Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Lava Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Fire Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Throw Boulder Attack", true);
 				try {
 					MagmaCube.save(file);
 				} catch (IOException e) {

@@ -25,6 +25,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -51,7 +53,7 @@ public class GiantListeners implements Listener {
 						String y = String.valueOf(Math.round(event.getLocation().getY()));
 						String z = String.valueOf(Math.round(event.getLocation().getZ()));
 						player.sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
-						Bukkit.getLogger().info(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
+						Bukkit.getConsoleSender().sendMessage(message.replace("%X", x).replace("%Y", y).replace("%Z", z).replace("{entity}", "Giant"));
 					}
 				}
 			}
@@ -128,7 +130,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler
-	public void onArrowDamage(EntityDamageByEntityEvent event){
+	public void arrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiant(entity))){
 			int damage;
@@ -138,7 +140,47 @@ public class GiantListeners implements Listener {
 			} catch (Exception e) {
 				damage = 10;
 			}
+			if(damage == 0){
+				event.setCancelled(true);
+				return;
+			}
 			event.setDamage(damage + 0.0);
+		}
+	}
+	
+	@EventHandler
+	public void fireDamage(EntityDamageEvent event){
+		Entity entity = event.getEntity();
+		if (API.isGiant(entity)){
+			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Damage Settings.Fire.Allow Fire Damage").equalsIgnoreCase("false")){	
+				if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK){
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void suffocationDamage(EntityDamageEvent event){
+		Entity entity = event.getEntity();
+		if (API.isGiant(entity)){
+			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Damage Settings.Block Damage.Allow Suffocation").equalsIgnoreCase("false")){
+				if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK){
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void cactiDamage(EntityDamageEvent event){
+		Entity entity = event.getEntity();
+		if (API.isGiant(entity)){
+			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Damage Settings.Block Damage.Allow Cacti Damage").equalsIgnoreCase("false")){
+				if (event.getCause() == DamageCause.THORNS){
+					event.setCancelled(true);
+				}
+			}
 		}
 	}
 	
@@ -198,32 +240,28 @@ public class GiantListeners implements Listener {
 	}
 	
 	@EventHandler
-	public void onShrapelAttack(EntityTargetEvent event) {
+	public void onShrapnelAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int Amt;
-		int chance = 0;
-		Random pick = new Random();
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiant(entity)) {
 				if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled").equalsIgnoreCase("true")) {
-					for (int counter = 1; counter <= 1; counter++) {
-						chance = 1 + pick.nextInt(100);
+					String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
+					try {
+						Amt = Integer.parseInt(config);
+					} catch (Exception e) {
+						Amt = 3;
 					}
-					if (chance == 50){
-						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
-						try {
-							Amt = Integer.parseInt(config);
-						} catch (Exception e) {
-							Amt = 3;
+					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+					}
+					for (int i = 1; i <= Amt; i++){
+						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
+							((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
 						}
-						for (int i = 1; i <= Amt; i++){
-							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
-								((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
-							}
-							else{
-								event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
-							}
+						else{
+							event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
 						}
 					}
 				}
@@ -267,10 +305,10 @@ public class GiantListeners implements Listener {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
 			String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Kick Attack.Kick Height");
-			int height;
+			double height;
 
 			try {
-				height = Integer.parseInt(config);
+				height = Double.parseDouble(config);
 			} catch (Exception e) {
 				height = 1;
 			}

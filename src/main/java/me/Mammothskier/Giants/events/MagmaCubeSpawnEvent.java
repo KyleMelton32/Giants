@@ -1,5 +1,6 @@
 package me.Mammothskier.Giants.events;
 
+
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Entity;
@@ -8,8 +9,10 @@ import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
+
 
 public class MagmaCubeSpawnEvent extends Event {
 	private static boolean cancelled = false;
@@ -17,29 +20,33 @@ public class MagmaCubeSpawnEvent extends Event {
 	private Location location;
 	private static final HandlerList handlers = new HandlerList();
 
+
 	public MagmaCubeSpawnEvent(Location loc) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 
+
 		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
 		int size;
-		double health;
+		double health = 1;
 		try {
 			size = Integer.parseInt(string);
 			health = Double.parseDouble(string2);
 		} catch (Exception e) {
 			size = 12;
-			health = size^2;
 		}
+
 
 		if (!API.getMagmaCubeSpawnWorlds().contains(loc.getWorld().getName())) {
 			setCancelled(true);
 		}
-		
+
+
 		if(API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Magma Cube").equalsIgnoreCase("false")){
 			setCancelled(true);
 		}
+
 
 		if (!isCancelled()) {
 			if (biome == Biome.SWAMPLAND) {
@@ -54,6 +61,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FOREST) {
@@ -61,6 +69,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FOREST_HILLS) {
@@ -68,6 +77,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA) {
@@ -75,6 +85,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA_HILLS) {
@@ -82,6 +93,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA_MOUNTAINS) {
@@ -89,6 +101,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA) {
@@ -96,6 +109,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA_HILLS) {
@@ -103,6 +117,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA_MOUNTAINS) {
@@ -110,6 +125,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_TAIGA) {
@@ -117,6 +133,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_TAIGA_HILLS) {
@@ -124,6 +141,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_SPRUCE_TAIGA) {
@@ -131,6 +149,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_SPRUCE_TAIGA_HILLS) {
@@ -138,6 +157,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.PLAINS) {
@@ -145,6 +165,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_PLAINS) {
@@ -152,6 +173,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_PLAINS_SPIKES) {
@@ -159,6 +181,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SUNFLOWER_PLAINS) {
@@ -166,6 +189,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.OCEAN) {
@@ -173,6 +197,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DEEP_OCEAN) {
@@ -180,6 +205,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FROZEN_OCEAN) {
@@ -187,6 +213,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.RIVER) {
@@ -194,6 +221,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FROZEN_RIVER) {
@@ -201,6 +229,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BEACH) {
@@ -208,6 +237,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.STONE_BEACH) {
@@ -215,6 +245,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_BEACH) {
@@ -222,6 +253,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS) {
@@ -229,6 +261,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_PLUS) {
@@ -236,6 +269,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_MOUNTAINS) {
@@ -243,6 +277,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_PLUS_MOUNTAINS) {
@@ -250,6 +285,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MUSHROOM_ISLAND) {
@@ -257,6 +293,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MUSHROOM_SHORE) {
@@ -264,6 +301,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT) {
@@ -271,6 +309,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT_HILLS) {
@@ -278,6 +317,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT_MOUNTAINS) {
@@ -285,6 +325,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE) || (biome == Biome.JUNGLE_EDGE)) {
@@ -292,6 +333,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE_HILLS) || (biome == Biome.JUNGLE_EDGE)) {
@@ -299,6 +341,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE_MOUNTAINS) || (biome == Biome.JUNGLE_EDGE) || (biome == Biome.JUNGLE_EDGE_MOUNTAINS)) {
@@ -306,6 +349,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST) {
@@ -313,6 +357,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_HILLS) {
@@ -320,6 +365,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_MOUNTAINS) {
@@ -327,6 +373,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_HILLS_MOUNTAINS) {
@@ -334,6 +381,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA) {
@@ -341,6 +389,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_MOUNTAINS) {
@@ -348,6 +397,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_PLATEAU) {
@@ -355,6 +405,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_PLATEAU_MOUNTAINS) {
@@ -362,6 +413,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ROOFED_FOREST) {
@@ -369,6 +421,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ROOFED_FOREST_MOUNTAINS) {
@@ -376,6 +429,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA) {
@@ -383,6 +437,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_BRYCE) {
@@ -390,6 +445,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU) {
@@ -397,6 +453,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_FOREST) {
@@ -404,6 +461,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_MOUNTAINS) {
@@ -411,6 +469,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_FOREST_MOUNTAINS) {
@@ -418,13 +477,15 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SMALL_MOUNTAINS) {
-				if(API.getFileHandler().getProperty(Files.MAGMACUBEBIOMES, "Magma Cube Configuration.Biome Settings.Other").equalsIgnoreCase("true")) {
+				if(API.getFileHandler().getProperty(Files.MAGMACUBEBIOMES, "Magma Cube Configuration.Biome Settings.Other.Small Mountains").equalsIgnoreCase("true")) {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_MOUNTAINS) {
@@ -432,6 +493,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.HELL) {
@@ -439,6 +501,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SKY) {
@@ -446,33 +509,39 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 		}
 	}
 
+
 	public void setCancelled(boolean cancel) {
 		cancelled = cancel;
 	}
+
 
 	public static boolean isCancelled() {
 		return cancelled;
 	}
 
+
 	public Entity getEntity() {
 		return entity;
 	}
+
 
 	public Location getLocation() {
 		return location;
 	}
 
+
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+
 
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 }
-

@@ -3,6 +3,7 @@ package me.Mammothskier.Giants;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -13,6 +14,8 @@ import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.PluginDescriptionFile;
+
 
 public class Commands implements CommandExecutor {
 	private Giants _giants;
@@ -40,6 +43,7 @@ public class Commands implements CommandExecutor {
 						API.getFileHandler().loadFiles();
 						sender.sendMessage(ChatColor.GREEN + "Giants config file reloaded.");
 						_giants.log.info(ChatColor.GREEN + "Giants config file reloaded.");
+						Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + sender + "has reloaded the giants config");
 					} else {
 						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 					}
@@ -64,21 +68,15 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-								
+
 								try {
 									locx = Integer.parseInt(args[2]);
-								} catch (Exception e) {
-								}
-								location.setX(locx);
-								try {
 									locy = Integer.parseInt(args[3]);
-								} catch (Exception e) {
-								}
-								location.setY(locy);
-								try {
 									locz = Integer.parseInt(args[4]);
 								} catch (Exception e) {
 								}
+								location.setX(locx);
+								location.setY(locy);
 								location.setZ(locz);
 								Location loc = location;
 								loc.getWorld().spawnEntity(location, EntityType.GIANT);
@@ -109,21 +107,15 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-									
+
 								try {
 									locx = Integer.parseInt(args[2]);
-								} catch (Exception e) {
-								}
-								loc.setX(locx);
-								try {
 									locy = Integer.parseInt(args[3]);
-								} catch (Exception e) {
-								}
-								loc.setY(locy);
-								try {
 									locz = Integer.parseInt(args[4]);
 								} catch (Exception e) {
 								}
+								loc.setX(locx);
+								loc.setY(locy);
 								loc.setZ(locz);
 								Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 								entity.setSize(size);
@@ -155,21 +147,15 @@ public class Commands implements CommandExecutor {
 								double locx = player.getLocation().getX();
 								double locy = player.getLocation().getY();
 								double locz = player.getLocation().getZ();
-									
+
 								try {
 									locx = Integer.parseInt(args[3]);
-								} catch (Exception e) {
-								}
-								loc.setX(locx);
-								try {
 									locy = Integer.parseInt(args[4]);
-								} catch (Exception e) {
-								}
-								loc.setY(locy);
-								try {
 									locz = Integer.parseInt(args[5]);
 								} catch (Exception e) {
 								}
+								loc.setX(locx);
+								loc.setY(locy);
 								loc.setZ(locz);
 								MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 								entity.setSize(size);
@@ -178,9 +164,29 @@ public class Commands implements CommandExecutor {
 							}
 						}
 					}
+					else {
+						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+					}
+				}
+			}
+			if (args[0].equalsIgnoreCase("version")){
+				Player player = null;
+				PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
+				if (sender instanceof Player){
+					player = (Player) sender;
+					if((player.hasPermission("giants.version")) || (player.isOp())){
+						player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " is currently Enabled!");
+					}
+					else {
+						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+					}
+				}
+				else{
+					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " is currently Enabled!");
 				}
 			}
 		}
 		return true;
 	}
 }
+
