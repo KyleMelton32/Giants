@@ -163,9 +163,6 @@ public class Commands implements CommandExecutor {
 								player.sendMessage(ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 							}
 						}
-						else {
-							player.sendMessage(ChatColor.RED + "Proper usage is /giants spawn [entitytype] <x> <y> <z> \n" + "entities that are supported are giant, slime, magma cube");
-						}
 					}
 					else {
 						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
