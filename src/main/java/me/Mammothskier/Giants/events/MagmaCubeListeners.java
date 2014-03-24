@@ -279,7 +279,7 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void onStompAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cubbe Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
+		if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
 			Random pick = new Random();
 			int chance = 0;
 			int s;
