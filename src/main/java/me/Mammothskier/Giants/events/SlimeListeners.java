@@ -117,22 +117,19 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void ArrowDamage(EntityDamageByEntityEvent event){
-		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiantSlime(entity))){
 			int damage;
-			int size = 1;
 			int s;
 			String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Arrows.Damage done by arrow");
 			try {
 				damage = Integer.parseInt(string);
-				size = Integer.parseInt(string2);
 			} catch (Exception e) {
 				damage = 10;
 			}
 			Slime slime = (Slime) event.getEntity();
 			s = slime.getSize();
-			if (s == size){
+			if (s > 4){
 				if(damage == 0){
 					event.setCancelled(true);
 					return;
@@ -144,18 +141,12 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void fireDamage(EntityDamageEvent event){
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
-		int size = 1;
 		int s;
 		if (API.isGiantSlime(entity)){
-			try {
-				size = Integer.parseInt(string);
-			} catch (Exception e) {
-			}
 			Slime slime = (Slime) event.getEntity();
 			s = slime.getSize();
-			if (s == size){
+			if (s > 4){
 				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Fire.Allow Fire Damage").equalsIgnoreCase("false")){	
 					if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK){
 						event.setCancelled(true);
@@ -167,18 +158,12 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void suffocationDamage(EntityDamageEvent event){
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
-		int size = 1;
 		int s;
 		if (API.isGiantSlime(entity)){
-			try {
-				size = Integer.parseInt(string);
-			} catch (Exception e) {
-			}
 			Slime slime = (Slime) event.getEntity();
 			s = slime.getSize();
-			if (s == size){
+			if (s > 4){
 				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Block Damage.Allow Suffocation").equalsIgnoreCase("false")){
 					if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK){
 						event.setCancelled(true);
@@ -190,18 +175,12 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void cactiDamage(EntityDamageEvent event){
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		Entity entity = event.getEntity();
-		int size = 1;
 		int s;
 		if (API.isGiantSlime(entity)){
-			try {
-				size = Integer.parseInt(string);
-			} catch (Exception e) {
-			}
 			Slime slime = (Slime) event.getEntity();
 			s = slime.getSize();
-			if (s == size){
+			if (s > 4){
 				if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Damage Settings.Block Damage.Allow Cacti Damage").equalsIgnoreCase("false")){
 					if (event.getCause() == DamageCause.THORNS){
 						event.setCancelled(true);
@@ -215,19 +194,13 @@ public class SlimeListeners implements Listener {
 	public void onLightningAttack(EntityTargetEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
-		int size = 1;
 		int s;
-		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiantSlime(entity)) {
-				try {
-					size = Integer.parseInt(string);
-				} catch (Exception e) {
-				}
 				Slime slime = (Slime) event.getEntity();
 				s = slime.getSize();
-				if (s == size){
+				if (s > 4){
 					if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Lightning Attack").equalsIgnoreCase("true")) {
 						try {
 							target.getLocation().getWorld().strikeLightning(target.getLocation());
@@ -289,7 +262,6 @@ public class SlimeListeners implements Listener {
 		Random pick = new Random();
 		int chance = 0;
 		int s;
-		int size = 0;
 		for (int counter = 1; counter <= 1; counter++) {
 			chance = 1 + pick.nextInt(100);
 		}
@@ -324,14 +296,11 @@ public class SlimeListeners implements Listener {
 		Player player = event.getPlayer();
 		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
 			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height");
-			String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 			double height;
-			int size = 1;
 			int s;
 
 			try {
 				height = Double.parseDouble(config);
-				size = Integer.parseInt(string);
 			} catch (Exception e) {
 				height = 1;
 			}
@@ -346,7 +315,7 @@ public class SlimeListeners implements Listener {
 					if (API.isGiantSlime(entity)) {
 						Slime slime = (Slime) entity;
 						s = slime.getSize();
-						if (s == size){
+						if (s > 4){
 							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
 								player.setVelocity(new Vector(0, height, 0));
 								if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
