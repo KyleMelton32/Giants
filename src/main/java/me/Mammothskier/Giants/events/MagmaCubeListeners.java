@@ -307,6 +307,32 @@ public class MagmaCubeListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void onStompAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cubbe Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
+			Random pick = new Random();
+			int chance = 0;
+			int s;
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (API.isGiantMagmaCube(entity)) {
+						MagmaCube magmacube = (MagmaCube) entity;
+						s = magmacube.getSize();
+						if (s > 4){
+							if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
+								player.getLocation().getWorld().createExplosion(player.getLocation(), 1.0F);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
 	public void ThrownBoulderAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		boolean inRange = false;
@@ -393,14 +419,10 @@ public class MagmaCubeListeners implements Listener {
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Experience");
-		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
 		int exp;
-		int size = 1;
-		int s2;
 
 		try {
 			exp = Integer.parseInt(string);
-			size = Integer.parseInt(string2);
 		} catch (Exception e) {
 			exp = 5;
 		}

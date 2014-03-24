@@ -242,7 +242,7 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
 		String ticks1 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
-		String ticks2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant");
+		String ticks2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime");
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int ticksTarget;
@@ -351,14 +351,10 @@ public class SlimeListeners implements Listener {
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
-		String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
 		int exp;
-		int size = 1;
-		int s2;
 
 		try {
 			exp = Integer.parseInt(string);
-			size = Integer.parseInt(string2);
 		} catch (Exception e) {
 			exp = 5;
 		}

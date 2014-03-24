@@ -199,7 +199,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
-				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
+				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime", new Integer(100));
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				Slime.set("Slime Configuration.Sounds.Death", true);
@@ -290,6 +290,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
+				MagmaCube.set("Magma Cubbe Configuration.Attack Mechanisms.Stomp Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
