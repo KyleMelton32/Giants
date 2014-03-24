@@ -15,7 +15,9 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -273,6 +275,43 @@ public class SlimeListeners implements Listener {
 							}
 						} else {
 							event.setTarget(target);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void ThrownBoulderAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		boolean inRange = false;
+		Random pick = new Random();
+		int chance = 0;
+		int s;
+		int size = 0;
+		for (int counter = 1; counter <= 1; counter++) {
+			chance = 1 + pick.nextInt(100);
+		}
+
+		for (Entity entity : player.getNearbyEntities(15, 12, 15)) {
+			if (API.isGiantMagmaCube(entity)) {
+				Slime slime = (Slime) entity;
+				s = slime.getSize();
+				if (s > 4){
+					if (entity.getNearbyEntities(15, 12, 15).contains(player) && !entity.getNearbyEntities(5, 3, 5).contains(player)) {
+						inRange = true;
+					}
+					if (inRange == true) {
+						if (chance == 50) {
+							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+								Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
+								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
+								fireball.setShooter((LivingEntity) entity);
+								if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
+								}
+							}
 						}
 					}
 				}
