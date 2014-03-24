@@ -107,8 +107,8 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
 				Giant.set("Giant Configuration.Sounds.Fire Attack", true);
 				Giant.set("Giant Configuration.Sounds.Throw Boulder Attack", true);
-				Giant.set("Giant Configuration.Sounds.Shrapnel Attack", true);
 				Giant.set("Giant Configuration.Sounds.Kick Attack", true);
+				Giant.set("Giant Configuration.Sounds.Shrapnel Attack", true);
 				Giant.set("Giant Configuration.Sounds.Death", true);
 				try {
 					Giant.save(file);
@@ -203,9 +203,10 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime", new Integer(100));
-				Slime.set("Slime Configuration.Sounds.Death", true);
 				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
+				Slime.set("Slime Configuration.Sounds.Throw Boulder Attack", true);
 				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
+				Slime.set("Slime Configuration.Sounds.Death", true);
 				try {
 					Slime.save(file);
 				} catch (IOException e) {
@@ -298,11 +299,11 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube", new Integer(100));
-				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
-				MagmaCube.set("Magma Cube Configuration.Sounds.Kick Attack", true);
-				MagmaCube.set("Magma Cube Configuration.Sounds.Lava Attack", true);
 				MagmaCube.set("Magma Cube Configuration.Sounds.Fire Attack", true);
 				MagmaCube.set("Magma Cube Configuration.Sounds.Throw Boulder Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Kick Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Lava Attack", true);
+				MagmaCube.set("Magma Cube Configuration.Sounds.Death", true);
 				try {
 					MagmaCube.save(file);
 				} catch (IOException e) {
