@@ -9,7 +9,7 @@
 
     <groupId>me.mammothskier</groupId>
     <artifactId>giants</artifactId>
-    <version>6.1-SNAPSHOT</version>
+    <version>6.1-BETA</version>
     <packaging>jar</packaging>
 
 

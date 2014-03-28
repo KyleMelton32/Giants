@@ -5,14 +5,33 @@ Slime Configuration:
     - world
     - world_nether
     - world_the_end
-  Damage Settings:
-    Arrows:
-      Damage done by arrow: 10
-  Giant Stats:
+  Slime Stats:
     Size: 12
+    Health: 100
     Experience: 5
     Drops:
     - '1:0:1'
+  Damage Settings:
+    Arrows:
+      Damage done by arrow: 10
+    Fire:
+      Allow Fire Damage: true
+    Block Damage:
+      Allow Suffocation: false
+      Allow Cacti Damage: false
+  Attack Mechanisms:
+    Lightning Attack: true
+    Throw Boulder Attack: true
+    Stomp Attack: true
+    Kick Attack:
+      Enabled: true
+      Kick Height: 1
+    Fire Attack:
+      Enabled: true
+      Ticks for Target: 100
+      Ticks for Slime: 100
   Sounds:
+    Fire Attack: true
+    Throw Boulder Attack: true
+    Kick Attack: true
     Death: true
-
