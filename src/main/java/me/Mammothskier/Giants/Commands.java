@@ -28,7 +28,8 @@ public class Commands implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("giants")) {
 			if (args.length == 0) {
 				if (sender.hasPermission("giants.reload") || sender.hasPermission("giants.*") || sender.hasPermission("giants.debug") || sender.hasPermission("giants.spawn") || sender.isOp()) {
-				sender.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" + "/giants reload:  Reloads the config file.\n" + "/giants spawn [entitytype] <x> <y> <z>");
+				sender.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" + "/giants reload:  Reloads the config file.\n" + 
+				"/giants spawn [entitytype] <x> <y> <z> : Spawns entity at the location given \n" + "/giants version:  Displays the version of the plugin running on the server");
 				} else {
 					sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 				}
