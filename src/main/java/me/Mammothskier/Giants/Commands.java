@@ -124,7 +124,7 @@ public class Commands implements CommandExecutor {
 								player.sendMessage(ChatColor.GREEN + "A Giant Slime has been spawned");
 							}
 						}
-						if(args[1].equalsIgnoreCase("magma") && args[2].equalsIgnoreCase("cube")){
+						if((args[1].equalsIgnoreCase("magma")) && (args[2].equalsIgnoreCase("cube")) || (args[1].equalsIgnoreCase("magma_cube")) || (args[1].equalsIgnoreCase("magma_cube"))){
 							Location loc = (Location) player.getEyeLocation();
 							Location location = loc;
 							String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
