@@ -11,6 +11,7 @@ import me.Mammothskier.Giants.utils.API;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -101,7 +102,7 @@ public class SlimeListeners implements Listener {
 					while (checkcount < 10) {
 						y2 += checkcount;
 						
-						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
+						if (!(entity.getWorld().getBlockAt(x2, y2, z2).equals(Material.AIR))) {
 							spawnslime = 0;
 						}
 						checkcount++;
