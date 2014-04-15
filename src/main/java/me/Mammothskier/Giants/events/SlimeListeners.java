@@ -101,7 +101,7 @@ public class SlimeListeners implements Listener {
 					while (checkcount < 10) {
 						y2 += checkcount;
 						
-						if (!(entity.getWorld().getBlockAt(x2, y2, z2).equals(Material.AIR))) {
+						if (entity.getWorld().getBlockTypeIdAt(x2, y2, z2) != 0) {
 							spawnslime = 0;
 						}
 						checkcount++;
