@@ -1,6 +1,5 @@
 package me.Mammothskier.Giants.events;
 
-
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Entity;
@@ -8,7 +7,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
 
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
@@ -54,6 +52,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SWAMPLAND_MOUNTAINS) {
