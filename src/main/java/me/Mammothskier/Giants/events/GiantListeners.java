@@ -110,7 +110,6 @@ public class GiantListeners implements Listener {
 					if (spawngiant == 1) {
 						GiantSpawnEvent GSE = new GiantSpawnEvent(location);
 						Bukkit.getServer().getPluginManager().callEvent(GSE);
-						event.setCancelled(true);
 					}
 				}
 			}

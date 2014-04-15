@@ -109,7 +109,6 @@ public class SlimeListeners implements Listener {
 					if (spawnslime == 1) {
 						SlimeSpawnEvent SSE = new SlimeSpawnEvent(location);
 						Bukkit.getServer().getPluginManager().callEvent(SSE);
-						event.setCancelled(true);
 					}
 				}
 			}

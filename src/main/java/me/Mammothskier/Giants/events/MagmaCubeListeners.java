@@ -110,7 +110,6 @@ public class MagmaCubeListeners implements Listener {
 					if (spawnmagmacube == 1) {
 						MagmaCubeSpawnEvent MCSE = new MagmaCubeSpawnEvent(location);
 						Bukkit.getServer().getPluginManager().callEvent(MCSE);
-						event.setCancelled(true);
 					}
 				}
 			}
