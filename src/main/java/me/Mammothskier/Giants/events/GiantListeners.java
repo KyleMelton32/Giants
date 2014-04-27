@@ -355,19 +355,10 @@ public class GiantListeners implements Listener {
 			}
 		}
 	}
-
+	
 	@EventHandler
-	public void onGiantDrops(EntityDeathEvent event) {
+	public void zombiesOnDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
-		int exp;
-
-		try {
-			exp = Integer.parseInt(string);
-		} catch (Exception e) {
-			exp = 5;
-		}
-
 		if (API.isGiant(entity)) {
 			if(API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled").equalsIgnoreCase("true")){
 				Location spawnLocation = entity.getLocation();
@@ -389,6 +380,22 @@ public class GiantListeners implements Listener {
 				}
 				
 			}
+		}
+	}
+
+	@EventHandler
+	public void onGiantDrops(EntityDeathEvent event) {
+		Entity entity = event.getEntity();
+		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
+		int exp;
+
+		try {
+			exp = Integer.parseInt(string);
+		} catch (Exception e) {
+			exp = 5;
+		}
+
+		if (API.isGiant(entity)) {
 			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
