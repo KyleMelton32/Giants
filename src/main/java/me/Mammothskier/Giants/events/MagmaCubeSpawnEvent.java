@@ -11,16 +11,19 @@ import org.bukkit.event.HandlerList;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
 
+
 public class MagmaCubeSpawnEvent extends Event {
 	private static boolean cancelled = false;
 	private Entity entity;
 	private Location location;
 	private static final HandlerList handlers = new HandlerList();
 
+
 	public MagmaCubeSpawnEvent(Location loc) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
+
 
 		String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
 		int size;
@@ -32,13 +35,16 @@ public class MagmaCubeSpawnEvent extends Event {
 			size = 12;
 		}
 
+
 		if (!API.getMagmaCubeSpawnWorlds().contains(loc.getWorld().getName())) {
 			setCancelled(true);
 		}
-		
+
+
 		if(API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Magma Cube").equalsIgnoreCase("false")){
 			setCancelled(true);
 		}
+
 
 		if (!isCancelled()) {
 			if (biome == Biome.SWAMPLAND) {
@@ -46,6 +52,7 @@ public class MagmaCubeSpawnEvent extends Event {
 					MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(location, EntityType.MAGMA_CUBE);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SWAMPLAND_MOUNTAINS) {
@@ -507,28 +514,33 @@ public class MagmaCubeSpawnEvent extends Event {
 		}
 	}
 
+
 	public void setCancelled(boolean cancel) {
 		cancelled = cancel;
 	}
+
 
 	public static boolean isCancelled() {
 		return cancelled;
 	}
 
+
 	public Entity getEntity() {
 		return entity;
 	}
+
 
 	public Location getLocation() {
 		return location;
 	}
 
+
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+
 
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 }
-

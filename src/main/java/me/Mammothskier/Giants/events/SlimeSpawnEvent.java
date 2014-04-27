@@ -474,4 +474,3 @@ public class SlimeSpawnEvent extends Event {
 		return handlers;
 	}
 }
-

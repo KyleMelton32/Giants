@@ -254,7 +254,9 @@ public class GiantListeners implements Listener {
 						Amt = 3;
 					}
 					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
-						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+						if (target instanceof LivingEntity){
+							target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+						}
 					}
 					for (int i = 1; i <= Amt; i++){
 						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
@@ -353,19 +355,10 @@ public class GiantListeners implements Listener {
 			}
 		}
 	}
-
+	
 	@EventHandler
-	public void onGiantDrops(EntityDeathEvent event) {
+	public void zombiesOnDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
-		int exp;
-
-		try {
-			exp = Integer.parseInt(string);
-		} catch (Exception e) {
-			exp = 5;
-		}
-
 		if (API.isGiant(entity)) {
 			if(API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled").equalsIgnoreCase("true")){
 				Location spawnLocation = entity.getLocation();
@@ -387,6 +380,22 @@ public class GiantListeners implements Listener {
 				}
 				
 			}
+		}
+	}
+
+	@EventHandler
+	public void onGiantDrops(EntityDeathEvent event) {
+		Entity entity = event.getEntity();
+		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
+		int exp;
+
+		try {
+			exp = Integer.parseInt(string);
+		} catch (Exception e) {
+			exp = 5;
+		}
+
+		if (API.isGiant(entity)) {
 			if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}

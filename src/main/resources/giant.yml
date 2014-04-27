@@ -1,4 +1,10 @@
 Giant Configuration:
+  Spawn Settings:
+    Chance: 10
+    Worlds:
+    - world
+    - world_nether
+    - world_the_end
   Giant Stats:
     Health: 100
     Experience: 5
@@ -7,34 +13,33 @@ Giant Configuration:
   Damage Settings:
     Arrows:
       Damage done by arrow: 10
+    Fire:
+      Allow Fire Damage: true
+    Block Damage:
+      Allow Suffocation: false
+      Allow Cacti Damage: false
   Attack Mechanisms:
-    Lightning Attack: false
-    Throw Boulder Attack: false
-    Stomp Attack: false
+    Lightning Attack: true
+    Throw Boulder Attack: true
+    Stomp Attack: true
     Kick Attack:
-      Enabled: false
+      Enabled: true
       Kick Height: 1
     Fire Attack:
-      Enabled: false
+      Enabled: true
       Ticks for Target: 100
       Ticks for Giant: 100
-    Zombie Attack:
-      Enabled: false
-      Baby Zombies: false
+    Shrapnel Attack:
+      Enabled: true
+      Baby Zombies: true
       Zombies to Spawn: 3
     Spawn Zombies On Death:
-      Enabled: false
-      Baby Zombies: false
+      Enabled: true
+      Baby Zombies: true
       Zombies to Spawn: 5
-  Spawn Settings:
-    Chance: 10
-    Worlds:
-    - world
-    - world_nether
-    - world_the_end
   Sounds:
     Fire Attack: true
     Throw Boulder Attack: true
     Kick Attack: true
+    Shrapnel Attack: true
     Death: true
-

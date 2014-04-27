@@ -1,35 +1,8 @@
 Giants Configuration:
-  Giant Stats:
-    Health: 100
-    Experience: 5
-    Drops:
-    - '1:0:1'
-  Attack Mechanisms:
-    Lightning Attack: false
-    Throw Boulder Attack: false
-    Stomp Attack: false
-    Kick Attack:
-      Enabled: false
-      Kick Height: 1
-    Fire Attack:
-      Enabled: false
-      Ticks for Target: 100
-      Ticks for Giant: 100
-    Zombie Attack:
-      Enabled: false
-      Baby Zombies: false
-      Zombies to Spawn: 3
-    Spawn Zombies On Death:
-      Enabled: false
-      Zombies to Spawn: 5
-  Spawn Settings:
-    Chance: 10
-    Worlds:
-  Sounds:
-    Fire Attack: true
-    Throw Boulder Attack: true
-    Kick Attack: true
-    Death: true
-  Debug Mode: false
-  Language:
-    Debug Message: '&2A Giant has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z'
+  Entities:
+    Giant: true
+    Giant Slime: true
+    Giant Magma Cube: true
+  Debug Mode:
+    Enabled: false
+    Debug Message: '&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z'

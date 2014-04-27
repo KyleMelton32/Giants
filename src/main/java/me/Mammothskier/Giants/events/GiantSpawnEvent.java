@@ -346,4 +346,3 @@ public class GiantSpawnEvent extends Event {
 		return handlers;
 	}
 }
-
