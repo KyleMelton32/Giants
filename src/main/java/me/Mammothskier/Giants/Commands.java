@@ -180,8 +180,8 @@ public class Commands implements CommandExecutor {
 						"/giants version:  Displays the version of the plugin running on the server");
 				}
 				if (args[0].equalsIgnoreCase("reload")) {
+					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]"+ ChatColor.GREEN + "Giants config files reloaded.");
 					API.getFileHandler().loadFiles();
-					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]"+ ChatColor.GREEN + "Giants config files reloaded.");	
 				}
 				if (args[0].equalsIgnoreCase("version")){
 					PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
