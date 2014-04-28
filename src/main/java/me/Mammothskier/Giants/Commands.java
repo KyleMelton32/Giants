@@ -16,6 +16,12 @@ import org.bukkit.entity.Slime;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class Commands implements CommandExecutor {
+	private Giants _giants;
+
+	public Commands(Giants giants) {
+		_giants = giants;
+	}
+
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("giants")) {
 			if (sender instanceof Player){
