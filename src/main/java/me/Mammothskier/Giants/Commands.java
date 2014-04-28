@@ -40,7 +40,6 @@ public class Commands implements CommandExecutor {
 					if ((player.hasPermission("giants.reload")) || (player.isOp())) {
 						API.getFileHandler().loadFiles();
 						player.sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Giants config file reloaded.");
-						_giants.log.info(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Giants config file reloaded.");
 						Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + player + "has reloaded the giants config");
 					} else {
 						sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
@@ -182,7 +181,7 @@ public class Commands implements CommandExecutor {
 				}
 				if (args[0].equalsIgnoreCase("reload")) {
 					API.getFileHandler().loadFiles();
-					_giants.log.info(ChatColor.AQUA + "[Giants]"+ ChatColor.GREEN + "Giants config file reloaded.");	
+					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]"+ ChatColor.GREEN + "Giants config files reloaded.");	
 				}
 				if (args[0].equalsIgnoreCase("version")){
 					PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
