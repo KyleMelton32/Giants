@@ -2,7 +2,6 @@ package me.Mammothskier.Giants;
 
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

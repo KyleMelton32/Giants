@@ -74,8 +74,6 @@ public class FileHandler {
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");
-/*				Config.set("Giants Configuration.Updater.Enabled", true);
-				Config.set("Giants Configuration.Updater.Automatic Download", true);*/
 				try {
 					Config.save(file);
 				} catch (IOException e) {

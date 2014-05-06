@@ -3,14 +3,13 @@ package me.Mammothskier.Giants;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
-import net.gravitydevelopment.updater.Updater;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import org.mcstats.Metrics;
 
 public class Giants extends JavaPlugin{
@@ -28,14 +27,6 @@ public class Giants extends JavaPlugin{
 		} catch (IOException e) {
 		    // Failed to submit the stats :-(
 		}
-/*		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Updater.Enabled").equals(true)){
-			if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Updater.Automatic Download").equals(true)){
-				Updater updater = new Updater(this, 42143, this.getFile(), Updater.UpdateType.DEFAULT, true);
-			}
-			else {
-				Updater updater = new Updater(this, 42143, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-			}
-		}*/
 	}
 	@Override
 	public void onDisable(){
