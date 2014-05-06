@@ -102,9 +102,11 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn", new Integer(3));
+				Giant.set("Giant Configuration.Attack Mechanisms.Shrapnel Attack.Health", new Integer(20));
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
+				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Health", new Integer(20));
 				Giant.set("Giant Configuration.Sounds.Fire Attack", true);
 				Giant.set("Giant Configuration.Sounds.Throw Boulder Attack", true);
 				Giant.set("Giant Configuration.Sounds.Kick Attack", true);

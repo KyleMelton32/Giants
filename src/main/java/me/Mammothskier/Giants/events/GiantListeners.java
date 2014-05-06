@@ -13,6 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -244,14 +245,20 @@ public class GiantListeners implements Listener {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int Amt;
+		double Health;
 		if ((entity instanceof LivingEntity)) {
 			if (API.isGiant(entity)) {
+				Location spawnLocation = entity.getLocation();
+				Location loc = spawnLocation;
 				if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Enabled").equalsIgnoreCase("true")) {
 					String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
+					String config2 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Health");
 					try {
 						Amt = Integer.parseInt(config);
+						Health = Double.parseDouble(config2);
 					} catch (Exception e) {
 						Amt = 3;
+						Health = 20;
 					}
 					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Shrapnel Attack").equalsIgnoreCase("true")){
 						if (target instanceof LivingEntity){
@@ -260,10 +267,15 @@ public class GiantListeners implements Listener {
 					}
 					for (int i = 1; i <= Amt; i++){
 						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
-							((Zombie) event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE)).setBaby(true);
+							Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+							((Zombie) e).setBaby(true);
+							((Damageable) e).setHealth(Health);
+							((Damageable) e).setMaxHealth(Health);
 						}
 						else{
-							event.getTarget().getLocation().getWorld().spawnEntity(target.getLocation(), EntityType.ZOMBIE);
+							Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+							((Damageable) e).setHealth(Health);
+							((Damageable) e).setMaxHealth(Health);
 						}
 					}
 				}
@@ -364,18 +376,28 @@ public class GiantListeners implements Listener {
 				Location spawnLocation = entity.getLocation();
 				Location loc = spawnLocation;
 				String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn");
+				String config2 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Health");
 				int zombAmt;
+				double zombHealth;
+				
 				try {
 					zombAmt = Integer.parseInt(config);
+					zombHealth = Double.parseDouble(config2);
 				}catch (Exception e) {
 					zombAmt = 1;
+					zombHealth = 20;
 				}
 				for (int i = 1; i <= zombAmt; i++){
 					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies").equalsIgnoreCase("true")) {
-						((Zombie) loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE)).setBaby(true);
+						Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+						((Zombie) e).setBaby(true);
+						((Damageable) e).setHealth(zombHealth);
+						((Damageable) e).setMaxHealth(zombHealth);
 					}
 					else{
-						loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+						Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+						((Damageable) e).setHealth(zombHealth);
+						((Damageable) e).setMaxHealth(zombHealth);
 					}
 				}
 				
