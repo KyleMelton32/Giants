@@ -26,7 +26,7 @@ public class Commands implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("giants")) {
 			if (sender instanceof Player){
 				Player player = (Player) sender;
-				if (args.length == 0){
+				if (args.length < 1){
 					if (player.hasPermission("giants.reload") || player.hasPermission("giants.*") || player.hasPermission("giants.debug") || player.hasPermission("giants.spawn") || player.isOp()) {
 						player.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 							"/giants reload:  Reloads the config file.\n" + 
@@ -182,7 +182,7 @@ public class Commands implements CommandExecutor {
 				}
 			}
 			else {
-				if (args.length != 1){
+				if (args.length < 1){
 					Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 						"/giants reload:  Reloads the config file.\n" + 
 						"/giants version:  Displays the version of the plugin running on the server");
