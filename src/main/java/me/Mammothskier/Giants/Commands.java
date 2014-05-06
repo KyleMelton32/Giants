@@ -182,7 +182,7 @@ public class Commands implements CommandExecutor {
 				}
 			}
 			else {
-				if (args.length == 0){
+				if (args.length != 1){
 					Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 						"/giants reload:  Reloads the config file.\n" + 
 						"/giants version:  Displays the version of the plugin running on the server");
