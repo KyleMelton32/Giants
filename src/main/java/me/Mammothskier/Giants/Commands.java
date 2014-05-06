@@ -79,6 +79,7 @@ public class Commands implements CommandExecutor {
 									loc.getWorld().spawnEntity(location, EntityType.GIANT);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
 								}
+								return true;
 							}
 							if(args[1].equalsIgnoreCase("slime")){
 								Location loc = (Location) player.getEyeLocation();
@@ -121,6 +122,7 @@ public class Commands implements CommandExecutor {
 									entity.setHealth(health);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Slime has been spawned");
 								}
+								return true;
 							}
 							if((args[1].equalsIgnoreCase("lavaslime")) || (args[1].equalsIgnoreCase("magma_cube")) || (args[1].equalsIgnoreCase("magma"))|| (args[1].equalsIgnoreCase("magmacube"))){
 								Location loc = (Location) player.getEyeLocation();
@@ -163,6 +165,7 @@ public class Commands implements CommandExecutor {
 									entity.setHealth(health);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Magma Cube has been spawned");
 								}
+								return true;
 							}
 							else {
 								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise giant, slime, and magmacube.");
