@@ -26,7 +26,7 @@ public class Commands implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("giants")) {
 			if (sender instanceof Player){
 				Player player = (Player) sender;
-				if (args.length < 1){
+				if (args.length == 0){
 					if (player.hasPermission("giants.reload") || player.hasPermission("giants.*") || player.hasPermission("giants.debug") || player.hasPermission("giants.spawn") || player.isOp()) {
 						player.sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 							"/giants reload:  Reloads the config file.\n" + 
@@ -35,6 +35,7 @@ public class Commands implements CommandExecutor {
 					} else {
 						player.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 					}
+					return true;
 				}
 				if (args[0].equalsIgnoreCase("reload")) {
 					if ((player.hasPermission("giants.reload")) || (player.isOp()) || (player.hasPermission("giants.*"))) {
@@ -182,7 +183,7 @@ public class Commands implements CommandExecutor {
 				}
 			}
 			else {
-				if (args.length < 1){
+				if (args.length == 0){
 					Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 						"/giants reload:  Reloads the config file.\n" + 
 						"/giants version:  Displays the version of the plugin running on the server");
@@ -195,7 +196,7 @@ public class Commands implements CommandExecutor {
 					PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
 					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " is currently Enabled!");
 				}
-				else {
+				else{
 					Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Unknown Command!");
 					Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "===== Giants Commands ===== \n" +
 						"/giants reload:  Reloads the config files.\n" + 
