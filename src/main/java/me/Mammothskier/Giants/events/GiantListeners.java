@@ -269,13 +269,13 @@ public class GiantListeners implements Listener {
 						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
 							Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
 							((Zombie) e).setBaby(true);
-							((Damageable) e).setHealth(Health);
 							((Damageable) e).setMaxHealth(Health);
+							((Damageable) e).setHealth(Health);
 						}
 						else{
 							Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
-							((Damageable) e).setHealth(Health);
 							((Damageable) e).setMaxHealth(Health);
+							((Damageable) e).setHealth(Health);
 						}
 					}
 				}
@@ -391,13 +391,13 @@ public class GiantListeners implements Listener {
 					if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies").equalsIgnoreCase("true")) {
 						Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
 						((Zombie) e).setBaby(true);
-						((Damageable) e).setHealth(zombHealth);
 						((Damageable) e).setMaxHealth(zombHealth);
+						((Damageable) e).setHealth(zombHealth);
 					}
 					else{
 						Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
-						((Damageable) e).setHealth(zombHealth);
 						((Damageable) e).setMaxHealth(zombHealth);
+						((Damageable) e).setHealth(zombHealth);
 					}
 				}
 				
