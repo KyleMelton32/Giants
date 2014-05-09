@@ -34,7 +34,7 @@ public class FileHandler {
 	}
 
 	private String[] loadDefaultDrop() {
-		String[] drops = { "1:0:1" };
+		String[] drops = { "1-3-3|0|1|100" };
 		return drops;
 	}
 
