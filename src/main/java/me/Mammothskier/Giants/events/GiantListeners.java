@@ -370,6 +370,38 @@ public class GiantListeners implements Listener {
 			}
 		}
 	}
+
+/*	@EventHandler
+	public void JumpAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		double height;
+		float power;
+		if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
+			for (Entity entity : player.getNearbyEntities(6, 4, 6)) {
+				if (API.isGiant(entity)) {
+					if (entity.getNearbyEntities(6, 4, 6).contains(player)) {
+						String config = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Jump Attack.Giant Jump Height");
+						String config2 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Jump Attack.Explosion.Enabled");
+						String config3 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Jump Attack.Explosion.Power");
+						try {
+							height = Double.parseDouble(config);
+							power = Float.parseFloat(config3);
+						} catch (Exception e) {
+							height = 1;
+							power = 1.0F;
+						}
+						entity.setVelocity(new Vector(0, height, 0));
+						if (config2.equalsIgnoreCase("true")){
+							player.getLocation().getWorld().createExplosion(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), power, false, true);
+						}
+						else {
+							player.getLocation().getWorld().createExplosion(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), power, false, false);
+						}
+					}
+				}
+			}
+		}
+	}*/
 	
 	@EventHandler
 	public void zombiesOnDeath(EntityDeathEvent event) {
@@ -504,64 +536,6 @@ public class GiantListeners implements Listener {
 						newItem.addEnchantment(enchantment, level);
 						drops.add(newItem);
 					}
-				}
-				else {
-					int id = 0;
-					int amt = 0;
-					short dmg = 0;
-					try {
-						String[] split = s.split(":");
-						if (split.length == 2) {
-							String idS = split[0];
-							String amtS = split[1];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = 0;
-						} else if (split.length == 3) {
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = Short.parseShort(dmgS);
-						}
-					} catch (Exception e) {
-						id = 1;
-						amt = 1;
-						dmg = 0;
-					}
-					ItemStack newItem = new ItemStack(id, amt, dmg);
-					drops.add(newItem);
 				}
 			}
 			event.getDrops().addAll(drops);
