@@ -117,20 +117,6 @@ public class GiantListeners implements Listener {
 	}
 	
 	@EventHandler
-	public void GiantHealth(CreatureSpawnEvent event){
-		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
-		double health;
-		try {
-			health = Integer.parseInt(string);
-		} catch (Exception e) {
-			health = 100;
-		}
-		if(event.getEntityType() == EntityType.GIANT){
-			event.getEntity().setMaxHealth(health);
-		}
-	}
-
-	@EventHandler
 	public void arrowDamage(EntityDamageByEntityEvent event){
 		Entity entity = event.getEntity();
 		if((event.getDamager() instanceof Arrow) && (API.isGiant(entity))){
