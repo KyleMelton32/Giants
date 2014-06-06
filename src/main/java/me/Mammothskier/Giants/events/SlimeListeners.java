@@ -34,6 +34,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class SlimeListeners implements Listener {
@@ -356,6 +358,32 @@ public class SlimeListeners implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void poisonAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Poison Attack").equalsIgnoreCase("true")){
+			Random pick = new Random();
+			int chance = 0;
+			double length;
+			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Poison Attack.length");
+			try {
+				length = Double.parseDouble(config);
+			} catch (Exception e) {
+				length = 5;
+			}
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (API.isGiantSlime(entity)) {
+						player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (length*20), 3));
+					}
+				}
+			}
+		}
+	}
 
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
@@ -453,64 +481,6 @@ public class SlimeListeners implements Listener {
 						newItem.addEnchantment(enchantment, level);
 						drops.add(newItem);
 					}
-				}
-				else {
-					int id = 0;
-					int amt = 0;
-					short dmg = 0;
-					try {
-						String[] split = s.split(":");
-						if (split.length == 2) {
-							String idS = split[0];
-							String amtS = split[1];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = 0;
-						} else if (split.length == 3) {
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = Short.parseShort(dmgS);
-						}
-					} catch (Exception e) {
-						id = 1;
-						amt = 1;
-						dmg = 0;
-					}
-					ItemStack newItem = new ItemStack(id, amt, dmg);
-					drops.add(newItem);
 				}
 			}
 			event.getDrops().addAll(drops);
