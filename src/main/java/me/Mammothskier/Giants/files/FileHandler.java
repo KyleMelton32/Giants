@@ -205,6 +205,8 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime", new Integer(100));
+				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.Enabled", true);
+				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.length", new Integer(5));
 				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
 				Slime.set("Slime Configuration.Sounds.Throw Boulder Attack", true);
 				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
