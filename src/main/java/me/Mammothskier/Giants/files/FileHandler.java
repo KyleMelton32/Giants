@@ -86,7 +86,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
-				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList("STONE-0-0|0|1|100/100"));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
