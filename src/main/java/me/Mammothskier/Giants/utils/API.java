@@ -44,15 +44,23 @@ public class API {
 	}
 	
 	public static boolean isGiantSlime(Entity entity) {
-		return entity instanceof Slime;
-	}
-
-	public static boolean isGiantSlime(LivingEntity livingEntity) {
-		return livingEntity instanceof Slime;
+		if (entity instanceof Slime){
+			Slime slime = (Slime) entity;
+			if ( slime.getSize() > 4){
+				return entity instanceof Slime;
+			}
+		}
+		return false;
 	}
 	
 	public static boolean isGiantMagmaCube(Entity entity) {
-		return entity instanceof MagmaCube;
+		if (entity instanceof MagmaCube){
+			MagmaCube magmacube = (MagmaCube) entity;
+			if (magmacube.getSize() > 4){
+				return entity instanceof MagmaCube;
+			}
+		}
+		return false;
 	}
 	
 	public static boolean isGiantMagmaCube(LivingEntity livingEntity) {

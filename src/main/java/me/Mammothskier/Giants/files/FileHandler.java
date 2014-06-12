@@ -20,7 +20,6 @@ public class FileHandler {
 	public FileHandler(Giants giants) {
 		_giants = giants;
 		_configurations = new HashMap<Files, YamlConfiguration>();
-		loadDefaultDrop();
 		loadWorlds();
 		loadFiles();
 	}
@@ -33,8 +32,22 @@ public class FileHandler {
 		return worldList;
 	}
 
-	private String[] loadDefaultDrop() {
-		String[] drops = { "1-3-3|0|1|100" };
+	private String[] loadDefaultDrop(String arg) {
+		String[] drops = null;
+		switch(arg){
+			case "Giant":
+				drops = new String[]{ "STONE-0-0|0|1|100/100" };
+				break;
+			case "Slime":
+				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12|" };
+				break;
+			case "MagmaCube":
+				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12|" };
+				break;
+			default:
+				drops = new String[]{ "AIR-0-0|0|0|100/100" };
+				break;
+		}
 		return drops;
 	}
 
@@ -86,7 +99,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
-				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop("Giant")));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
@@ -192,7 +205,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Size", new Integer(12));
 				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
-				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop("Slime")));
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
@@ -205,6 +218,8 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime", new Integer(100));
+				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.Enabled", true);
+				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.length", new Integer(5));
 				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
 				Slime.set("Slime Configuration.Sounds.Throw Boulder Attack", true);
 				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
@@ -288,7 +303,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
-				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop()));
+				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop("MagmaCube")));
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", true);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);

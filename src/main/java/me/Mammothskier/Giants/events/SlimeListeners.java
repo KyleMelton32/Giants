@@ -20,6 +20,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -34,6 +35,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class SlimeListeners implements Listener {
@@ -356,10 +359,38 @@ public class SlimeListeners implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void poisonAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Poison Attack").equalsIgnoreCase("true")){
+			Random pick = new Random();
+			int chance = 0;
+			double length;
+			String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Poison Attack.length");
+			try {
+				length = Double.parseDouble(config);
+			} catch (Exception e) {
+				length = 5;
+			}
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (API.isGiantSlime(entity)) {
+						player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (length*20), 3));
+					}
+				}
+			}
+		}
+	}
 
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
+		MagmaCube magmacube = (MagmaCube) entity;
+		int size = magmacube.getSize();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
 		int exp;
 
@@ -378,142 +409,119 @@ public class SlimeListeners implements Listener {
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
+			int lsize = 4;
+			int usize = 12;
 			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String s : newDrop) {
-				String[] split1 = s.split("|");
-				if (split1.length == 4) {
-					Random rand = new Random();
-					String id = "AIR";
-					short color = 0;
-					int effect = 0;
-					int level = 0;
+			for (String dropList : newDrop) {
+				Random rand = new Random();
+				String[] s = dropList.split("|");
+				if (s.length == 5) {
+					String item = s[0];
+					String style= "";
+					String effect = "";
+					String effectLevel= "";
+					String durability = s[1];
+					String amount = s[2];
+					String rate = s[3];
+					String sizes = s[4];
+					int num = 100;
+					int den = 100;
+					short color;
+					int effectID = 0;
+					int effectLevelID = 0;
 					short dmg = 0;
-					int amt = 0;
-					int chance = 0;
-					try {
-						String[] split = s.split("|");
-						if (split.length == 4){
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							String chanceS = split[3];
-							if (idS.contains("-")){
-								String[] idSS = idS.split("-");
-								if (idSS.length == 3) {
-									String idsSS = idSS[0];
-									String effectIdSs = idSS[1];
-									String lvlIdSs = idSS[2];
-									if (idsSS.contains(":")){
-										String[] idsSSS = idsSS.split(":");
-										if (idsSSS.length == 2){
-											id = idsSSS[0];
-											String cidsSSSS = idsSSS[1];
-											color = Short.parseShort(cidsSSSS);
-										}
-									}
-									else {
-										id = idsSS;
-										effect = Integer.parseInt(effectIdSs);
-										level = Integer.parseInt(lvlIdSs);
-									}
-								}
+					
+					
+					
+						if (item.contains("-")){
+							String[] split = item.split("-");
+							if (split.length == 3){
+								item = split[0];
+								effect = split[1];
+								effectLevel = split[2];
 							}
-							if (amtS.contains("-")){
-								String[] amtSS = amtS.split("-");
-								if (amtSS.length == 2){
-									int lamt = 0;
-									int uamt = 0;
-									String lamtSS = amtSS[0];
-									String uamtSS = amtSS[1];
-									lamt = Integer.parseInt(lamtSS);
-									uamt = Integer.parseInt(uamtSS);
-									amt = rand.nextInt(uamt - lamt + 1);
-								}
+						} 
+						if (item.contains(":")){
+							String[] split = item.split(":");
+							if (split.length == 2){
+								item = split[0];
+								style = split[1];
 							}
-							else {
-								amt = Integer.parseInt(amtS);
-								id = idS;
-							}
-							dmg = Short.parseShort(dmgS);				
-							chance = Integer.parseInt(chanceS);
 						}
-					} catch (Exception e) {
-						color = 0;
-						effect = 0;
-						level = 0;
-						amt = 1;
-						dmg = 0;
-						chance = 100;
+					if (amount.contains("-")){
+						int lowerAmount;
+						int upperAmount;
+						int amt;
+						String[] split = amount.split("-");
+						String lAmount = split[0];
+						String uAmount = split[1];
+						try {
+							lowerAmount = Integer.parseInt(lAmount);
+							upperAmount = Integer.parseInt(uAmount);
+						} catch (Exception e) {
+							lowerAmount = 1;
+							upperAmount = 1;
+						}
+						amt = rand.nextInt(upperAmount - lowerAmount + 1) + lowerAmount - 1;
+						amount = String.valueOf(amt);
 					}
-					int randNum = rand.nextInt(100);
-					if (chance <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(id), amt, color);
+					if (rate.contains("/")){
+						String[] split = rate.split("/");
+						if (split.length == 2){
+							try {
+								num = Integer.parseInt(split[0]);
+								den = Integer.parseInt(split[1]);
+							} catch (Exception e) {
+								num = 100;
+								den = 100;
+							}
+						}
+					}
+					if (sizes.contains("-")){
+						String[] split = sizes.split("-");
+						String lAmount = split[0];
+						String uAmount = split[1];
+						try {
+							lsize = Integer.parseInt(lAmount);
+							usize = Integer.parseInt(uAmount);
+						} catch (Exception e) {
+							lsize = 4;
+							usize = 12;
+						}
+						
+					}
+
+					int amt;
+					try {
+						effectID = Integer.parseInt(effect);
+						effectLevelID = Integer.parseInt(effectLevel);
+						color = Short.parseShort(style);
+						dmg = Short.parseShort(durability);
+						amt = Integer.parseInt(amount);
+					} catch (Exception e) {
+						effectID = 0;
+						effectLevelID = 0;
+						color = 0;
+						dmg = 0;
+						amt = 1;
+					}
+					
+					int randNum = rand.nextInt(den);
+					if (num <= randNum){
+						ItemStack newItem = new ItemStack(Material.getMaterial(item), amt, color);
 						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effect);
-						newItem.addEnchantment(enchantment, level);
+						Enchantment enchantment = new EnchantmentWrapper(effectID);
+						newItem.addEnchantment(enchantment, effectLevelID);
 						drops.add(newItem);
 					}
 				}
 				else {
-					int id = 0;
-					int amt = 0;
-					short dmg = 0;
-					try {
-						String[] split = s.split(":");
-						if (split.length == 2) {
-							String idS = split[0];
-							String amtS = split[1];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = 0;
-						} else if (split.length == 3) {
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = Short.parseShort(dmgS);
-						}
-					} catch (Exception e) {
-						id = 1;
-						amt = 1;
-						dmg = 0;
-					}
-					ItemStack newItem = new ItemStack(id, amt, dmg);
-					drops.add(newItem);
+					return;
 				}
 			}
-			event.getDrops().addAll(drops);
+			if ((lsize <= size) && (size <= usize)){
+				event.getDrops().addAll(drops);
+			}
 		}
 	}
 }
