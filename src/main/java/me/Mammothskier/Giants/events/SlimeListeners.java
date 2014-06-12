@@ -20,7 +20,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -389,8 +388,8 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		MagmaCube magmacube = (MagmaCube) entity;
-		int size = magmacube.getSize();
+		Slime slime = (Slime) entity;
+		int size = slime.getSize();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
 		int exp;
 
