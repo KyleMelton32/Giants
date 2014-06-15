@@ -388,8 +388,6 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void GiantSlimeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		Slime slime = (Slime) entity;
-		int size = slime.getSize();
 		String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Experience");
 		int exp;
 
@@ -400,6 +398,8 @@ public class SlimeListeners implements Listener {
 		}
 
 		if (API.isGiantSlime(entity)) {
+			Slime slime = (Slime) entity;
+			int size = slime.getSize();
 			if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}

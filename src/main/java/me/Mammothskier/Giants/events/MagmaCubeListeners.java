@@ -381,8 +381,6 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void GiantMagmaCubeDrops(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		MagmaCube magmacube = (MagmaCube) entity;
-		int size = magmacube.getSize();
 		String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Experience");
 		int exp;
 
@@ -393,6 +391,8 @@ public class MagmaCubeListeners implements Listener {
 		}
 
 		if (API.isGiantMagmaCube(entity)) {
+			MagmaCube magmacube = (MagmaCube) entity;
+			int size = magmacube.getSize();
 			if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
