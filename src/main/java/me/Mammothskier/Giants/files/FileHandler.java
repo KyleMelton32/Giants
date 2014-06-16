@@ -39,10 +39,10 @@ public class FileHandler {
 				drops = new String[]{ "STONE-0-0|0|1|100/100" };
 				break;
 			case "Slime":
-				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12|" };
+				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12" };
 				break;
 			case "MagmaCube":
-				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12|" };
+				drops = new String[]{ "STONE-0-0|0|1|100/100|4-12" };
 				break;
 			default:
 				drops = new String[]{ "AIR-0-0|0|0|100/100" };
