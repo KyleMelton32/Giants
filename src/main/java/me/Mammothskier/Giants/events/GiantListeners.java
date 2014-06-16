@@ -438,6 +438,7 @@ public class GiantListeners implements Listener {
 					String durability = s[1];
 					String amount = s[2];
 					String rate = s[3];
+					int id = 1;
 					int num = 100;
 					int den = 100;
 					short color;
@@ -498,6 +499,7 @@ public class GiantListeners implements Listener {
 						color = Short.parseShort(style);
 						dmg = Short.parseShort(durability);
 						amt = Integer.parseInt(amount);
+						id = Integer.parseInt(item);
 					} catch (Exception e) {
 						effectID = 0;
 						effectLevelID = 0;
@@ -508,7 +510,7 @@ public class GiantListeners implements Listener {
 					
 					int randNum = rand.nextInt(den);
 					if (num <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(item), amt, color);
+						ItemStack newItem = new ItemStack(id, amt, color);
 						newItem.setDurability(dmg);
 						Enchantment enchantment = new EnchantmentWrapper(effectID);
 						newItem.addEnchantment(enchantment, effectLevelID);
