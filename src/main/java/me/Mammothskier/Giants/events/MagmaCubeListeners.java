@@ -429,10 +429,6 @@ public class MagmaCubeListeners implements Listener {
 							item = split[0];
 							effect = split[1];
 							effectLevel = split[2];
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
-									"item after first item split " + item + "\n"+ 
-									"effect = " + effect + "\n" +
-									"effect level = " + effectLevel);
 						}
 					} 
 					if (item.contains(":")){
@@ -440,9 +436,6 @@ public class MagmaCubeListeners implements Listener {
 						if (split.length == 2){
 							item = split[0];
 							style = split[1];
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
-							"item after style split = " + item + "\n"+
-							" style = " + style);
 						}
 					}
 					if (amount.contains("-")){
@@ -509,16 +502,6 @@ public class MagmaCubeListeners implements Listener {
 					}
 					int randNum = rand.nextInt(den);
 					
-					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" + " newDrop = " + newDrop + "\n" + 
-							" itemcode = "  + item + "\n" +
-							" itemID = "  + id + "\n" +
-							" item color "  + color + "\n"+
-							" effect id "  + effectID+ "\n"+
-							" effect level " + effectLevelID + "\n"+
-							" amount = "  + amt + "\n"+
-							" denomenator = " + den + "\n"+
-							" numerator = " + num + "\n"+
-							"random number = " + randNum);
 					if ((lsize <= size) && (size <= usize)) {
 						if (num >= randNum){
 							ItemStack newItem = new ItemStack(id, amt, color);
@@ -529,11 +512,10 @@ public class MagmaCubeListeners implements Listener {
 								Enchantment enchantment = new EnchantmentWrapper(effectID);
 								newItem.addEnchantment(enchantment, effectLevelID);
 							} else {
-								Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Enchantment level out of bounds!");
+								
 							}
 							
 							drops.add(newItem);
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "item = " + newItem);
 						}
 					}
 				}

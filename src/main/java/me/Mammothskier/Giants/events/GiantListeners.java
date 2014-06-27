@@ -416,16 +416,7 @@ public class GiantListeners implements Listener {
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
-			
-/* Variables for drops
- * String id = final item id added to the ItemStack
- * String dropList = list imported from config
- * String[] s = dropList split by "|"
- * String item = first split of dropList by "|"
- * String durability = second split of dropList by "|"
- * String amount = third split of dropList by "|"
- * String amount = fourth split of dropList by "|"
- */
+
 			List<ItemStack> drops = new ArrayList<ItemStack>();
 			for (String dropList : newDrop) {
 				Random rand = new Random();
@@ -451,10 +442,6 @@ public class GiantListeners implements Listener {
 							item = split[0];
 							effect = split[1];
 							effectLevel = split[2];
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
-									"item after first item split " + item + "\n"+ 
-									"effect = " + effect + "\n" +
-									"effect level = " + effectLevel);
 						}
 					} 
 					if (item.contains(":")){
@@ -516,11 +503,10 @@ public class GiantListeners implements Listener {
 							Enchantment enchantment = new EnchantmentWrapper(effectID);
 							newItem.addEnchantment(enchantment, effectLevelID);
 						} else {
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Enchantment level out of bounds!");
+							
 						}
 						
 						drops.add(newItem);
-						Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "item = " + newItem);
 					}
 				}
 				else {
