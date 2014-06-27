@@ -408,45 +408,50 @@ public class SlimeListeners implements Listener {
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
-			int lsize = 4;
-			int usize = 12;
 			List<ItemStack> drops = new ArrayList<ItemStack>();
 			for (String dropList : newDrop) {
 				Random rand = new Random();
-				String[] s = dropList.split("|");
-				if (s.length == 5) {
+				String[] s = dropList.split(";");
+				
+				if (s.length == 4) {
 					String item = s[0];
 					String style= "";
 					String effect = "";
 					String effectLevel= "";
-					String durability = s[1];
-					String amount = s[2];
-					String rate = s[3];
-					String sizes = s[4];
+					String amount = s[1];
+					String rate = s[2];
+					String sizeRange = s[3];
+					int id = 0;
 					int num = 100;
 					int den = 100;
-					short color;
+					short color = 0;
 					int effectID = 0;
 					int effectLevelID = 0;
-					short dmg = 0;
-					
-					
-					
-						if (item.contains("-")){
-							String[] split = item.split("-");
-							if (split.length == 3){
-								item = split[0];
-								effect = split[1];
-								effectLevel = split[2];
-							}
-						} 
-						if (item.contains(":")){
-							String[] split = item.split(":");
-							if (split.length == 2){
-								item = split[0];
-								style = split[1];
-							}
+					int lsize = 4;
+					int usize = 12;
+				
+					if (item.contains("-")){
+						String[] split = item.split("-");
+						if (split.length == 3){
+							item = split[0];
+							effect = split[1];
+							effectLevel = split[2];
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
+									"item after first item split " + item + "\n"+ 
+									"effect = " + effect + "\n" +
+									"effect level = " + effectLevel);
 						}
+					} 
+					if (item.contains(":")){
+						String[] split = item.split(":");
+						if (split.length == 2){
+							item = split[0];
+							style = split[1];
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
+							"item after style split = " + item + "\n"+
+							" style = " + style);
+						}
+					}
 					if (amount.contains("-")){
 						int lowerAmount;
 						int upperAmount;
@@ -476,51 +481,73 @@ public class SlimeListeners implements Listener {
 							}
 						}
 					}
-					if (sizes.contains("-")){
-						String[] split = sizes.split("-");
-						String lAmount = split[0];
-						String uAmount = split[1];
-						try {
-							lsize = Integer.parseInt(lAmount);
-							usize = Integer.parseInt(uAmount);
-						} catch (Exception e) {
-							lsize = 4;
-							usize = 12;
+					
+					if (sizeRange.contains("-")) {
+						String[] split = sizeRange.split("-");
+						if (split.length == 2){
+							try {
+								lsize = Integer.parseInt(split[0]);
+								usize = Integer.parseInt(split[1]);
+							} catch (Exception e) {
+								num = 5;
+								den = 12;
+							}
 						}
-						
+					} else {
+						try {
+							lsize = Integer.parseInt(sizeRange);
+							usize = Integer.parseInt(sizeRange);
+						} catch (Exception e) {
+							lsize = 5;
+							usize = 5;
+						}
 					}
 
-					int amt;
+					int amt = 1;
+
 					try {
+						id = Integer.parseInt(item);
 						effectID = Integer.parseInt(effect);
 						effectLevelID = Integer.parseInt(effectLevel);
 						color = Short.parseShort(style);
-						dmg = Short.parseShort(durability);
 						amt = Integer.parseInt(amount);
 					} catch (Exception e) {
-						effectID = 0;
-						effectLevelID = 0;
-						color = 0;
-						dmg = 0;
-						amt = 1;
+						
 					}
-					
 					int randNum = rand.nextInt(den);
-					if (num <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(item), amt, color);
-						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effectID);
-						newItem.addEnchantment(enchantment, effectLevelID);
-						drops.add(newItem);
+					
+					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" + " newDrop = " + newDrop + "\n" + 
+							" itemcode = "  + item + "\n" +
+							" itemID = "  + id + "\n" +
+							" item color "  + color + "\n"+
+							" effect id "  + effectID+ "\n"+
+							" effect level " + effectLevelID + "\n"+
+							" amount = "  + amt + "\n"+
+							" denomenator = " + den + "\n"+
+							" numerator = " + num + "\n"+
+							"random number = " + randNum);
+					if ((lsize <= size) && (size <= usize)) {
+						if (num >= randNum){
+							ItemStack newItem = new ItemStack(id, amt, color);
+							newItem.setDurability(color);
+							if ((effectID == 0) || (effectLevelID == 0)) {
+								
+							} else if ((effectLevelID >= Enchantment.getById(effectID).getStartLevel()) && (effectLevelID <= Enchantment.getById(effectID).getMaxLevel())) {
+								Enchantment enchantment = new EnchantmentWrapper(effectID);
+								newItem.addEnchantment(enchantment, effectLevelID);
+							} else {
+								Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Enchantment level out of bounds!");
+							}
+							
+							drops.add(newItem);
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "item = " + newItem);
+						}
 					}
-				}
-				else {
+				} else {
 					return;
 				}
 			}
-			if ((lsize <= size) && (size <= usize)){
-				event.getDrops().addAll(drops);
-			}
+			event.getDrops().addAll(drops);
 		}
 	}
 }

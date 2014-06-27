@@ -2,6 +2,7 @@ package me.Mammothskier.Giants;
 
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Giant;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
@@ -53,10 +55,21 @@ public class Commands implements CommandExecutor {
 					if((player.hasPermission("giants.spawn")) || (player.isOp()) || player.hasPermission("giants.*")){
 						if (args.length >= 2){
 							if(args[1].equalsIgnoreCase("giant")){
+								double health;
+								
+								String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
+								try {
+									health = Double.parseDouble(string);
+								} catch (Exception e) {
+									health = 100;
+								}
+								
 								if(args.length ==  2){
 									Location loc = (Location) player.getEyeLocation();
 									Location location = loc;
-									loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									Giant entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									entity.setMaxHealth(health);
+									entity.setHealth(health);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned");
 								}
 								if(args.length == 5){
@@ -69,13 +82,18 @@ public class Commands implements CommandExecutor {
 										locx = Integer.parseInt(args[2]);
 										locy = Integer.parseInt(args[3]);
 										locz = Integer.parseInt(args[4]);
+										
 									} catch (Exception e) {
 									}
 									location.setX(locx);
 									location.setY(locy);
 									location.setZ(locz);
 									Location loc = location;
-									loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									
+									Giant entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									entity.setMaxHealth(health);
+									entity.setHealth(health);
+									
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
 								}
 								return true;

@@ -1,76 +1,76 @@
-Slime Configuration:
+Giant Configuration:
   Biome Settings:
     Swampland:
-      Swampland: true
-      Swampland Mountains: true
+      Swampland: 
+      Swampland Mountains: 
     Forest:
-      Forest: true
-      Forest Hills: true
+      Forest: 
+      Forest Hills: 
     Taiga:
-      Taiga: true
-      Taiga Hills: true
-      Taiga Mountains: true
-      Cold Taiga: true
-      Cold Taiga Hills: true
-      Cold Taiga Mountains: true
-      Mega Taiga: true
-      Mega Taiga Hills: true
-      Mega Spruce Taiga: true
-      Mega Spruce Taiga Hills: true
+      Taiga: 
+      Taiga Hills: 
+      Taiga Mountains: 
+      Cold Taiga: 
+      Cold Taiga Hills: 
+      Cold Taiga Mountains: 
+      Mega Taiga: 
+      Mega Taiga Hills: 
+      Mega Spruce Taiga: 
+      Mega Spruce Taiga Hills: 
     Plains:
-      Plains: true
-      Ice Plains: true
-      Ice Plains Spikes: true
-      Sunflower Plains: true
+      Plains: 
+      Ice Plains: 
+      Ice Plains Spikes: 
+      Sunflower Plains: 
     Ocean:
       Ocean: false
       Deep Ocean: false
-      Frozen Ocean: true
+      Frozen Ocean: 
     River:
-      River: true
-      Frozen River: true
+      River: 
+      Frozen River: 
     Beach:
-      Beach: true
-      Stone Beach: true
-      Cold Beach: true
+      Beach: 
+      Stone Beach: 
+      Cold Beach: 
     Extreme Hills:
-      Extreme Hills: true
-      Extreme Hills Plus: true
-      Extreme Hills Mountains: true
-      Extreme Hills Plus Mountains: true
+      Extreme Hills: 
+      Extreme Hills Plus: 
+      Extreme Hills Mountains: 
+      Extreme Hills Plus Mountains: 
     Mushroom Island:
-      Mushroom Island: true
-      Mushroom Shore: true
+      Mushroom Island: 
+      Mushroom Shore: 
     Desert:
-      Desert: true
-      Desert Hills: true
-      Desert Mountains: true
+      Desert: 
+      Desert Hills: 
+      Desert Mountains: 
     Jungle:
-      Jungle: true
-      Jungle Hills: true
-      Jungle Mountains: true
+      Jungle: 
+      Jungle Hills: 
+      Jungle Mountains: 
     Birch Forest:
-      Birch Forest: true
-      Birch Forest Hills: true
-      Birch Forest Mountains: true
-      Birch Forest Hills Mountains: true
+      Birch Forest: 
+      Birch Forest Hills: 
+      Birch Forest Mountains: 
+      Birch Forest Hills Mountains: 
     Savanna:
-      Savanna: true
-      Savanna Mountains: true
-      Savanna Plateau: true
-      Savanna Plateau Mountains: true
+      Savanna: 
+      Savanna Mountains: 
+      Savanna Plateau: 
+      Savanna Plateau Mountains: 
     Roofed Forest:
-      Roofed Forest: true
-      Roofed Forest Mountains: true
+      Roofed Forest: 
+      Roofed Forest Mountains: 
     Mesa:
-      Mesa: true
-      Mesa Bryce: true
-      Mesa Plateau: true
-      Mesa Plateau Forest: true
-      Mesa Plateau Mountains: true
-      Mesa Plateau Forest Mountains: true
+      Mesa: 
+      Mesa Bryce: 
+      Mesa Plateau: 
+      Mesa Plateau Forest: 
+      Mesa Plateau Mountains: 
+      Mesa Plateau Forest Mountains: 
     Other:
-      Small Mountains: true
-      Ice Mountains: true
+      Small Mountains: 
+      Ice Mountains: 
       Hell: false
       Sky: false

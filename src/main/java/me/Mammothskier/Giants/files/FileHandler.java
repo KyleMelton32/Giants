@@ -22,6 +22,9 @@ public class FileHandler {
 		_configurations = new HashMap<Files, YamlConfiguration>();
 		loadWorlds();
 		loadFiles();
+		loadDefaultDrop("Giant");
+		loadDefaultDrop("Slime");
+		loadDefaultDrop("MagmaCube");
 	}
 
 	private List<String> loadWorlds() {
@@ -36,25 +39,18 @@ public class FileHandler {
 		String[] drops = null;
 		switch(arg){
 			case "Giant":
-				drops = new String[]{ "1-0-0|0|1|100/100" };
+				drops = new String[]{ "1-0-0;1;100/100" };;
 				break;
 			case "Slime":
-				drops = new String[]{ "1-0-0|0|1|100/100|4-12" };
+				drops = new String[]{ "1-0-0;1;100/100;4-12" };
 				break;
 			case "MagmaCube":
-				drops = new String[]{ "1-0-0|0|1|100/100|4-12" };
+				drops = new String[]{ "1-0-0;1;100/100;4-12" };
 				break;
 			default:
-				drops = new String[]{ "1-0-0|0|0|100/100" };
 				break;
 		}
 		return drops;
-	}
-
-	@SuppressWarnings("unused")
-	private String[] loadDefaultDeathMessage() {
-		String[] message = { "Player got stomped by a Giant" };
-		return message;
 	}
 	
 	public void loadFiles() {
@@ -98,6 +94,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Spawn Settings.Chance", new Integer(10));
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
+				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop("Giant")));
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
@@ -303,7 +300,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Size", new Integer(12));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
-				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops", Arrays.asList(loadDefaultDrop("MagmaCube")));
+				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops",  Arrays.asList(loadDefaultDrop("MagmaCube")));
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", true);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);

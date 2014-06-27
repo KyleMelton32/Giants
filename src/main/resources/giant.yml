@@ -9,7 +9,7 @@ Giant Configuration:
     Health: 100
     Experience: 5
     Drops:
-    - '1:0:1'
+    - 1-0-0;1;100/100
   Damage Settings:
     Arrows:
       Damage done by arrow: 10
@@ -19,24 +19,26 @@ Giant Configuration:
       Allow Suffocation: false
       Allow Cacti Damage: false
   Attack Mechanisms:
-    Lightning Attack: true
-    Throw Boulder Attack: true
-    Stomp Attack: true
+    Lightning Attack: false
+    Throw Boulder Attack: false
+    Stomp Attack: false
     Kick Attack:
-      Enabled: true
+      Enabled: false
       Kick Height: 1
     Fire Attack:
-      Enabled: true
+      Enabled: false
       Ticks for Target: 100
       Ticks for Giant: 100
     Shrapnel Attack:
-      Enabled: true
-      Baby Zombies: true
+      Enabled: false
+      Baby Zombies: false
       Zombies to Spawn: 3
+      Health: 20
     Spawn Zombies On Death:
-      Enabled: true
-      Baby Zombies: true
+      Enabled: false
+      Baby Zombies: false
       Zombies to Spawn: 5
+      Health: 20
   Sounds:
     Fire Attack: true
     Throw Boulder Attack: true

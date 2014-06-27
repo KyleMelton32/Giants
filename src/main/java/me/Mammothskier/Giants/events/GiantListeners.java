@@ -3,6 +3,7 @@ package me.Mammothskier.Giants.events;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.*;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.Files;
@@ -395,7 +396,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler
-	public void onGiantDrops(EntityDeathEvent event) {
+	public void onGiantDrops(EntityDeathEvent event) throws IOException{
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
 		int exp;
@@ -424,44 +425,45 @@ public class GiantListeners implements Listener {
  * String durability = second split of dropList by "|"
  * String amount = third split of dropList by "|"
  * String amount = fourth split of dropList by "|"
- * 
  */
 			List<ItemStack> drops = new ArrayList<ItemStack>();
 			for (String dropList : newDrop) {
 				Random rand = new Random();
-				String[] s = dropList.split("|");
-				if (s.length == 4) {
+				String[] s = dropList.split(";");			
+				
+				if (s.length == 3) {
 					String item = s[0];
 					String style= "";
 					String effect = "";
 					String effectLevel= "";
-					String durability = s[1];
-					String amount = s[2];
-					String rate = s[3];
-					int id = 1;
+					String amount = s[1];
+					String rate = s[2];
+					int id = 0;
 					int num = 100;
 					int den = 100;
-					short color;
+					short color = 0;
 					int effectID = 0;
 					int effectLevelID = 0;
-					short dmg = 0;
-					
-					
-						if (item.contains("-")){
-							String[] split = item.split("-");
-							if (split.length == 3){
-								item = split[0];
-								effect = split[1];
-								effectLevel = split[2];
-							}
-						} 
-						if (item.contains(":")){
-							String[] split = item.split(":");
-							if (split.length == 2){
-								item = split[0];
-								style = split[1];
-							}
+				
+					if (item.contains("-")){
+						String[] split = item.split("-");
+						if (split.length == 3){
+							item = split[0];
+							effect = split[1];
+							effectLevel = split[2];
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "\n" +
+									"item after first item split " + item + "\n"+ 
+									"effect = " + effect + "\n" +
+									"effect level = " + effectLevel);
 						}
+					} 
+					if (item.contains(":")){
+						String[] split = item.split(":");
+						if (split.length == 2){
+							item = split[0];
+							style = split[1];
+						}
+					}
 					if (amount.contains("-")){
 						int lowerAmount;
 						int upperAmount;
@@ -492,29 +494,33 @@ public class GiantListeners implements Listener {
 						}
 					}
 
-					int amt;
+					int amt = 1;
+
 					try {
+						id = Integer.parseInt(item);
 						effectID = Integer.parseInt(effect);
 						effectLevelID = Integer.parseInt(effectLevel);
 						color = Short.parseShort(style);
-						dmg = Short.parseShort(durability);
 						amt = Integer.parseInt(amount);
-						id = Integer.parseInt(item);
 					} catch (Exception e) {
-						effectID = 0;
-						effectLevelID = 0;
-						color = 0;
-						dmg = 0;
-						amt = 1;
+						
 					}
-					
 					int randNum = rand.nextInt(den);
-					if (num <= randNum){
+					
+					if (num >= randNum){
 						ItemStack newItem = new ItemStack(id, amt, color);
-						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effectID);
-						newItem.addEnchantment(enchantment, effectLevelID);
+						newItem.setDurability(color);
+						if ((effectID == 0) || (effectLevelID == 0)) {
+							
+						} else if ((effectLevelID >= Enchantment.getById(effectID).getStartLevel()) && (effectLevelID <= Enchantment.getById(effectID).getMaxLevel())) {
+							Enchantment enchantment = new EnchantmentWrapper(effectID);
+							newItem.addEnchantment(enchantment, effectLevelID);
+						} else {
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Enchantment level out of bounds!");
+						}
+						
 						drops.add(newItem);
+						Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "item = " + newItem);
 					}
 				}
 				else {
