@@ -12,7 +12,6 @@ import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Slime;
 
@@ -36,14 +35,19 @@ public class API {
 	}
 
 	public static boolean isGiant(Entity entity) {
+		String config = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant");
+		if (config.equalsIgnoreCase("false")){
+			return false;
+		}
 		return entity instanceof Giant;
-	}
-
-	public static boolean isGiant(LivingEntity livingEntity) {
-		return livingEntity instanceof Giant;
 	}
 	
 	public static boolean isGiantSlime(Entity entity) {
+		String config = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime");
+		if (config.equalsIgnoreCase("false")){
+			return false;
+		}
+		
 		if (entity instanceof Slime){
 			Slime slime = (Slime) entity;
 			if ( slime.getSize() > 4){
@@ -54,6 +58,11 @@ public class API {
 	}
 	
 	public static boolean isGiantMagmaCube(Entity entity) {
+		String config = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Magma Cube");
+		if (config.equalsIgnoreCase("false")){
+			return false;
+		}
+		
 		if (entity instanceof MagmaCube){
 			MagmaCube magmacube = (MagmaCube) entity;
 			if (magmacube.getSize() > 4){
@@ -61,10 +70,6 @@ public class API {
 			}
 		}
 		return false;
-	}
-	
-	public static boolean isGiantMagmaCube(LivingEntity livingEntity) {
-		return livingEntity instanceof MagmaCube;
 	}
 
 	public static List<String> getGiantSpawnWorlds() {
