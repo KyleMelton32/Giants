@@ -310,6 +310,7 @@ public class MagmaCubeListeners implements Listener {
 		boolean inRange = false;
 		Random pick = new Random();
 		int chance = 0;
+		int bDamage;
 		int s;
 		for (int counter = 1; counter <= 1; counter++) {
 			chance = 1 + pick.nextInt(100);
@@ -325,10 +326,18 @@ public class MagmaCubeListeners implements Listener {
 					}
 					if (inRange == true) {
 						if (chance == 50) {
-							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").equalsIgnoreCase("true")) {
+								String config = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+								try {
+									bDamage = Integer.parseInt(config);
+								} catch (Exception e) {
+									bDamage = 1;
+								}
+									
 								Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
+								fireball.setYield(bDamage);
 								if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
 									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
 								}
