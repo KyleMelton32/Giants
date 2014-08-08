@@ -17,6 +17,7 @@ import me.Mammothskier.Giants.Giants;
 public class FileHandler {
 	private final Giants _giants;
 	private final HashMap<Files, YamlConfiguration> _configurations;
+	
 	public FileHandler(Giants giants) {
 		_giants = giants;
 		_configurations = new HashMap<Files, YamlConfiguration>();

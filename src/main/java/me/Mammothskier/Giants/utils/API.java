@@ -2,6 +2,7 @@ package me.Mammothskier.Giants.utils;
 
 import java.util.List;
 
+import me.Mammothskier.Giants.Attacks;
 import me.Mammothskier.Giants.Commands;
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.events.GiantListeners;
@@ -21,6 +22,8 @@ public class API {
 	private static Giants _magmacubes;
 	private Commands commands;
 	private static FileHandler fileHandler;
+	private static Attacks Attacks;
+	private static DropsManager drops;
 
 	public API(Giants giants) {
 		_giants = giants;
@@ -32,6 +35,8 @@ public class API {
 		commands = new Commands(_giants);
 		_giants.getCommand("giants").setExecutor(commands);
 		fileHandler = new FileHandler(_giants);
+		Attacks = new Attacks(_giants);
+		drops = new DropsManager(_giants);
 	}
 
 	public static boolean isGiant(Entity entity) {
@@ -86,5 +91,13 @@ public class API {
 
 	public static FileHandler getFileHandler() {
 		return fileHandler;
+	}
+	
+	public static Attacks createAttack() {
+		return Attacks;
+	}
+	
+	public static DropsManager createDrop() {
+		return drops;
 	}
 }
