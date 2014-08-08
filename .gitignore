@@ -15,6 +15,18 @@ local.properties
 .classpath
 .settings/
 .loadpath
+world/
+logs/
+plugins/
+banned-ips.txt
+banned-players.txt
+bukkit.yml
+commands.yml
+help.yml
+ops.txt
+permissions.yml
+server.properties
+white-list.txt
 
 # External tool builders
 .externalToolBuilders/
