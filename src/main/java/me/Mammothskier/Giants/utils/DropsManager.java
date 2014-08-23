@@ -36,6 +36,7 @@ public class DropsManager {
 						String rate = s[2];
 						int id = 0;
 						int num = 100;
+						int amt = 1;
 						int den = 100;
 						short color = 0;
 						int effectID = 0;
@@ -59,7 +60,6 @@ public class DropsManager {
 						if (amount.contains("-")){
 							int lowerAmount;
 							int upperAmount;
-							int amt;
 							String[] split = amount.split("-");
 							String lAmount = split[0];
 							String uAmount = split[1];
@@ -85,8 +85,6 @@ public class DropsManager {
 								}
 							}
 						}
-
-						int amt = 1;
 
 						try {
 							id = Integer.parseInt(item);
@@ -136,6 +134,7 @@ public class DropsManager {
 						int id = 0;
 						int num = 100;
 						int den = 100;
+						int amt = 1;
 						short color = 0;
 						int effectID = 0;
 						int effectLevelID = 0;
@@ -163,7 +162,6 @@ public class DropsManager {
 						if (amount.contains("-")){
 							int lowerAmount;
 							int upperAmount;
-							int amt;
 							String[] split = amount.split("-");
 							String lAmount = split[0];
 							String uAmount = split[1];
@@ -210,8 +208,6 @@ public class DropsManager {
 								usize = 5;
 							}
 						}
-
-						int amt = 1;
 
 						try {
 							id = Integer.parseInt(item);
@@ -262,6 +258,7 @@ public class DropsManager {
 						int id = 0;
 						int num = 100;
 						int den = 100;
+						int amt = 1;
 						short color = 0;
 						int effectID = 0;
 						int effectLevelID = 0;
@@ -289,7 +286,6 @@ public class DropsManager {
 						if (amount.contains("-")){
 							int lowerAmount;
 							int upperAmount;
-							int amt;
 							String[] split = amount.split("-");
 							String lAmount = split[0];
 							String uAmount = split[1];
@@ -336,8 +332,6 @@ public class DropsManager {
 								usize = 5;
 							}
 						}
-
-						int amt = 1;
 
 						try {
 							id = Integer.parseInt(item);
