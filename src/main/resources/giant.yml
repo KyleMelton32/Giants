@@ -2,9 +2,6 @@ Giant Configuration:
   Spawn Settings:
     Chance: 10
     Worlds:
-    - world
-    - world_nether
-    - world_the_end
   Giant Stats:
     Health: 100
     Experience: 5
@@ -20,7 +17,6 @@ Giant Configuration:
       Allow Cacti Damage: false
   Attack Mechanisms:
     Lightning Attack: false
-    Throw Boulder Attack: false
     Stomp Attack: false
     Kick Attack:
       Enabled: false
@@ -29,6 +25,9 @@ Giant Configuration:
       Enabled: false
       Ticks for Target: 100
       Ticks for Giant: 100
+    Throw Boulder Attack:
+      Enabled: false
+      Block Damage: 1
     Shrapnel Attack:
       Enabled: false
       Baby Zombies: false

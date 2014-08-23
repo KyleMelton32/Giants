@@ -2,9 +2,6 @@ Slime Configuration:
   Spawn Settings:
     Chance: 10
     Worlds:
-    - world
-    - world_nether
-    - world_the_end
   Slime Stats:
     Size: 12
     Health: 100
@@ -21,7 +18,6 @@ Slime Configuration:
       Allow Cacti Damage: false
   Attack Mechanisms:
     Lightning Attack: false
-    Throw Boulder Attack: false
     Stomp Attack: false
     Kick Attack:
       Enabled: false
@@ -30,6 +26,9 @@ Slime Configuration:
       Enabled: false
       Ticks for Target: 100
       Ticks for Slime: 100
+    Throw Boulder Attack:
+      Enabled: false
+      Block Damage: 1
     Poison Attack:
       Enabled: true
       length: 5

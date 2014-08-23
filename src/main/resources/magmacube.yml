@@ -2,9 +2,6 @@ Magma Cube Configuration:
   Spawn Settings:
     Chance: 10
     Worlds:
-    - world
-    - world_nether
-    - world_the_end
   Magma Cube Stats:
     Size: 12
     Health: 100
@@ -19,7 +16,8 @@ Magma Cube Configuration:
       Allow Cacti Damage: false
   Attack Mechanisms:
     Lightning Attack: false
-    Throw Boulder Attack: false
+    Throw Boulder Attack:
+      Block Damage: 1
     Stomp Attack: false
     Lava Attack: false
     Kick Attack:
