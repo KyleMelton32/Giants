@@ -145,6 +145,23 @@
             </properties>
         </profile>
         <profile>
+            <id>razor</id>
+            <activation>
+                <property>
+                    <name>env.JOB_NAME</name>
+                    <value>Giants-Razor</value>
+                </property>
+            </activation>
+            <properties>
+                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
+                <project.build.type>RAZOR</project.build.type>
+                <project.build.version>
+                    ${project.version}-b${project.build.number}-${project.build.type}
+                </project.build.version>
+                <project.build.name>${project.name}</project.build.name>
+            </properties>
+        </profile>
+        <profile>
             <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>

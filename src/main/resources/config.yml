@@ -1,8 +1,8 @@
 Giants Configuration:
   Entities:
     Giant: true
-    Giant Slime: true
-    Giant Magma Cube: true
+    Giant Slime: false
+    Giant Magma Cube: false
   Debug Mode:
     Enabled: false
     Debug Message: '&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z'

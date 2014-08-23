@@ -3,6 +3,7 @@ package me.Mammothskier.Giants.events;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.*;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.Files;
@@ -278,6 +279,7 @@ public class GiantListeners implements Listener {
 		boolean inRange = false;
 		Random pick = new Random();
 		int chance = 0;
+		int bDamage;
 		for (int counter = 1; counter <= 1; counter++) {
 			chance = 1 + pick.nextInt(100);
 		}
@@ -289,10 +291,17 @@ public class GiantListeners implements Listener {
 				}
 				if (inRange == true) {
 					if (chance == 50) {
-						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+						if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").equalsIgnoreCase("true")) {
+							String config = API.getFileHandler().getProperty(Files.GIANT,  "Giant Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+							try {
+								bDamage = Integer.parseInt(config);
+							} catch (Exception e) {
+								bDamage = 1;
+							}
 							Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
 							Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 							fireball.setShooter((LivingEntity) entity);
+							fireball.setYield(bDamage);
 							if (API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
 								player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
 							}
@@ -395,7 +404,7 @@ public class GiantListeners implements Listener {
 	}
 
 	@EventHandler
-	public void onGiantDrops(EntityDeathEvent event) {
+	public void onGiantDrops(EntityDeathEvent event) throws IOException{
 		Entity entity = event.getEntity();
 		String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Experience");
 		int exp;
@@ -416,109 +425,9 @@ public class GiantListeners implements Listener {
 				return;
 			}
 			
-/* Variables for drops
- * String id = final item id added to the ItemStack
- * String dropList = list imported from config
- * String[] s = dropList split by "|"
- * String item = first split of dropList by "|"
- * String durability = second split of dropList by "|"
- * String amount = third split of dropList by "|"
- * String amount = fourth split of dropList by "|"
- * 
- */
 			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String dropList : newDrop) {
-				Random rand = new Random();
-				String[] s = dropList.split("|");
-				if (s.length == 4) {
-					String item = s[0];
-					String style= "";
-					String effect = "";
-					String effectLevel= "";
-					String durability = s[1];
-					String amount = s[2];
-					String rate = s[3];
-					int num = 100;
-					int den = 100;
-					short color;
-					int effectID = 0;
-					int effectLevelID = 0;
-					short dmg = 0;
-					
-					
-						if (item.contains("-")){
-							String[] split = item.split("-");
-							if (split.length == 3){
-								item = split[0];
-								effect = split[1];
-								effectLevel = split[2];
-							}
-						} 
-						if (item.contains(":")){
-							String[] split = item.split(":");
-							if (split.length == 2){
-								item = split[0];
-								style = split[1];
-							}
-						}
-					if (amount.contains("-")){
-						int lowerAmount;
-						int upperAmount;
-						int amt;
-						String[] split = amount.split("-");
-						String lAmount = split[0];
-						String uAmount = split[1];
-						try {
-							lowerAmount = Integer.parseInt(lAmount);
-							upperAmount = Integer.parseInt(uAmount);
-						} catch (Exception e) {
-							lowerAmount = 1;
-							upperAmount = 1;
-						}
-						amt = rand.nextInt(upperAmount - lowerAmount + 1) + lowerAmount - 1;
-						amount = String.valueOf(amt);
-					}
-					if (rate.contains("/")){
-						String[] split = rate.split("/");
-						if (split.length == 2){
-							try {
-								num = Integer.parseInt(split[0]);
-								den = Integer.parseInt(split[1]);
-							} catch (Exception e) {
-								num = 100;
-								den = 100;
-							}
-						}
-					}
+			drops = API.createDrop().setDrop(entity, newDrop);
 
-					int amt;
-					try {
-						effectID = Integer.parseInt(effect);
-						effectLevelID = Integer.parseInt(effectLevel);
-						color = Short.parseShort(style);
-						dmg = Short.parseShort(durability);
-						amt = Integer.parseInt(amount);
-					} catch (Exception e) {
-						effectID = 0;
-						effectLevelID = 0;
-						color = 0;
-						dmg = 0;
-						amt = 1;
-					}
-					
-					int randNum = rand.nextInt(den);
-					if (num <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(item), amt, color);
-						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effectID);
-						newItem.addEnchantment(enchantment, effectLevelID);
-						drops.add(newItem);
-					}
-				}
-				else {
-					return;
-				}
-			}
 			event.getDrops().addAll(drops);
 		}
 	}

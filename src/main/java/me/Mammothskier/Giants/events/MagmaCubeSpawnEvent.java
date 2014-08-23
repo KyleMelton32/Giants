@@ -41,7 +41,7 @@ public class MagmaCubeSpawnEvent extends Event {
 		}
 
 
-		if(API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Magma Cube").equalsIgnoreCase("false")){
+		if (!API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Magma Cube").equalsIgnoreCase("true")){
 			setCancelled(true);
 		}
 

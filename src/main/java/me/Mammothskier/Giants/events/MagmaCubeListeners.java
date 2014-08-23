@@ -310,6 +310,7 @@ public class MagmaCubeListeners implements Listener {
 		boolean inRange = false;
 		Random pick = new Random();
 		int chance = 0;
+		int bDamage;
 		int s;
 		for (int counter = 1; counter <= 1; counter++) {
 			chance = 1 + pick.nextInt(100);
@@ -325,10 +326,18 @@ public class MagmaCubeListeners implements Listener {
 					}
 					if (inRange == true) {
 						if (chance == 50) {
-							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+							if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").equalsIgnoreCase("true")) {
+								String config = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+								try {
+									bDamage = Integer.parseInt(config);
+								} catch (Exception e) {
+									bDamage = 1;
+								}
+									
 								Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
+								fireball.setYield(bDamage);
 								if (API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
 									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
 								}
@@ -399,141 +408,11 @@ public class MagmaCubeListeners implements Listener {
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
+
 			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String s : newDrop) {
-				String[] split1 = s.split("|");
-				if (split1.length == 4) {
-					Random rand = new Random();
-					String id = "AIR";
-					short color = 0;
-					int effect = 0;
-					int level = 0;
-					short dmg = 0;
-					int amt = 0;
-					int chance = 0;
-					try {
-						String[] split = s.split("|");
-						if (split.length == 4){
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							String chanceS = split[3];
-							if (idS.contains("-")){
-								String[] idSS = idS.split("-");
-								if (idSS.length == 3) {
-									String idsSS = idSS[0];
-									String effectIdSs = idSS[1];
-									String lvlIdSs = idSS[2];
-									if (idsSS.contains(":")){
-										String[] idsSSS = idsSS.split(":");
-										if (idsSSS.length == 2){
-											id = idsSSS[0];
-											String cidsSSSS = idsSSS[1];
-											color = Short.parseShort(cidsSSSS);
-										}
-									}
-									else {
-										id = idsSS;
-										effect = Integer.parseInt(effectIdSs);
-										level = Integer.parseInt(lvlIdSs);
-									}
-								}
-							}
-							if (amtS.contains("-")){
-								String[] amtSS = amtS.split("-");
-								if (amtSS.length == 2){
-									int lamt = 0;
-									int uamt = 0;
-									String lamtSS = amtSS[0];
-									String uamtSS = amtSS[1];
-									lamt = Integer.parseInt(lamtSS);
-									uamt = Integer.parseInt(uamtSS);
-									amt = rand.nextInt(uamt - lamt + 1);
-								}
-							}
-							else {
-								amt = Integer.parseInt(amtS);
-								id = idS;
-							}
-							dmg = Short.parseShort(dmgS);				
-							chance = Integer.parseInt(chanceS);
-						}
-					} catch (Exception e) {
-						color = 0;
-						effect = 0;
-						level = 0;
-						amt = 1;
-						dmg = 0;
-						chance = 100;
-					}
-					int randNum = rand.nextInt(100);
-					if (chance <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(id), amt, color);
-						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effect);
-						newItem.addEnchantment(enchantment, level);
-						drops.add(newItem);
-					}
-				}
-				else {
-					int id = 0;
-					int amt = 0;
-					short dmg = 0;
-					try {
-						String[] split = s.split(":");
-						if (split.length == 2) {
-							String idS = split[0];
-							String amtS = split[1];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = 0;
-						} else if (split.length == 3) {
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							id = Integer.parseInt(idS);
-							if (amtS.contains("-")) {
-								String[] newSplit = amtS.split("-");
-								int range;
-								int loc;
-								Random rand = new Random();
-								if (Double.valueOf(newSplit[0]) > Double.valueOf(newSplit[1])) {
-									range = (int) ((Double.valueOf(newSplit[0]) * 100) - (Double.valueOf(newSplit[1]) * 100));
-									loc = (int) (Double.valueOf(newSplit[1]) * 100);
-								} else {
-									range = (int) ((Double.valueOf(newSplit[1]) * 100) - (Double.valueOf(newSplit[0]) * 100));
-									loc = (int) (Double.valueOf(newSplit[0]) * 100);
-								}
-								amt = ((int) (loc + rand.nextInt(range + 1))) / 100;
-							} else {
-								amt = Integer.parseInt(amtS);
-							}
-							dmg = Short.parseShort(dmgS);
-						}
-					} catch (Exception e) {
-						id = 1;
-						amt = 1;
-						dmg = 0;
-					}
-					ItemStack newItem = new ItemStack(id, amt, dmg);
-					drops.add(newItem);
-				}
-			}
+
+			drops = API.createDrop().setDrop(entity, newDrop);
+
 			event.getDrops().addAll(drops);
 		}
 	}

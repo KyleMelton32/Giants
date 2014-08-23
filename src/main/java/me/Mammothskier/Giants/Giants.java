@@ -9,8 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import org.mcstats.Metrics;
+
 
 public class Giants extends JavaPlugin{
 	

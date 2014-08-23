@@ -265,6 +265,7 @@ public class SlimeListeners implements Listener {
 		boolean inRange = false;
 		Random pick = new Random();
 		int chance = 0;
+		int bDamage;
 		int s;
 		for (int counter = 1; counter <= 1; counter++) {
 			chance = 1 + pick.nextInt(100);
@@ -280,10 +281,17 @@ public class SlimeListeners implements Listener {
 					}
 					if (inRange == true) {
 						if (chance == 50) {
-							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Throw Boulder Attack").equalsIgnoreCase("true")) {
+							if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").equalsIgnoreCase("true")) {
+								String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+								try {
+									bDamage = Integer.parseInt(config);
+								} catch (Exception e) {
+									bDamage = 1;
+								}
 								Vector direction = ((LivingEntity) entity).getEyeLocation().getDirection().multiply(2);
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
+								fireball.setYield(bDamage);
 								if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Throw Boulder Attack").equalsIgnoreCase("true")) {
 									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
 								}
@@ -378,7 +386,7 @@ public class SlimeListeners implements Listener {
 			if (chance == 50) {
 				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
 					if (API.isGiantSlime(entity)) {
-						player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (length*20), 3));
+						API.createAttack().poisonAttack(player, length);
 					}
 				}
 			}
@@ -406,83 +414,11 @@ public class SlimeListeners implements Listener {
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
+			
 			List<ItemStack> drops = new ArrayList<ItemStack>();
-			for (String s : newDrop) {
-				String[] split1 = s.split("|");
-				if (split1.length == 4) {
-					Random rand = new Random();
-					String id = "AIR";
-					short color = 0;
-					int effect = 0;
-					int level = 0;
-					short dmg = 0;
-					int amt = 0;
-					int chance = 0;
-					try {
-						String[] split = s.split("|");
-						if (split.length == 4){
-							String idS = split[0];
-							String dmgS = split[1];
-							String amtS = split[2];
-							String chanceS = split[3];
-							if (idS.contains("-")){
-								String[] idSS = idS.split("-");
-								if (idSS.length == 3) {
-									String idsSS = idSS[0];
-									String effectIdSs = idSS[1];
-									String lvlIdSs = idSS[2];
-									if (idsSS.contains(":")){
-										String[] idsSSS = idsSS.split(":");
-										if (idsSSS.length == 2){
-											id = idsSSS[0];
-											String cidsSSSS = idsSSS[1];
-											color = Short.parseShort(cidsSSSS);
-										}
-									}
-									else {
-										id = idsSS;
-										effect = Integer.parseInt(effectIdSs);
-										level = Integer.parseInt(lvlIdSs);
-									}
-								}
-							}
-							if (amtS.contains("-")){
-								String[] amtSS = amtS.split("-");
-								if (amtSS.length == 2){
-									int lamt = 0;
-									int uamt = 0;
-									String lamtSS = amtSS[0];
-									String uamtSS = amtSS[1];
-									lamt = Integer.parseInt(lamtSS);
-									uamt = Integer.parseInt(uamtSS);
-									amt = rand.nextInt(uamt - lamt + 1);
-								}
-							}
-							else {
-								amt = Integer.parseInt(amtS);
-								id = idS;
-							}
-							dmg = Short.parseShort(dmgS);				
-							chance = Integer.parseInt(chanceS);
-						}
-					} catch (Exception e) {
-						color = 0;
-						effect = 0;
-						level = 0;
-						amt = 1;
-						dmg = 0;
-						chance = 100;
-					}
-					int randNum = rand.nextInt(100);
-					if (chance <= randNum){
-						ItemStack newItem = new ItemStack(Material.getMaterial(id), amt, color);
-						newItem.setDurability(dmg);
-						Enchantment enchantment = new EnchantmentWrapper(effect);
-						newItem.addEnchantment(enchantment, level);
-						drops.add(newItem);
-					}
-				}
-			}
+
+			drops = API.createDrop().setDrop(entity, newDrop);
+
 			event.getDrops().addAll(drops);
 		}
 	}
