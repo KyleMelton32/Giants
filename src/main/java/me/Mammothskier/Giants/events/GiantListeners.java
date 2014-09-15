@@ -358,7 +358,7 @@ public class GiantListeners implements Listener {
 				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
 					if (API.isGiant(entity)) {
 						if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
-							player.getLocation().getWorld().createExplosion(player.getLocation(), 1.0F);
+							player.getLocation().getWorld().createExplosion(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), 1.0F, false, false);
 						}
 					}
 				}
