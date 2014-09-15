@@ -90,8 +90,9 @@ public class Attacks {
 		}
 	}
 	
-	public void stompAttack(Location location, float power, boolean sound){
-		location.getWorld().createExplosion(location, power);
+	public void stompAttack(Entity attacker, Entity target, double height, float power, boolean blockDamage, boolean sound){
+		Location location = attacker.getLocation();
+		location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), power, false, blockDamage);
 		if (sound == true){
 			location.getWorld().playSound(location, Sound.ENDERDRAGON_HIT, 1, 0);
 		}
