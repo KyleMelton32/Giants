@@ -90,10 +90,10 @@ public class Attacks {
 		}
 	}
 	
-	public void stompAttack(Location location, float power, boolean sound){
-		location.getWorld().createExplosion(location, power);
+	public void stompAttack(Location location, float power, boolean fire, boolean sound){
+		location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), power, fire);
 		if (sound == true){
-			location.getWorld().playSound(location, Sound.ENDERDRAGON_HIT, 1, 0);
+			location.getWorld().playSound(location, Sound.FIREWORK_LARGE_BLAST, 1, 0);
 		}
 	}
 	

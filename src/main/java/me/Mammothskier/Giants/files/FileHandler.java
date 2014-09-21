@@ -40,7 +40,7 @@ public class FileHandler {
 		String[] drops = null;
 		switch(arg){
 			case "Giant":
-				drops = new String[]{ "1-0-0;1;100/100" };;
+				drops = new String[]{ "1-0-0;1;100/100" };
 				break;
 			case "Slime":
 				drops = new String[]{ "1-0-0;1;100/100;4-12" };
@@ -102,7 +102,9 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Lightning Attack", false);
-				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack", false);
+				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack.Enabled", false);
+				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
+				Giant.set("Giant Configuration.Attack Mechanisms.Stomp Attack.Light Fire", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				Giant.set("Giant Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
@@ -118,6 +120,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
 				Giant.set("Giant Configuration.Attack Mechanisms.Spawn Zombies On Death.Health", new Integer(20));
+				Giant.set("Giant Configuration.Sounds.Stomp Attack", true);
 				Giant.set("Giant Configuration.Sounds.Fire Attack", true);
 				Giant.set("Giant Configuration.Sounds.Throw Boulder Attack", true);
 				Giant.set("Giant Configuration.Sounds.Kick Attack", true);
@@ -209,7 +212,9 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Lightning Attack", false);
-				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack.Enabled", false);
+				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
+				Slime.set("Slime Configuration.Attack Mechanisms.Stomp Attack.Light Fire", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				Slime.set("Slime Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
 				Slime.set("Slime Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
@@ -219,6 +224,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage", new Integer(1));
 				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.Enabled", true);
 				Slime.set("Slime Configuration.Attack Mechanisms.Poison Attack.length", new Integer(5));
+				Slime.set("Slime Configuration.Sounds.Stomp Attack", true);
 				Slime.set("Slime Configuration.Sounds.Fire Attack", true);
 				Slime.set("Slime Configuration.Sounds.Throw Boulder Attack", true);
 				Slime.set("Slime Configuration.Sounds.Kick Attack", true);
@@ -308,7 +314,9 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Enabled", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Light Fire", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));

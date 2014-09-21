@@ -343,8 +343,11 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void onStompAttack(PlayerMoveEvent event) {
+		boolean sound = false;
+		boolean fire = false;
+		float power = 1.0f;
 		Player player = event.getPlayer();
-		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Stomp Attack").equalsIgnoreCase("true")) {
+		if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Stomp Attack.Enabled").equalsIgnoreCase("true")) {
 			Random pick = new Random();
 			int chance = 0;
 			int s;
@@ -358,7 +361,21 @@ public class SlimeListeners implements Listener {
 						s = slime.getSize();
 						if (s > 4){
 							if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
-								player.getLocation().getWorld().createExplosion(player.getLocation(), 1.0F);
+								String config = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Attack Mechanisms.Stomp Attack.Explosion Power");
+								if (API.getFileHandler().getProperty(Files.SLIME,
+										"Slime Configuration.Attack Mechanisms.Stomp Attack.Light Fire").equalsIgnoreCase("true")) {
+									fire = true;
+								}
+								if (API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Sounds.Stomp Attack").equalsIgnoreCase("true")) {
+									sound = true;
+								}
+								
+								try {
+									power = Float.parseFloat(config);
+								} catch (Exception e) {
+									power = 0.0f;
+								}
+								API.createAttack().stompAttack(player.getLocation(), power, fire, sound);
 							}
 						}
 					}
