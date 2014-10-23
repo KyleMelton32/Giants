@@ -313,7 +313,6 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Light Fire", false);
@@ -323,7 +322,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube", new Integer(100));
-				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack", false);
+				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled", false);
 				MagmaCube.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage", new Integer(1));
 				MagmaCube.set("Magma Cube Configuration.Sounds.Fire Attack", true);
 				MagmaCube.set("Magma Cube Configuration.Sounds.Throw Boulder Attack", true);
