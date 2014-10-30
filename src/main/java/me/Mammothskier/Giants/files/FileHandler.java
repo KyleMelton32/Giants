@@ -47,13 +47,13 @@ public class FileHandler {
 		String[] drops = null;
 		switch(arg){
 			case "Giant":
-				drops = new String[]{ "1-0-0;1;100/100" };
+				drops = new String[]{ "1-0-0;1;100/100;GIANT STONE;Dropped by a Giant" };
 				break;
 			case "Slime":
-				drops = new String[]{ "1-0-0;1;100/100;4-12" };
+				drops = new String[]{ "1-0-0;1;100/100;4-12;GIANT STONE;Dropped by a Giant Slime" };
 				break;
 			case "MagmaCube":
-				drops = new String[]{ "1-0-0;1;100/100;4-12" };
+				drops = new String[]{ "1-0-0;1;100/100;4-12;GIANT STONE;Dropped by a Giant Magma Cube" };
 				break;
 			default:
 				break;

@@ -1,15 +1,18 @@
 package me.Mammothskier.Giants.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Slime;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Mammothskier.Giants.Giants;
 
@@ -27,13 +30,16 @@ public class DropsManager {
 					Random rand = new Random();
 					String[] s = dropList.split(";");			
 					
-					if (s.length == 3) {
+					if (s.length == 5) {
 						String item = s[0];
 						String style= "";
 						String effect = "";
 						String effectLevel= "";
 						String amount = s[1];
 						String rate = s[2];
+						String name = s[3];
+						String lore = s[4];
+						List<String> itemLore;
 						int id = 0;
 						int num = 100;
 						int amt = 1;
@@ -97,8 +103,24 @@ public class DropsManager {
 						}
 						int randNum = rand.nextInt(den);
 						
+						if (name != null) {
+							name = ChatColor.translateAlternateColorCodes('&', name);
+						}
+						
+						if (lore != null) {
+							lore = ChatColor.translateAlternateColorCodes('&', lore);
+						}
+						
+						itemLore = Arrays.asList(lore);
+						
+						
 						if (num >= randNum){
 							ItemStack newItem = new ItemStack(id, amt, color);
+							ItemMeta itemMeta = newItem.getItemMeta();
+							itemMeta.setDisplayName(name);
+							itemMeta.setLore(itemLore);
+							newItem.setItemMeta(itemMeta);
+							
 							newItem.setDurability(color);
 							if ((effectID == 0) || (effectLevelID == 0)) {
 								
@@ -123,7 +145,7 @@ public class DropsManager {
 					Random rand = new Random();
 					String[] s = dropList.split(";");
 					
-					if (s.length == 4) {
+					if (s.length == 6) {
 						String item = s[0];
 						String style= "";
 						String effect = "";
@@ -131,6 +153,9 @@ public class DropsManager {
 						String amount = s[1];
 						String rate = s[2];
 						String sizeRange = s[3];
+						String name = s[4];
+						String lore = s[5];
+						List<String> itemLore;
 						int id = 0;
 						int num = 100;
 						int den = 100;
@@ -220,9 +245,25 @@ public class DropsManager {
 						}
 						int randNum = rand.nextInt(den);
 						
+						if (name != null) {
+							name = ChatColor.translateAlternateColorCodes('&', name);
+						}
+						
+						if (lore != null) {
+							lore = ChatColor.translateAlternateColorCodes('&', lore);
+						}
+						
+						itemLore = Arrays.asList(lore);
+						
 						if ((lsize <= size) && (size <= usize)) {
 							if (num >= randNum){
 								ItemStack newItem = new ItemStack(id, amt, color);
+								ItemMeta itemMeta = newItem.getItemMeta();
+								
+								itemMeta.setDisplayName(name);
+								itemMeta.setLore(itemLore);
+								newItem.setItemMeta(itemMeta);
+								
 								newItem.setDurability(color);
 								if ((effectID == 0) || (effectLevelID == 0)) {
 									
@@ -247,7 +288,7 @@ public class DropsManager {
 					Random rand = new Random();
 					String[] s = dropList.split(";");
 					
-					if (s.length == 4) {
+					if (s.length == 6) {
 						String item = s[0];
 						String style= "";
 						String effect = "";
@@ -255,6 +296,9 @@ public class DropsManager {
 						String amount = s[1];
 						String rate = s[2];
 						String sizeRange = s[3];
+						String name = s[4];
+						String lore = s[5];
+						List<String> itemLore;
 						int id = 0;
 						int num = 100;
 						int den = 100;
@@ -344,9 +388,25 @@ public class DropsManager {
 						}
 						int randNum = rand.nextInt(den);
 						
+						if (name != null) {
+							name = ChatColor.translateAlternateColorCodes('&', name);
+						}
+						
+						if (lore != null) {
+							lore = ChatColor.translateAlternateColorCodes('&', lore);
+						}
+						
+						itemLore = Arrays.asList(lore);
+						
 						if ((lsize <= size) && (size <= usize)) {
 							if (num >= randNum){
 								ItemStack newItem = new ItemStack(id, amt, color);
+								ItemMeta itemMeta = newItem.getItemMeta();
+								
+								itemMeta.setDisplayName(name);
+								itemMeta.setLore(itemLore);
+								newItem.setItemMeta(itemMeta);
+								
 								newItem.setDurability(color);
 								if ((effectID == 0) || (effectLevelID == 0)) {
 									
