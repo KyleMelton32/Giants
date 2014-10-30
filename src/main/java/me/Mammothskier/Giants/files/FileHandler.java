@@ -10,6 +10,7 @@ import java.util.List;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginDescriptionFile;
 
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.Giants;
@@ -23,9 +24,15 @@ public class FileHandler {
 		_configurations = new HashMap<Files, YamlConfiguration>();
 		loadWorlds();
 		loadFiles();
+		loadVersion();
 		loadDefaultDrop("Giant");
 		loadDefaultDrop("Slime");
 		loadDefaultDrop("MagmaCube");
+	}
+	
+	private String loadVersion() {
+		PluginDescriptionFile pdf = Giants.getPlugin().getDescription();
+		return pdf.getVersion();
 	}
 
 	private List<String> loadWorlds() {
@@ -84,6 +91,13 @@ public class FileHandler {
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");
+				Config.set("Giants Version.Do not edit these settings.Config.configyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Giant.giantyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Giant.biomeyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Slime.slimeyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Slime.biomeyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Magmacube.magmacubeyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Magmacube.biomeyml", loadVersion());
 				try {
 					Config.save(file);
 				} catch (IOException e) {

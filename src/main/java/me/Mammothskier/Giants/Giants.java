@@ -7,6 +7,7 @@ import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
@@ -15,6 +16,8 @@ import org.mcstats.Metrics;
 public class Giants extends JavaPlugin{
 	
 	public final Logger log = Logger.getLogger("Minecraft");
+	
+	private static Plugin plugin;
 	
 	/*
 	 * CHANGE LOG:
@@ -95,5 +98,9 @@ public class Giants extends JavaPlugin{
 	}
 	@Override
 	public void onDisable(){
+	}
+	
+	public static Plugin getPlugin() {
+		return plugin;
 	}
 }
