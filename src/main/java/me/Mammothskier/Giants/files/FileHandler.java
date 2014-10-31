@@ -31,8 +31,10 @@ public class FileHandler {
 	}
 	
 	private String loadVersion() {
+		String version;
 		PluginDescriptionFile pdf = Giants.getPlugin().getDescription();
-		return pdf.getVersion();
+		version = pdf.getVersion();
+		return version;
 	}
 
 	private List<String> loadWorlds() {
