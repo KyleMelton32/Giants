@@ -24,7 +24,7 @@ public class FileHandler {
 		_configurations = new HashMap<Files, YamlConfiguration>();
 		loadWorlds();
 		loadFiles();
-		loadVersion();
+//		loadVersion();
 		loadDefaultDrop("Giant");
 		loadDefaultDrop("Slime");
 		loadDefaultDrop("MagmaCube");
