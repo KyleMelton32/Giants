@@ -30,12 +30,14 @@ public class FileHandler {
 		loadDefaultDrop("MagmaCube");
 	}
 	
-/*	private String loadVersion() {
-		String version;
-		PluginDescriptionFile pdf = Giants.getPlugin().getDescription();
-		version = pdf.getVersion();
+	private String loadVersion() {		
+		PluginDescriptionFile pdf = _giants.getDescription();
+		String version = pdf.getVersion();
+		if (version == null) {
+			return null;
+		}
 		return version;
-	}*/
+	}
 
 	private List<String> loadWorlds() {
 		List<String> worldList = new ArrayList<String>();
@@ -93,13 +95,13 @@ public class FileHandler {
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");
-/*				Config.set("Giants Version.Do not edit these settings.Config.configyml", loadVersion());
+				Config.set("Giants Version.Do not edit these settings.Config.configyml", loadVersion());
 				Config.set("Giants Version.Do not edit these settings.Giant.giantyml", loadVersion());
 				Config.set("Giants Version.Do not edit these settings.Giant.biomeyml", loadVersion());
 				Config.set("Giants Version.Do not edit these settings.Slime.slimeyml", loadVersion());
 				Config.set("Giants Version.Do not edit these settings.Slime.biomeyml", loadVersion());
 				Config.set("Giants Version.Do not edit these settings.Magmacube.magmacubeyml", loadVersion());
-				Config.set("Giants Version.Do not edit these settings.Magmacube.biomeyml", loadVersion());*/
+				Config.set("Giants Version.Do not edit these settings.Magmacube.biomeyml", loadVersion());
 				try {
 					Config.save(file);
 				} catch (IOException e) {
