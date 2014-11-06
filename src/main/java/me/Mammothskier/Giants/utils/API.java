@@ -8,7 +8,6 @@ import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.listeners.GiantListeners;
-import me.Mammothskier.Giants.listeners.JockeyListeners;
 import me.Mammothskier.Giants.listeners.MagmaCubeListeners;
 import me.Mammothskier.Giants.listeners.SlimeListeners;
 
@@ -29,7 +28,6 @@ public class API {
 		new GiantListeners(_giants);
 		new SlimeListeners(_giants);
 		new MagmaCubeListeners(_giants);
-		new JockeyListeners(_giants);
 		commands = new Commands(_giants);
 		_giants.getCommand("giants").setExecutor(commands);
 		fileHandler = new FileHandler(_giants);
