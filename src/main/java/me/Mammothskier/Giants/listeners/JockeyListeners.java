@@ -1,7 +1,6 @@
 package me.Mammothskier.Giants.listeners;
 
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.events.EntityMoveEvent;
 import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
@@ -11,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class JockeyListeners implements Listener {
 	private Giants _jockeys;
@@ -22,12 +22,9 @@ public class JockeyListeners implements Listener {
 	}
 	
 	@EventHandler
-	public void JockeySpawnEvent (EntityMoveEvent event) {
+	public void JockeySpawnEvent (CreatureSpawnEvent event) {
 		Entity entity = event.getEntity();
-		if (Bukkit.getServer().getPlayer("Mammothskier").isOnline()) {
-			Player player = Bukkit.getServer().getPlayer("Mammothskier");
-			player.sendMessage("EntityMoveEvent is working");
-		}
+
 		if (API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
 			Slime cube = (Slime) entity;
 			for (Entity entity2 : cube.getNearbyEntities(15, 12, 15)) {
