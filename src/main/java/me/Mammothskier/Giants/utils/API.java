@@ -53,12 +53,10 @@ public class API {
 		            	for (Entity entity : world.getEntities()) {
 		            		if ((entity instanceof Slime) || (entity instanceof MagmaCube)) {
 		            			for (Entity entity2 : entity.getNearbyEntities(15, 12, 15)) {
-			            			if ((entity2 instanceof Giant) && (entity2 != null)) {
-			            				if (!entity.getPassenger().equals(EntityType.GIANT)) {
-				            				Entity passenger = entity2;
-				            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
-				    						Bukkit.getServer().getPluginManager().callEvent(JSE);
-			            				}
+			            			if ((entity2 instanceof Giant) && (entity.getPassenger().getType() != EntityType.GIANT)) {
+			            				Entity passenger = entity2;
+			            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
+			    						Bukkit.getServer().getPluginManager().callEvent(JSE);
 			            			}
 			            		}
 		            		}
