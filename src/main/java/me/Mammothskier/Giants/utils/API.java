@@ -5,6 +5,8 @@ import java.util.List;
 import me.Mammothskier.Giants.Attacks;
 import me.Mammothskier.Giants.Commands;
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.events.JockeySpawnEvent;
+import me.Mammothskier.Giants.events.SlimeSpawnEvent;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.listeners.GiantListeners;
@@ -12,10 +14,15 @@ import me.Mammothskier.Giants.listeners.JockeyListeners;
 import me.Mammothskier.Giants.listeners.MagmaCubeListeners;
 import me.Mammothskier.Giants.listeners.SlimeListeners;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Slime;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public class API {
 	private static Giants _giants;
@@ -35,6 +42,29 @@ public class API {
 		fileHandler = new FileHandler(_giants);
 		Attacks = new Attacks(_giants);
 		drops = new DropsManager(_giants);
+		
+		if (getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey").equalsIgnoreCase("true")) {
+			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		    scheduler.scheduleSyncRepeatingTask(_giants, new Runnable() {
+		    	
+		        @Override
+		        public void run() {
+		            for (World world : _giants.getServer().getWorlds()) {
+		            	for (Entity entity : world.getEntities()) {
+		            		if ((entity instanceof Slime) || (entity instanceof MagmaCube)) {
+		            			for (Entity entity2 : entity.getNearbyEntities(15, 12, 15)) {
+			            			if ((entity2 instanceof Giant) && (!entity.getPassenger().equals(EntityType.GIANT))) {
+			            				Entity passenger = entity2;
+			            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
+			    						Bukkit.getServer().getPluginManager().callEvent(JSE);
+			            			}
+			            		}
+		            		}
+		            	}
+		            }
+		        }
+		    }, 0L, 1L);
+		}
 	}
 
 	public static boolean isGiant(Entity entity) {
@@ -73,6 +103,8 @@ public class API {
 		}
 		return false;
 	}
+	
+
 
 	public static List<String> getGiantSpawnWorlds() {
 		return getFileHandler().getPropertyList(Files.GIANT, "Giant Configuration.Spawn Settings.Worlds");
