@@ -5,11 +5,11 @@ import java.util.List;
 import me.Mammothskier.Giants.Attacks;
 import me.Mammothskier.Giants.Commands;
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.events.GiantListeners;
-import me.Mammothskier.Giants.events.MagmaCubeListeners;
-import me.Mammothskier.Giants.events.SlimeListeners;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.listeners.GiantListeners;
+import me.Mammothskier.Giants.listeners.MagmaCubeListeners;
+import me.Mammothskier.Giants.listeners.SlimeListeners;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;

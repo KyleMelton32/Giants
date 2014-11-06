@@ -1,10 +1,11 @@
-package me.Mammothskier.Giants.events;
+package me.Mammothskier.Giants.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.events.SlimeSpawnEvent;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
 
