@@ -171,7 +171,7 @@
             </activation>
             <properties>
                 <project.build.number>${env.BUILD_NUMBER}</project.build.number>
-                <project.build.type>RAZOR</project.build.type>
+                <project.build.type>EXPERIMENTAL</project.build.type>
                 <project.build.version>
                     ${project.version}-b${project.build.number}-${project.build.type}
                 </project.build.version>

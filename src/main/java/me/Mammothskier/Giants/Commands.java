@@ -141,6 +141,61 @@ public class Commands implements CommandExecutor {
 								}
 								return true;
 							}
+							
+							if(args[1].equalsIgnoreCase("jockey")){
+								Location loc = (Location) player.getEyeLocation();
+								Location location = loc;
+								String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
+								String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
+								String string3 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
+								int size;
+								double giantHealth;
+								double slimeHealth;
+								try {
+									size = Integer.parseInt(string);
+									slimeHealth = Double.parseDouble(string2);
+									giantHealth = Double.parseDouble(string3);
+								} catch (Exception e) {
+									size = 12;
+									slimeHealth = size^2;
+									giantHealth = 100;
+								}
+								if(args.length ==  2){
+									Slime slime = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
+									slime.setSize(size);
+									slime.setMaxHealth(slimeHealth);
+									slime.setHealth(slimeHealth);
+									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									giant.setMaxHealth(giantHealth);
+									slime.setPassenger(giant);
+									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
+								}
+								if(args.length == 5){
+									double locx = player.getLocation().getX();
+									double locy = player.getLocation().getY();
+									double locz = player.getLocation().getZ();
+										
+									try {
+										locx = Integer.parseInt(args[2]);
+										locy = Integer.parseInt(args[3]);
+										locz = Integer.parseInt(args[4]);
+									} catch (Exception e) {
+									}
+									loc.setX(locx);
+									loc.setY(locy);
+									loc.setZ(locz);
+									Slime slime = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
+									slime.setSize(size);
+									slime.setMaxHealth(slimeHealth);
+									slime.setHealth(slimeHealth);
+									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									giant.setMaxHealth(giantHealth);
+									slime.setPassenger(giant);
+									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
+								}
+								return true;
+							}
+							
 							if((args[1].equalsIgnoreCase("lavaslime")) || (args[1].equalsIgnoreCase("magma_cube")) || (args[1].equalsIgnoreCase("magma"))|| (args[1].equalsIgnoreCase("magmacube"))){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
@@ -185,7 +240,7 @@ public class Commands implements CommandExecutor {
 								return true;
 							}
 							else {
-								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise giant, slime, and magmacube.");
+								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise giant, slime, magmacube and jockey.");
 							}
 						}
 						else {

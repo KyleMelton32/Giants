@@ -1,12 +1,16 @@
 Giant Configuration:
+  File Version: Version
   Spawn Settings:
     Chance: 10
     Worlds:
+    - world
+    - world_nether
+    - world_the_end
   Giant Stats:
     Health: 100
     Experience: 5
     Drops:
-    - 1-0-0;1;100/100
+    - 1-0-0;1;100/100;GIANT STONE;Dropped by a Giant
   Damage Settings:
     Arrows:
       Damage done by arrow: 10
@@ -17,7 +21,10 @@ Giant Configuration:
       Allow Cacti Damage: false
   Attack Mechanisms:
     Lightning Attack: false
-    Stomp Attack: false
+    Stomp Attack:
+      Enabled: false
+      Explosion Power: 1
+      Light Fire: false
     Kick Attack:
       Enabled: false
       Kick Height: 1
@@ -39,6 +46,7 @@ Giant Configuration:
       Zombies to Spawn: 5
       Health: 20
   Sounds:
+    Stomp Attack: true
     Fire Attack: true
     Throw Boulder Attack: true
     Kick Attack: true
