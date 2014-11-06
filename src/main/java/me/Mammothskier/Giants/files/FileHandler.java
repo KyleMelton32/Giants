@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.utils.API;
 import me.Mammothskier.Giants.Giants;
 
 public class FileHandler {
@@ -94,7 +95,9 @@ public class FileHandler {
 				Config.set("Giants Configuration.Entities.Giant", true);
 				Config.set("Giants Configuration.Entities.Giant Slime", false);
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);
-				Config.set("Giants Configuration.Entities.Giant Jockey", false);
+				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Bugs", new String("This entity of Giants is extremely experimental and does not have many features. Bugs may be present."));
+				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Files", new String("Config files for this entity will NOT load unless enabled."));
+				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");
 				try {
@@ -420,72 +423,87 @@ public class FileHandler {
 				}
 				_configurations.put(files, MagmaCubeBiomes);
 				break;
-			case JOCKEYBIOMES:
-				YamlConfiguration JockeyBiomes = YamlConfiguration.loadConfiguration(file);
-				JockeyBiomes.set("Jockey Configuration.File Version", loadVersion());
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Swampland.Swampland", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Swampland.Swampland Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Forest.Forest", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Forest.Forest Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Taiga", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Taiga Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Spruce Taiga", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Spruce Taiga Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Plains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Ice Plains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Ice Plains Spikes", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Sunflower Plains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Ocean", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Deep Ocean", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Frozen Ocean", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.River.River", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.River.Frozen River", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Beach", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Stone Beach", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Cold Beach", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Plus", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Plus Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mushroom Island.Mushroom Island", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mushroom Island.Mushroom Shore", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Hills", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Hills Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Plateau", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Plateau Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Roofed Forest.Roofed Forest", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Roofed Forest.Roofed Forest Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Bryce", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Forest", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Forest Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Small Mountains", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Ice Mountains", true);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Hell", false);
-				JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Sky", false);
-				try {
-					JockeyBiomes.save(file);
-				} catch (IOException e) {
+			case JOCKEY:
+				if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
+					YamlConfiguration Jockey = YamlConfiguration.loadConfiguration(file);
+					Jockey.set("Jockey Configuration.File Version", loadVersion());
+					Jockey.set("Jockey Configuration", new String("This entity of Giants is extremely experimental and does not have many features"));
+					Jockey.set("Jockey Configuration.Spawn Settings.Worlds", loadWorlds());
+					try {
+						Jockey.save(file);
+					} catch (IOException e) {
+					}
+					_configurations.put(files, Jockey);
 				}
-				_configurations.put(files, JockeyBiomes);
+				break;
+			case JOCKEYBIOMES:
+				if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
+					YamlConfiguration JockeyBiomes = YamlConfiguration.loadConfiguration(file);
+					JockeyBiomes.set("Jockey Configuration.File Version", loadVersion());
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Swampland.Swampland", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Swampland.Swampland Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Forest.Forest", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Forest.Forest Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Taiga Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Cold Taiga Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Taiga", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Taiga Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Spruce Taiga", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Taiga.Mega Spruce Taiga Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Plains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Ice Plains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Ice Plains Spikes", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Plains.Sunflower Plains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Ocean", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Deep Ocean", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Ocean.Frozen Ocean", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.River.River", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.River.Frozen River", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Beach", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Stone Beach", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Beach.Cold Beach", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Plus", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Extreme Hills.Extreme Hills Plus Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mushroom Island.Mushroom Island", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mushroom Island.Mushroom Shore", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Desert.Desert Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Jungle.Jungle Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Hills", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Birch Forest.Birch Forest Hills Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Plateau", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Savanna.Savanna Plateau Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Roofed Forest.Roofed Forest", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Roofed Forest.Roofed Forest Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Bryce", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Forest", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Mesa.Mesa Plateau Forest Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Small Mountains", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Ice Mountains", true);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Hell", false);
+					JockeyBiomes.set("Jockey Configuration.Biome Settings.Other.Sky", false);
+					try {
+						JockeyBiomes.save(file);
+					} catch (IOException e) {
+					}
+					_configurations.put(files, JockeyBiomes);
+				}
 				break;
 		default:
 			break;
