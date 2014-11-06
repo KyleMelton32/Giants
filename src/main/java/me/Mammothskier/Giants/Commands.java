@@ -167,6 +167,7 @@ public class Commands implements CommandExecutor {
 									slime.setHealth(slimeHealth);
 									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
 									giant.setMaxHealth(giantHealth);
+									slime.setPassenger(giant);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
 								}
 								if(args.length == 5){
@@ -189,6 +190,7 @@ public class Commands implements CommandExecutor {
 									slime.setHealth(slimeHealth);
 									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
 									giant.setMaxHealth(giantHealth);
+									slime.setPassenger(giant);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
 								}
 								return true;
