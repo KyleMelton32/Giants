@@ -8,6 +8,7 @@ import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.listeners.GiantListeners;
+import me.Mammothskier.Giants.listeners.JockeyListeners;
 import me.Mammothskier.Giants.listeners.MagmaCubeListeners;
 import me.Mammothskier.Giants.listeners.SlimeListeners;
 
@@ -18,8 +19,6 @@ import org.bukkit.entity.Slime;
 
 public class API {
 	private static Giants _giants;
-	private static Giants _slimes;
-	private static Giants _magmacubes;
 	private Commands commands;
 	private static FileHandler fileHandler;
 	private static Attacks Attacks;
@@ -27,11 +26,10 @@ public class API {
 
 	public API(Giants giants) {
 		_giants = giants;
-		_slimes = giants;
-		_magmacubes = giants;
 		new GiantListeners(_giants);
-		new SlimeListeners(_slimes);
-		new MagmaCubeListeners(_magmacubes);
+		new SlimeListeners(_giants);
+		new MagmaCubeListeners(_giants);
+		new JockeyListeners(_giants);
 		commands = new Commands(_giants);
 		_giants.getCommand("giants").setExecutor(commands);
 		fileHandler = new FileHandler(_giants);
