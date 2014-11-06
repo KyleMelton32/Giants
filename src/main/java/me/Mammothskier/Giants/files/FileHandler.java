@@ -105,7 +105,7 @@ public class FileHandler {
 				break;
 			case GIANT:
 				YamlConfiguration Giant = YamlConfiguration.loadConfiguration(file);
-				Giant.set("Giants Configuration.File Version", loadVersion());
+				Giant.set("Giant Configuration.File Version", loadVersion());
 				Giant.set("Giant Configuration.Spawn Settings.Chance", new Integer(10));
 				Giant.set("Giant Configuration.Spawn Settings.Worlds", loadWorlds());
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
@@ -148,7 +148,7 @@ public class FileHandler {
 				break;
 			case GIANTBIOMES:
 				YamlConfiguration GiantBiomes = YamlConfiguration.loadConfiguration(file);
-				GiantBiomes.set("Giants Configuration.File Version", loadVersion());
+				GiantBiomes.set("Giant Configuration.File Version", loadVersion());
 				GiantBiomes.set("Giant Configuration.Biome Settings.Swampland.Swampland", true);
 				GiantBiomes.set("Giant Configuration.Biome Settings.Swampland.Swampland Mountains", true);
 				GiantBiomes.set("Giant Configuration.Biome Settings.Forest.Forest", true);
