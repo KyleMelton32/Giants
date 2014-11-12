@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -46,6 +47,13 @@ public class FileHandler {
 			worldList.add(w.getName());
 		}
 		return worldList;
+	}
+	
+	private boolean checkDependencies(String plugin) {
+		if (Bukkit.getPluginManager().getPlugin(plugin) != null) {
+			return true;
+		}
+		return false;
 	}
 
 	private String[] loadDefaultDrop(String arg) {
@@ -92,6 +100,7 @@ public class FileHandler {
 			case CONFIG:
 				YamlConfiguration Config = YamlConfiguration.loadConfiguration(file);
 				Config.set("Giants Configuration.File Version", loadVersion());
+				Config.set("Giants Configuration.Dependencies.BarAPI", checkDependencies("BarAPI"));
 				Config.set("Giants Configuration.Entities.Giant", true);
 				Config.set("Giants Configuration.Entities.Giant Slime", false);
 				Config.set("Giants Configuration.Entities.Giant Magma Cube", false);

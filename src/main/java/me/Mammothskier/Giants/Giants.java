@@ -3,12 +3,12 @@ package me.Mammothskier.Giants;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import me.Mammothskier.Giants.BarAPI.HealthBar;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
@@ -17,8 +17,6 @@ import org.mcstats.Metrics;
 public class Giants extends JavaPlugin{
 	
 	public final Logger log = Logger.getLogger("Minecraft");
-	
-	private static Plugin plugin;
 	
 	/*
 	 * CHANGE LOG:
@@ -121,12 +119,20 @@ public class Giants extends JavaPlugin{
 			}
 		}
 		
+		if ((API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Dependencies.BarAPI").equalsIgnoreCase("true")) &&
+				(Bukkit.getPluginManager().getPlugin("BossAPI") != null)) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + "Found BossAPI: Enabling BossAPI features.");
+			new HealthBar(this);
+		} else if (Bukkit.getPluginManager().getPlugin("BossAPI") != null) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Found BossAPI: Config file set to ignore BossAPI features. \n" +
+		"Disabling BossAPI features.");
+		} else {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Cannot Find BossAPI: Disabling BossAPI features.");
+		}
+		
 		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GOLD + "You have Giant Jockeys Enabled! \n" +
 					"This entity of Giants is extremely experimental and does not have many features.");
 		}
-	}
-	@Override
-	public void onDisable(){
 	}
 }
