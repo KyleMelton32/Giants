@@ -119,13 +119,13 @@ public class Giants extends JavaPlugin{
 		
 		if ((API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Dependencies.BarAPI").equalsIgnoreCase("true")) &&
 				(Bukkit.getPluginManager().getPlugin("BarAPI") != null)) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + "Found BarAPI: Enabling BossAPI features.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Found BarAPI: Enabling BarAPI features.");
 			new HealthBar(this);
-		} else if (Bukkit.getPluginManager().getPlugin("BossAPI") != null) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Found BossAPI: Config file set to ignore BossAPI features. \n" +
+		} else if (Bukkit.getPluginManager().getPlugin("BarAPI") != null) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Found BarAPI: Config file set to ignore BossAPI features. \n" +
 		"Disabling BossAPI features.");
 		} else {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + "Cannot Find BarAPI: Disabling BossAPI features.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Cannot Find BarAPI: Disabling BossAPI features.");
 		}
 		
 		if (API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
