@@ -30,7 +30,7 @@ public class HealthBar implements Listener {
 		
 		if (target instanceof Player) {
 			Player player = (Player) target;
-			if (API.isGiant(entity)) {
+			if (API.isGiant(entity) || API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
 				BarAPI.setMessage(player, entity.getType() + "", (float) (((Damageable) entity).getHealth() / ((Damageable) entity).getMaxHealth()));
 			} else if (API.isGiantSlime(entity)) {
 				BarAPI.setMessage(player, "Giant" + entity.getType(), (float) (((Damageable) entity).getHealth() / ((Damageable) entity).getMaxHealth()));
