@@ -4,6 +4,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -22,6 +23,7 @@ public class HealthBar implements Listener {
 		_giants.getServer().getPluginManager().registerEvents(this, giants);
 	}
 	
+	@EventHandler
 	public void onHealthBar(EntityTargetLivingEntityEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
@@ -38,7 +40,7 @@ public class HealthBar implements Listener {
 		}
 	}
 
-	
+	@EventHandler
 	public void changeHealthBar(EntityDamageByEntityEvent event) {
 		Entity damager = event.getDamager();
 		Entity entity = event.getEntity();
@@ -60,6 +62,7 @@ public class HealthBar implements Listener {
 		}
 	}
 	
+	@EventHandler
 	public void onDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		if (API.isGiant(entity) || API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
