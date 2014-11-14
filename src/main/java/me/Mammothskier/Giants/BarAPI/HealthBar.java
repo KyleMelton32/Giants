@@ -11,7 +11,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.utils.API;
 import me.confuser.barapi.BarAPI;
 
@@ -27,15 +26,18 @@ public class HealthBar implements Listener {
 	public void onHealthBar(EntityTargetLivingEntityEvent event) {
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
+		Double maxHealth = ((Damageable) entity).getMaxHealth();
+		Double health = ((Damageable) entity).getHealth();
+		Float percent = (float) (health / maxHealth);
 		
 		if (target instanceof Player) {
 			Player player = (Player) target;
-			if (API.isGiant(entity) || API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
-				BarAPI.setMessage(player, entity.getType() + "", (float) (((Damageable) entity).getHealth() / ((Damageable) entity).getMaxHealth()));
+			if (API.isGiant(entity)) {
+				BarAPI.setMessage(player, entity.getType() + "", percent);
 			} else if (API.isGiantSlime(entity)) {
-				BarAPI.setMessage(player, "Giant" + entity.getType(), (float) (((Damageable) entity).getHealth() / ((Damageable) entity).getMaxHealth()));
+				BarAPI.setMessage(player, "Giant" + entity.getType(), percent);
 			} else if (API.isGiantMagmaCube(entity)) {
-				BarAPI.setMessage(player, "Giant" + entity.getType(), (float) (((Damageable) entity).getHealth() / ((Damageable) entity).getMaxHealth()));
+				BarAPI.setMessage(player, "Giant" + entity.getType(), percent);
 			}
 		}
 	}
