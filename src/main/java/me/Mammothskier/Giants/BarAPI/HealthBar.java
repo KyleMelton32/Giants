@@ -15,7 +15,12 @@ import me.Mammothskier.Giants.utils.API;
 import me.confuser.barapi.BarAPI;
 
 public class HealthBar implements Listener {
-	public HealthBar(Giants giants) {}
+	private Giants _giants;
+	
+	public HealthBar(Giants giants) {
+		_giants = giants;
+		_giants.getServer().getPluginManager().registerEvents(this, giants);
+	}
 	
 	public void onHealthBar(EntityTargetLivingEntityEvent event) {
 		Entity entity = event.getEntity();

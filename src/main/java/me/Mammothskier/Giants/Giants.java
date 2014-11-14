@@ -119,11 +119,11 @@ public class Giants extends JavaPlugin{
 		
 		if ((API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Dependencies.BarAPI").equalsIgnoreCase("true")) &&
 				(Bukkit.getPluginManager().getPlugin("BarAPI") != null)) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Found BarAPI: Enabling BarAPI features.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Found BarAPI: Enabling BarAPI features.");
 			new HealthBar(this);
 		} else if (Bukkit.getPluginManager().getPlugin("BarAPI") != null) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Found BarAPI: Config file set to ignore BarAPI features. \n" +
-		"Disabling BossAPI features.");
+		"Disabling BarAPI features.");
 		} else {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Cannot Find BarAPI: Disabling BarAPI features.");
 		}
