@@ -69,19 +69,25 @@ public class HealthBar implements Listener {
 		case GIANT:
 			String giantName = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.BarAPI.Display Name");
 			giantName = ChatColor.translateAlternateColorCodes('&', giantName);
-			BarAPI.setMessage(player, giantName, percent * 100);
+			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {
+				BarAPI.setMessage(player, giantName, percent * 100);
+			}
 			break;
 		case SLIME:
 			String slimeName = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.BarAPI.Display Name");
 			slimeName = ChatColor.translateAlternateColorCodes('&', slimeName);
 			size = Integer.toString(((Slime) entity).getSize());
-			BarAPI.setMessage(player, slimeName.replace("{size}", size), percent* 100);
+			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {
+				BarAPI.setMessage(player, slimeName.replace("{size}", size), percent* 100);
+			}
 			break;
 		case MAGMA_CUBE:
 			String magmacubeName = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.BarAPI.Display Name");
 			magmacubeName = ChatColor.translateAlternateColorCodes('&', magmacubeName);
 			size = Integer.toString(((MagmaCube) entity).getSize());
-			BarAPI.setMessage(player, magmacubeName.replace("{size}", size), percent* 100);
+			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {
+				BarAPI.setMessage(player, magmacubeName.replace("{size}", size), percent* 100);
+			}
 			break;
 		default:
 			break;

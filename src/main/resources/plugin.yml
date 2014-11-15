@@ -17,6 +17,7 @@ permissions:
             giants.debug: true
             giants.spawn: true
             giants.version: true
+            giants.barAPI: true
     giants.reload:
         description: Reloads the config file.
         default: false
@@ -29,3 +30,6 @@ permissions:
     giants.version:
         description: Displays the version of the plugin running on the server.
         default: false
+    giants.barAPI:
+        description: Allows access to the barAPI features.
+        default: false	
