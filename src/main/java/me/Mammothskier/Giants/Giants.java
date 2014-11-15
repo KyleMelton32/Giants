@@ -102,6 +102,8 @@ public class Giants extends JavaPlugin{
 	 *  Added support for lore and custom item names
 	 *  Added file version to each file
 	 *  Added Giant Jockey Entity
+	 *  Added support for BarAPI
+	 *  Fixed Slime's health bug
 	 * ======
 	 */
 	

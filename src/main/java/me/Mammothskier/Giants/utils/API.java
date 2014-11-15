@@ -6,7 +6,6 @@ import me.Mammothskier.Giants.Attacks;
 import me.Mammothskier.Giants.Commands;
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.events.JockeySpawnEvent;
-import me.Mammothskier.Giants.events.SlimeSpawnEvent;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.listeners.GiantListeners;
@@ -15,7 +14,6 @@ import me.Mammothskier.Giants.listeners.MagmaCubeListeners;
 import me.Mammothskier.Giants.listeners.SlimeListeners;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

@@ -14,7 +14,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import me.Mammothskier.Giants.files.Files;
-import me.Mammothskier.Giants.utils.API;
 import me.Mammothskier.Giants.Giants;
 
 public class FileHandler {
@@ -123,6 +122,7 @@ public class FileHandler {
 				Giant.set("Giant Configuration.Giant Stats.Health", new Integer(100));
 				Giant.set("Giant Configuration.Giant Stats.Experience", new Integer(5));
 				Giant.set("Giant Configuration.Giant Stats.Drops", Arrays.asList(loadDefaultDrop("Giant")));
+				Giant.set("Giant Configuration.Giant Stats.BarAPI.Display Name", "&2Giant");
 				Giant.set("Giant Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Giant.set("Giant Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Giant.set("Giant Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
@@ -235,6 +235,7 @@ public class FileHandler {
 				Slime.set("Slime Configuration.Slime Stats.Health", new Integer(100));
 				Slime.set("Slime Configuration.Slime Stats.Experience", new Integer(5));
 				Slime.set("Slime Configuration.Slime Stats.Drops", Arrays.asList(loadDefaultDrop("Slime")));
+				Slime.set("Slime Configuration.Slime Stats.BarAPI.Display Name", "&2Giant Slime Size {size}");
 				Slime.set("Slime Configuration.Damage Settings.Arrows.Damage done by arrow", new Integer(10));
 				Slime.set("Slime Configuration.Damage Settings.Fire.Allow Fire Damage", true);
 				Slime.set("Slime Configuration.Damage Settings.Block Damage.Allow Suffocation",false);
@@ -339,6 +340,7 @@ public class FileHandler {
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Health", new Integer(100));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Experience", new Integer(5));
 				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.Drops",  Arrays.asList(loadDefaultDrop("MagmaCube")));
+				MagmaCube.set("Magma Cube Configuration.Magma Cube Stats.BarAPI.Display Name", "&2Giant Magma Cube Size {size}");
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Arrows.Damage done by arrow", true);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Suffocation", false);
 				MagmaCube.set("Magma Cube Configuration.Damage Settings.Block Damage.Allow Cacti Damage", false);
