@@ -46,6 +46,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SWAMPLAND_MOUNTAINS) {
@@ -53,6 +54,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FOREST) {
@@ -60,6 +62,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FOREST_HILLS) {
@@ -67,6 +70,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA) {
@@ -74,6 +78,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA_HILLS) {
@@ -81,6 +86,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.TAIGA_MOUNTAINS) {
@@ -88,6 +94,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA) {
@@ -95,6 +102,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA_HILLS) {
@@ -102,6 +110,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_TAIGA_MOUNTAINS) {
@@ -109,6 +118,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_TAIGA) {
@@ -116,6 +126,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_TAIGA_HILLS) {
@@ -123,6 +134,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_SPRUCE_TAIGA) {
@@ -130,6 +142,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MEGA_SPRUCE_TAIGA_HILLS) {
@@ -137,6 +150,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.PLAINS) {
@@ -144,6 +158,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_PLAINS) {
@@ -151,6 +166,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_PLAINS_SPIKES) {
@@ -158,6 +174,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SUNFLOWER_PLAINS) {
@@ -165,6 +182,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.OCEAN) {
@@ -172,6 +190,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DEEP_OCEAN) {
@@ -179,6 +198,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FROZEN_OCEAN) {
@@ -186,6 +206,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.RIVER) {
@@ -193,6 +214,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.FROZEN_RIVER) {
@@ -200,6 +222,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BEACH) {
@@ -207,6 +230,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.STONE_BEACH) {
@@ -214,6 +238,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.COLD_BEACH) {
@@ -221,6 +246,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS) {
@@ -228,6 +254,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_PLUS) {
@@ -235,6 +262,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_MOUNTAINS) {
@@ -242,6 +270,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.EXTREME_HILLS_PLUS_MOUNTAINS) {
@@ -249,6 +278,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MUSHROOM_ISLAND) {
@@ -256,6 +286,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MUSHROOM_SHORE) {
@@ -263,6 +294,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT) {
@@ -270,6 +302,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT_HILLS) {
@@ -277,6 +310,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.DESERT_MOUNTAINS) {
@@ -284,6 +318,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE) || (biome == Biome.JUNGLE_EDGE)) {
@@ -291,6 +326,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE_HILLS) || (biome == Biome.JUNGLE_EDGE)) {
@@ -298,6 +334,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if ((biome == Biome.JUNGLE_MOUNTAINS) || (biome == Biome.JUNGLE_EDGE) || (biome == Biome.JUNGLE_EDGE_MOUNTAINS)) {
@@ -305,6 +342,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST) {
@@ -312,6 +350,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_HILLS) {
@@ -319,6 +358,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_MOUNTAINS) {
@@ -326,6 +366,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.BIRCH_FOREST_HILLS_MOUNTAINS) {
@@ -333,6 +374,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA) {
@@ -340,6 +382,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_MOUNTAINS) {
@@ -347,6 +390,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_PLATEAU) {
@@ -354,6 +398,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SAVANNA_PLATEAU_MOUNTAINS) {
@@ -361,6 +406,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ROOFED_FOREST) {
@@ -368,6 +414,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ROOFED_FOREST_MOUNTAINS) {
@@ -375,6 +422,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA) {
@@ -382,6 +430,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_BRYCE) {
@@ -389,6 +438,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU) {
@@ -396,6 +446,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_FOREST) {
@@ -403,6 +454,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_MOUNTAINS) {
@@ -410,6 +462,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.MESA_PLATEAU_FOREST_MOUNTAINS) {
@@ -417,6 +470,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SMALL_MOUNTAINS) {
@@ -424,6 +478,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.ICE_MOUNTAINS) {
@@ -431,6 +486,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.HELL) {
@@ -438,6 +494,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 			if (biome == Biome.SKY) {
@@ -445,6 +502,7 @@ public class SlimeSpawnEvent extends Event {
 					Slime entity = (Slime) loc.getWorld().spawnEntity(location, EntityType.SLIME);
 					entity.setSize(size);
 					entity.setMaxHealth(health);
+					entity.setHealth(health);
 				}
 			}
 		}
