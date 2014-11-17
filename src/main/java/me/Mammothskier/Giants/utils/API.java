@@ -71,12 +71,19 @@ public class API {
 		if (config.equalsIgnoreCase("false")){
 			return false;
 		}
+		if (entity.getVehicle() != null) {
+			return false;
+		}
+		
 		return entity instanceof Giant;
 	}
 	
 	public static boolean isGiantSlime(Entity entity) {
 		String config = API.getFileHandler().getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime");
 		if (config.equalsIgnoreCase("false")){
+			return false;
+		}
+		if (entity.getPassenger() != null) {
 			return false;
 		}
 
@@ -94,6 +101,10 @@ public class API {
 		if (config.equalsIgnoreCase("false")){
 			return false;
 		}
+		if (entity.getPassenger() != null) {
+			return false;
+		}
+		
 		if (entity instanceof MagmaCube){
 			MagmaCube magmacube = (MagmaCube) entity;
 			if (magmacube.getSize() > 4){
@@ -110,17 +121,19 @@ public class API {
 		}
 		switch (entity.getType()) {
 		case GIANT:
-			if ((isGiantSlime(entity.getVehicle())) || (isGiantMagmaCube(entity.getVehicle())) || (entity.getVehicle().getType() == EntityType.GHAST)) {
+			if((entity.getVehicle() instanceof Slime && ((Slime) entity).getSize() > 4) ||
+					(entity.getVehicle() instanceof MagmaCube && ((MagmaCube) entity).getSize() > 4) ||
+					(entity.getVehicle().getType() == EntityType.GHAST)) {
 				return true;
 			}
 			break;
 		case SLIME:
-			if ((isGiantSlime(entity)) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+			if ((((Slime) entity).getSize() > 4) && (entity.getPassenger().getType() == EntityType.GIANT)) {
 				return true;
 			}
 			break;
 		case MAGMA_CUBE:
-			if ((isGiantMagmaCube(entity)) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+			if ((((MagmaCube) entity).getSize() > 4) && (entity.getPassenger().getType() == EntityType.GIANT)) {
 				return true;
 			}
 			break;
@@ -133,6 +146,19 @@ public class API {
 			break;
 		}
 		return false;
+	}
+	
+	public static String getJockeyPosition(Entity entity) {
+		String position = null;
+		if (isGiantJockey(entity)) {
+			if (entity.getVehicle() == null) {
+				position = "MOUNT";
+			} else {
+				position = "RIDER";
+			}
+		}
+		
+		return position;
 	}
 
 	public static List<String> getGiantSpawnWorlds() {
