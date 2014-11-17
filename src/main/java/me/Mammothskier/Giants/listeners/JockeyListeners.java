@@ -26,7 +26,7 @@ public class JockeyListeners implements Listener {
 		Entity entity = event.getEntity();
 		Double damage = event.getDamage();
 		DamageCause cause = event.getCause();
-		if (API.getJockeyPosition(entity).equals("RIDER")) {
+		if (API.isJockeyRider(entity)) {
 			
 			Entity mount =  entity.getVehicle();
 			EntityDamageEvent EDE = new EntityDamageEvent(mount, cause, damage);
@@ -39,7 +39,7 @@ public class JockeyListeners implements Listener {
 	public void onJockeyDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		if (API.isGiantJockey(entity)) {
-			if (API.getJockeyPosition(entity).equals("RIDER")) {
+			if (API.isJockeyRider(entity)) {
 				event.getDrops().clear();
 				event.setDroppedExp(0);
 				Entity mount = entity.getVehicle();
@@ -47,6 +47,4 @@ public class JockeyListeners implements Listener {
 			}
 		}
 	}
-	
-	
 }

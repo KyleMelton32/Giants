@@ -148,17 +148,38 @@ public class API {
 		return false;
 	}
 	
-	public static String getJockeyPosition(Entity entity) {
-		String position = null;
+	public static boolean isJockeyMount(Entity entity) {
 		if (isGiantJockey(entity)) {
-			if (entity.getVehicle() == null) {
-				position = "MOUNT";
-			} else {
-				position = "RIDER";
+			switch (entity.getType()) {
+			case SLIME:
+				if ((((Slime) entity).getSize() > 4) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+					return true;
+				}
+				break;
+			case MAGMA_CUBE:
+				if ((((MagmaCube) entity).getSize() > 4) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+					return true;
+				}
+				break;
+			case GHAST:	
+				if (entity.getPassenger().getType() == EntityType.GIANT) {
+					return true;
+				}
+				break;
+			default:
+				break;
 			}
 		}
-		
-		return position;
+		return false;
+	}
+	
+	public static boolean isJockeyRider(Entity entity) {
+		if(isGiant(entity)) { 
+			if ((isGiantSlime(entity.getVehicle())) || (isGiantMagmaCube(entity.getVehicle())) || (entity.getVehicle() instanceof Ghast)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static List<String> getGiantSpawnWorlds() {
