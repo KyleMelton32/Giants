@@ -24,13 +24,12 @@ public class JockeyListeners implements Listener {
 	@EventHandler
 	public void onJockeyDamage(EntityDamageEvent event) {
 		Entity entity = event.getEntity();
-		Double damage = event.getFinalDamage();
+		Double damage = event.getDamage();
 		DamageCause cause = event.getCause();
 		if (API.getJockeyPosition(entity).equals("RIDER")) {
 			
 			Entity mount =  entity.getVehicle();
 			EntityDamageEvent EDE = new EntityDamageEvent(mount, cause, damage);
-			EDE = new EntityDamageEvent(mount, cause, null, null);
 			Bukkit.getServer().getPluginManager().callEvent(EDE);
 			event.setCancelled(true);
 		}
