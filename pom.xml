@@ -75,7 +75,7 @@
         <repository>
             <id>spigot-repo</id>
             <name>Bukkit Repository</name>
-            <url>https://hub.spigotmc.org/nexus/</url>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/org/bukkit/bukkit/</url>
         </repository>
         <repository>
             <id>Plugin Metrics</id>
@@ -208,9 +208,4 @@
             </properties>
         </profile>
     </profiles>
-    
-
-
-
-
 </project>
