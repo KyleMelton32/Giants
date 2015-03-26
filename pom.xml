@@ -73,6 +73,9 @@
 
     <repositories>
         <repository>
+            <id>spigot-repo</id>
+        </repository>
+        <repository>
             <id>Plugin Metrics</id>
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
@@ -87,7 +90,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.8.0-R0.1-SNAPSHOT</version>
+            <version>1.8-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -203,4 +206,9 @@
             </properties>
         </profile>
     </profiles>
+    
+
+
+
+
 </project>

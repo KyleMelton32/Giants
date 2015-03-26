@@ -14,8 +14,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.entity.Entities;
 import me.Mammothskier.Giants.files.Files;
-import me.Mammothskier.Giants.utils.API;
 import me.confuser.barapi.BarAPI;
 
 public class HealthBar implements Listener {
@@ -33,7 +33,7 @@ public class HealthBar implements Listener {
 		if (entity == null || damager == null) {
 			return;
 		}
-		if (API.isGiant(entity) || API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
+		if (Entities.isGiantZombie(entity) || Entities.isGiantLavaSlime(entity) || Entities.isGiantSlime(entity)) {
 			if (damager instanceof Projectile) {
 				damager =  ((Projectile) damager).getShooter();
 			}
@@ -47,7 +47,7 @@ public class HealthBar implements Listener {
 	@EventHandler
 	public void onDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
-		if (API.isGiant(entity) || API.isGiantMagmaCube(entity) || API.isGiantSlime(entity)) {
+		if (Entities.isGiantZombie(entity) || Entities.isGiantLavaSlime(entity) || Entities.isGiantSlime(entity)) {
 			Entity killer = event.getEntity().getKiller();
 			if (killer instanceof Player) {
 				Player player = (Player) killer;
@@ -67,14 +67,14 @@ public class HealthBar implements Listener {
 		
 		switch (entityType) {
 		case GIANT:
-			String giantName = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.BarAPI.Display Name");
+			String giantName = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.BarAPI.Display Name.Giant Zombie");
 			giantName = ChatColor.translateAlternateColorCodes('&', giantName);
 			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {
 				BarAPI.setMessage(player, giantName, percent * 100);
 			}
 			break;
 		case SLIME:
-			String slimeName = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.BarAPI.Display Name");
+			String slimeName = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.BarAPI.Display Name.Giant Slime");
 			slimeName = ChatColor.translateAlternateColorCodes('&', slimeName);
 			size = Integer.toString(((Slime) entity).getSize());
 			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {
@@ -82,7 +82,7 @@ public class HealthBar implements Listener {
 			}
 			break;
 		case MAGMA_CUBE:
-			String magmacubeName = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.BarAPI.Display Name");
+			String magmacubeName = Giants.getProperty(Files.ENTITIES, "Magma Cube Configuration.Magma Cube Stats.BarAPI.Display Name.Giant Lava Slime");
 			magmacubeName = ChatColor.translateAlternateColorCodes('&', magmacubeName);
 			size = Integer.toString(((MagmaCube) entity).getSize());
 			if (player.hasPermission("giants.barAPI") || player.hasPermission("giants.*") || player.isOp()) {

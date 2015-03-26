@@ -1,7 +1,6 @@
 package me.Mammothskier.Giants;
 
 import me.Mammothskier.Giants.files.Files;
-import me.Mammothskier.Giants.utils.API;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -41,7 +40,7 @@ public class Commands implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("reload")) {
 					if ((player.hasPermission("giants.reload")) || (player.isOp()) || (player.hasPermission("giants.*"))) {
 						if ((player.hasPermission("giants.reload")) || (player.isOp())) {
-							API.getFileHandler().loadFiles();
+							Giants.getFileHandler().loadFiles();
 							player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Giants config file reloaded.");
 							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + player + "has reloaded the giants config");
 							_giants.log.info("Giants config file reloaded.");
@@ -51,7 +50,7 @@ public class Commands implements CommandExecutor {
 					}
 					return true;
 				}
-				if (args[0].equalsIgnoreCase("spawn")){
+				/*if (args[0].equalsIgnoreCase("spawn")){
 					if((player.hasPermission("giants.spawn")) || (player.isOp()) || player.hasPermission("giants.*")){
 						if (args.length >= 2){
 							if(args[1].equalsIgnoreCase("giant")){
@@ -248,7 +247,7 @@ public class Commands implements CommandExecutor {
 						}
 					}
 					return true;
-				}
+				}*/
 				if (args[0].equalsIgnoreCase("version")){
 					if((player.hasPermission("giants.version")) || (player.isOp())){
 						PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
@@ -272,7 +271,7 @@ public class Commands implements CommandExecutor {
 				}
 				if (args[0].equalsIgnoreCase("reload")) {
 					Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] "+ ChatColor.GREEN + "Giants config files reloaded.");
-					API.getFileHandler().loadFiles();
+					Giants.getFileHandler().loadFiles();
 					_giants.log.info("Giants config file reloaded.");
 					return true;
 				}

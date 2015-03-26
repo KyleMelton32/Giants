@@ -1,27 +1,118 @@
-package me.Mammothskier.Giants.utils;
+package me.Mammothskier.Giants.entity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Files;
+
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Slime;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.Mammothskier.Giants.Giants;
-
-public class DropsManager {
+public class DropsManager implements Listener {
 	
-	public DropsManager(Giants drops) {		
+	private Giants _giants;
+	
+	public DropsManager(Giants giants) {
+		_giants = giants;
+		_giants.getServer().getPluginManager().registerEvents(this, giants);
 	}
 	
-	public List<ItemStack> setDrop(Entity entity, List<String> newDrop) {
+	@EventHandler
+	public void onGiantDrops(EntityDeathEvent event) throws IOException{
+		Entity entity = event.getEntity();
+		
+
+		if (Entities.isGiant(entity)) {
+			String string = Giants.getProperty(Files.ENTITIES, "Giant Configuration.Giant Stats.Experience");//FIXME
+			int exp;
+
+			try {
+				exp = Integer.parseInt(string);
+			} catch (Exception e) {
+				exp = 5;
+			}
+			if (Giants.getProperty(Files.ENTITIES, "Giant Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
+			}
+			event.setDroppedExp(exp);
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Giant Configuration.Giant Stats.Drops");//FIXME
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+				return;
+			}
+			
+			List<ItemStack> drops = new ArrayList<ItemStack>();
+			drops = setDrop(entity, newDrop);
+
+			event.getDrops().addAll(drops);
+		}
+		if (Entities.isGiantSlime(entity)) {
+			String string = Giants.getProperty(Files.ENTITIES, "Slime Configuration.Slime Stats.Experience");//FIXME
+			int exp;
+
+			try {
+				exp = Integer.parseInt(string);
+			} catch (Exception e) {
+				exp = 5;
+			} 
+			if (Giants.getProperty(Files.ENTITIES, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
+			}
+			event.setDroppedExp(exp);
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Slime Configuration.Slime Stats.Drops");//FIXME
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+				return;
+			}
+			
+			List<ItemStack> drops = new ArrayList<ItemStack>();
+
+			drops = setDrop(entity, newDrop);
+
+			event.getDrops().addAll(drops);
+		}
+		
+
+		if (Entities.isGiantLavaSlime(entity)) {
+			String string = Giants.getProperty(Files.ENTITIES, "Magma Cube Configuration.Magma Cube Stats.Experience");//FIXME
+			int exp;
+
+			try {
+				exp = Integer.parseInt(string);
+			} catch (Exception e) {
+				exp = 5;
+			}
+			if (Giants.getProperty(Files.ENTITIES, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
+			}
+			event.setDroppedExp(exp);
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Magma Cube Configuration.Magma Cube Stats.Drops");//FIXME
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+				return;
+			}
+
+			List<ItemStack> drops = new ArrayList<ItemStack>();
+
+			drops = setDrop(entity, newDrop);
+
+			event.getDrops().addAll(drops);
+		}
+	}
+	
+	
+	public static List<ItemStack> setDrop(Entity entity, List<String> newDrop) {
 		List<ItemStack> drops = new ArrayList<ItemStack>();
 		
 		switch (entity.getType()) {
