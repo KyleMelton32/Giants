@@ -92,6 +92,12 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
+            <version>1.8.0-R0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
             <version>1.8.3-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
@@ -104,7 +110,7 @@
         <dependency>
             <groupId>me.confuser</groupId>
             <artifactId>BarAPI</artifactId>
-            <version>3.0</version>
+            <version>3.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
