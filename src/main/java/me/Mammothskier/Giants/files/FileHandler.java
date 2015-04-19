@@ -114,6 +114,7 @@ public class FileHandler {
 				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Bugs", new String("This entity of Giants is extremely experimental and does not have many features. Bugs may be present."));
 				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Files", new String("Config files for this entity will NOT load unless enabled."));
 				Config.set("Giants Configuration.Entities.Giant Jockey.Warning.Enabled", false);
+				Config.set("Giants Configuration.Sounds", true);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");
 				try {
@@ -203,20 +204,28 @@ public class FileHandler {
 				break;
 			
 			case ATTACKS:
-				YamlConfiguration attacks = YamlConfiguration.loadConfiguration(file);/*
-				attacks.set("Magma Cube Configuration.File Version", loadVersion());
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Lightning Attack", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Enabled", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Stomp Attack.Light Fire", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Lava Attack", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Enabled", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Enabled", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube", new Integer(100));
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled", false);
-				attacks.set("Magma Cube Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage", new Integer(1));*/
+				YamlConfiguration attacks = YamlConfiguration.loadConfiguration(file);
+				attacks.set("Attacks Configuration.File Version", loadVersion());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Lightning Attack", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Lava Attack", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled", loadEntities());
+				attacks.set("Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage", new Integer(1));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Enabled", Arrays.asList("Giant Zombie"));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies", false);
+				attacks.set("Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn", new Integer(3));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Health", new Integer(20));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled", false);
+				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
+				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
+				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Health", new Integer(20));
 				try {
 					attacks.save(file);
 				} catch (IOException e) {

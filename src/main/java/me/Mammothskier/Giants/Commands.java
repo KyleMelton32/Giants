@@ -53,10 +53,10 @@ public class Commands implements CommandExecutor {
 				/*if (args[0].equalsIgnoreCase("spawn")){
 					if((player.hasPermission("giants.spawn")) || (player.isOp()) || player.hasPermission("giants.*")){
 						if (args.length >= 2){
-							if(args[1].equalsIgnoreCase("giant")){
+							if(args[1].equalsIgnoreCase("zombie")){
 								double health;
 								
-								String string = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
+								String string = Giants.getProperty(Files., "Giant Configuration.Giant Stats.Health");
 								try {
 									health = Double.parseDouble(string);
 								} catch (Exception e) {

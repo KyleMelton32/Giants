@@ -35,7 +35,7 @@ public class HealthBar implements Listener {
 		}
 		if (Entities.isGiantZombie(entity) || Entities.isGiantLavaSlime(entity) || Entities.isGiantSlime(entity)) {
 			if (damager instanceof Projectile) {
-				damager =  ((Projectile) damager).getShooter();
+				damager =  (Entity) ((Projectile) damager).getShooter();
 			}
 			if (damager instanceof Player) {
 				Player player = (Player) damager;

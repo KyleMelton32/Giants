@@ -36,7 +36,7 @@ public class DropsManager implements Listener {
 		Entity entity = event.getEntity();
 		
 
-		if (Entities.isGiant(entity)) {
+		if (Entities.isGiantZombie(entity)) {
 			String string = Giants.getProperty(Files.ENTITIES, "Giant Configuration.Giant Stats.Experience");//FIXME
 			int exp;
 
@@ -45,7 +45,7 @@ public class DropsManager implements Listener {
 			} catch (Exception e) {
 				exp = 5;
 			}
-			if (Giants.getProperty(Files.ENTITIES, "Giant Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
@@ -68,7 +68,7 @@ public class DropsManager implements Listener {
 			} catch (Exception e) {
 				exp = 5;
 			} 
-			if (Giants.getProperty(Files.ENTITIES, "Slime Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}
 			event.setDroppedExp(exp);

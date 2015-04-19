@@ -1,5 +1,6 @@
 package me.Mammothskier.Giants;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -9,6 +10,8 @@ import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.util.NMSUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Giants extends JavaPlugin {
@@ -19,19 +22,31 @@ public class Giants extends JavaPlugin {
 	public void onEnable() {
 		
 		String version = NMSUtils.getBukkitVersion();
+		if ("v1_7_R4".equals(version)) {
+			//TODO Legacy support
+		}
 		if ("v1_8_R1".equals(version)) {
-
-			Bukkit.getConsoleSender().sendMessage("Minecraft server version v1_8_R1 found. Enabling Giant Zombies.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R1 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R1.CustomEntityType.registerEntities();
 		} else if ("v1_8_R2".equals(version)) {
-			Bukkit.getConsoleSender().sendMessage("Minecraft server version v1_8_R2 found. Enabling Giant Zombies.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R2 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.registerEntities();
 		} else {
-			Bukkit.getConsoleSender().sendMessage("Minecraft server version " + version + "does not support Giant Zombies.Disabling Giant Zombies");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Minecraft server version " + version + "does not support Giant Zombies.Disabling Giant Zombies");
 			Entities.GiantZombie = false;
 		}
+		
+		PluginDescriptionFile pdf = this.getDescription();
+		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " Has Been Enabled!");
+		
+		/*try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) {
+		    // Failed to submit the stats :-(
+		}*/
 		
 		this.getCommand("giants").setExecutor(new Commands(this));
 		new Entities(this);

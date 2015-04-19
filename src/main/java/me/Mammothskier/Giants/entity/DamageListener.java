@@ -4,7 +4,10 @@ import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -88,6 +91,23 @@ public class DamageListener implements Listener	{
 					return;
 				}
 				event.setDamage(damage + 0.0);
+			}
+		}
+	}
+	
+	
+	@EventHandler
+	public void damage(EntityDamageByEntityEvent event){
+		Entity entity = event.getEntity();
+		int s;
+		if ((event.getDamager() instanceof Player) && (Entities.isGiantLavaSlime(entity))){
+			MagmaCube magmacube = (MagmaCube) event.getEntity();
+			s = magmacube.getSize();
+			if (s > 4){
+				double damage = event.getDamage();
+				double health =  ((Damageable) event.getEntity()).getHealth();
+				((Damageable) entity).setHealth(Math.max(0, Math.min(health - damage, ((Damageable) entity).getMaxHealth())));
+				event.setCancelled(true);
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.entity.nms.v1_8_R2.EntityCreator;
+import me.Mammothskier.Giants.entity.EntityCreator;
 import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.Bukkit;
