@@ -32,6 +32,11 @@ public class Entities implements Listener {
 		_giants = giants;
 		_giants.getServer().getPluginManager().registerEvents(this, giants);
 		new DamageListener(_giants);
+		new DropsManager(_giants);
+		new GiantListeners(_giants);
+		new SlimeListeners(_giants);
+		new MagmaCubeListeners(_giants);
+		
 	}
 	
 	@EventHandler (priority = EventPriority.NORMAL)
@@ -90,13 +95,12 @@ public class Entities implements Listener {
 
 					int spawngiant  = 1;
 					double checkcount = 0.01;
-					Bukkit.getConsoleSender().sendMessage("Trying to spawn a " + spawn);
 
 					String s;
 					int size;
 					
 					//Comment out this next line to allow random spawning.
-					spawn = EntityType.GIANT;
+					//spawn = EntityType.GIANT;
 					
 					switch (spawn) {
 					case GIANT:
@@ -136,11 +140,9 @@ public class Entities implements Listener {
 						break;
 					}
 					//Commment out the following line to enable chance of spawning.
-					spawngiant = 1;
+					//spawngiant = 1;
 					if (spawngiant == 1) {
 						SpawnEvent SE = new SpawnEvent(location, spawn);
-						Bukkit.getServer().getPluginManager().callEvent(SE);
-						Bukkit.getConsoleSender().sendMessage("Spawning " + spawn);
 						event.setCancelled(true);
 					}
 					
@@ -193,17 +195,17 @@ public class Entities implements Listener {
 	}
 	
 	public static boolean isGiantJockey(Entity entity) {
-		//TODO 
+		//TODO JOCKEY
 		return false;
 	}
 	
 	public static boolean isGiantJockeyMount(Entity entity) {
-		//TODO 
+		//TODO JOCKEY
 		return false;
 	}
 	
 	public static boolean isGiantJockeyRider(Entity entity) {
-		//TODO 
+		//TODO JOCKEY
 		return false;
 	}
 	
@@ -228,11 +230,12 @@ public class Entities implements Listener {
 	}
 	
 	public static List<String> getJockeySpawnWorlds() {
-		//TODO 
-		return null;//getFileHandler().getPropertyList(Files.JOCKEY, "Jockey Configuration.Spawn Settings.Worlds");
+		return Giants.getPropertyList(Files.JOCKEY, "Jockey Configuration.Spawn Settings.Worlds");
 	}
 	
 	public static void callSpawnDebug(Entity entity) {
+		if (entity == null) 
+			return;
 		if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Enabled").equalsIgnoreCase("true")) {
 			for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 				if (player.hasPermission("giants.debug") || player.hasPermission("giants.*") || player.isOp()) {

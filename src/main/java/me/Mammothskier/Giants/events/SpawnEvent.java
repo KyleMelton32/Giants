@@ -5,10 +5,9 @@ import java.util.List;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.entity.EntityCreator;
+import me.Mammothskier.Giants.entity.nms.EntityCreator;
 import me.Mammothskier.Giants.files.Files;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -350,10 +349,7 @@ public class SpawnEvent extends Event{
 
 			Entities.callSpawnDebug(entity);
 			
-			Bukkit.getConsoleSender().sendMessage("testasdf");
 			if (entity != null) {
-
-				Bukkit.getConsoleSender().sendMessage("test");
 				((Damageable) entity).setMaxHealth(health);
 				((Damageable) entity).setHealth(health);
 				if (entity.getType() == EntityType.GIANT) {
@@ -367,7 +363,6 @@ public class SpawnEvent extends Event{
 					} catch (Exception e){
 						rate = 0;
 					}
-					Bukkit.getConsoleSender().sendMessage("test2");
 					
 					try {
 						for (int i = 0; i < s.length; i++) {

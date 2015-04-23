@@ -1,38 +1,21 @@
 package me.Mammothskier.Giants.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.Files;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentWrapper;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -157,7 +140,7 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled").equalsIgnoreCase("true")) {
+		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled").contains("Giant Slime")) {
 			String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height");
 			double height;
 			int s;
@@ -198,7 +181,7 @@ public class SlimeListeners implements Listener {
 		boolean fire = false;
 		float power = 1.0f;
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled").contains("Giants Slime")) {
+		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled").contains("Giant Slime")) {
 			Random pick = new Random();
 			int chance = 0;
 			int s;
@@ -242,7 +225,7 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void poisonAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack").equalsIgnoreCase("true")){
+		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack").contains("Giant Slime")){
 			Random pick = new Random();
 			int chance = 0;
 			double length;

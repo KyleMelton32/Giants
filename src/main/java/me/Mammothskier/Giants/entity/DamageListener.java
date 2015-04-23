@@ -26,14 +26,13 @@ public class DamageListener implements Listener	{
 		Entity entity = event.getEntity();
 		if (Entities.isGiant(entity)) {
 			if (event.getCause() == DamageCause.SUFFOCATION || event.getCause() == DamageCause.FALLING_BLOCK) {
-				//TODO Update keys
 				String string = "true";
 				if (Entities.isGiantZombie(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Zombie");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Suffocation.Giant Zombie");
 				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Slime");
-				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Lava Slime");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Suffocation.Giant Slime");
+				else if (Entities.isGiantLavaSlime(entity))
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Suffocation.Giant Lava Slime");
 				
 				if (string.equalsIgnoreCase("false")) {
 					event.setCancelled(true);
@@ -41,27 +40,23 @@ public class DamageListener implements Listener	{
 			}
 			
 			if (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK) {
-				//TODO Update keys
 				String string = "true";
 				if (Entities.isGiantZombie(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Zombie");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Fire.Allow Fire Damage.Giant Zombie");
 				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Slime");
-				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Lava Slime");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Fire.Allow Fire Damage.Giant Slime");
 				if (string.equalsIgnoreCase("false")) {
 					event.setCancelled(true);
 				}
 			}
 			if (event.getCause() == DamageCause.THORNS) {
-				//TODO Update keys
 				String string = "true";
 				if (Entities.isGiantZombie(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Zombie");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Zombie");
 				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Slime");
-				else if (Entities.isGiantSlime(entity))
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Arrows.Damage done by arrow.Giant Lava Slime");
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Slime");
+				else if (Entities.isGiantLavaSlime(entity))
+					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Lava Slime");
 				if (string.equalsIgnoreCase("false")) {
 					event.setCancelled(true);
 				}

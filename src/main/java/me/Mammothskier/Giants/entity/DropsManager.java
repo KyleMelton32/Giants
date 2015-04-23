@@ -37,7 +37,7 @@ public class DropsManager implements Listener {
 		
 
 		if (Entities.isGiantZombie(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Giant Configuration.Giant Stats.Experience");//FIXME
+			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Zombie");
 			int exp;
 
 			try {
@@ -49,7 +49,7 @@ public class DropsManager implements Listener {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Giant Configuration.Giant Stats.Drops");//FIXME
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
@@ -60,7 +60,7 @@ public class DropsManager implements Listener {
 			event.getDrops().addAll(drops);
 		}
 		if (Entities.isGiantSlime(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Slime Configuration.Slime Stats.Experience");//FIXME
+			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Slime");
 			int exp;
 
 			try {
@@ -72,7 +72,7 @@ public class DropsManager implements Listener {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Slime Configuration.Slime Stats.Drops");//FIXME
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Slime");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}
@@ -86,7 +86,7 @@ public class DropsManager implements Listener {
 		
 
 		if (Entities.isGiantLavaSlime(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Magma Cube Configuration.Magma Cube Stats.Experience");//FIXME
+			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Lava Slime");
 			int exp;
 
 			try {
@@ -94,11 +94,11 @@ public class DropsManager implements Listener {
 			} catch (Exception e) {
 				exp = 5;
 			}
-			if (Giants.getProperty(Files.ENTITIES, "Magma Cube Configuration.Sounds.Death").equalsIgnoreCase("true")) {//FIXME
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
 				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
 			}
 			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Magma Cube Configuration.Magma Cube Stats.Drops");//FIXME
+			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Lava Slime");
 			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
 				return;
 			}

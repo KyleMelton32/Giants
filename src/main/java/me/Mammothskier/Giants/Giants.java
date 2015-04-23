@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import me.Mammothskier.Giants.entity.Entities;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.util.Metrics;
 import me.Mammothskier.Giants.util.NMSUtils;
 
 import org.bukkit.Bukkit;
@@ -22,14 +23,19 @@ public class Giants extends JavaPlugin {
 	public void onEnable() {
 		
 		String version = NMSUtils.getBukkitVersion();
-		if ("v1_7_R4".equals(version)) {
-			//TODO Legacy support
-		}
-		if ("v1_8_R1".equals(version)) {
+/*		if ("v1_7_R3".equals(version)) { //TODO Implement multiple versions
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_7_R3 found. Enabling Giant Zombies.");
+			Entities.GiantZombie = true;
+			me.Mammothskier.Giants.entity.nms.v1_7_R3.CustomEntityType.registerEntities();
+		} else if ("v1_7_R4".equals(version)) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_7_R4 found. Enabling Giant Zombies.");
+			Entities.GiantZombie = true;
+			me.Mammothskier.Giants.entity.nms.v1_7_R4.CustomEntityType.registerEntities();
+		} else if ("v1_8_R1".equals(version)) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R1 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R1.CustomEntityType.registerEntities();
-		} else if ("v1_8_R2".equals(version)) {
+		} else */if ("v1_8_R2".equals(version)) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R2 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.registerEntities();
@@ -41,12 +47,12 @@ public class Giants extends JavaPlugin {
 		PluginDescriptionFile pdf = this.getDescription();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " Has Been Enabled!");
 		
-		/*try {
+		try {
 		    Metrics metrics = new Metrics(this);
 		    metrics.start();
 		} catch (IOException e) {
 		    // Failed to submit the stats :-(
-		}*/
+		}
 		
 		this.getCommand("giants").setExecutor(new Commands(this));
 		new Entities(this);
@@ -55,7 +61,16 @@ public class Giants extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.unregisterEntities();
+		String version = NMSUtils.getBukkitVersion();/*//TODO Implement multiple versions
+		if ("v1_7_R3".equals(version)) {
+			me.Mammothskier.Giants.entity.nms.v1_7_R3.CustomEntityType.unregisterEntities();
+		} else if ("v1_7_R4".equals(version)) {
+			me.Mammothskier.Giants.entity.nms.v1_7_R4.CustomEntityType.unregisterEntities();
+		} else if ("v1_8_R1".equals(version)) {
+			me.Mammothskier.Giants.entity.nms.v1_8_R1.CustomEntityType.unregisterEntities();
+		} else */if ("v1_8_R2".equals(version)) {
+			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.unregisterEntities();
+		}
 	}
 
 	public static String getProperty(Files file, String path) {

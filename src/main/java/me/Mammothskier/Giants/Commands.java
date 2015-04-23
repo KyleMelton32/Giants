@@ -1,18 +1,27 @@
 package me.Mammothskier.Giants;
 
+import me.Mammothskier.Giants.entity.nms.EntityCreator;
+import me.Mammothskier.Giants.events.SpawnEvent;
 import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class Commands implements CommandExecutor {
@@ -50,13 +59,14 @@ public class Commands implements CommandExecutor {
 					}
 					return true;
 				}
-				/*if (args[0].equalsIgnoreCase("spawn")){
+				if (args[0].equalsIgnoreCase("spawn")){
 					if((player.hasPermission("giants.spawn")) || (player.isOp()) || player.hasPermission("giants.*")){
 						if (args.length >= 2){
 							if(args[1].equalsIgnoreCase("zombie")){
+								Giant entity = null;
 								double health;
 								
-								String string = Giants.getProperty(Files., "Giant Configuration.Giant Stats.Health");
+								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Zombie");
 								try {
 									health = Double.parseDouble(string);
 								} catch (Exception e) {
@@ -66,9 +76,7 @@ public class Commands implements CommandExecutor {
 								if(args.length ==  2){
 									Location loc = (Location) player.getEyeLocation();
 									Location location = loc;
-									Giant entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
-									entity.setMaxHealth(health);
-									entity.setHealth(health);
+									entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned");
 								}
 								if(args.length == 5){
@@ -89,19 +97,61 @@ public class Commands implements CommandExecutor {
 									location.setZ(locz);
 									Location loc = location;
 									
-									Giant entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
-									entity.setMaxHealth(health);
-									entity.setHealth(health);
+									EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+									 
+									entity = (Giant) SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
 									
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
+								}
+								
+								if (entity != null) {
+									((Damageable) entity).setMaxHealth(health);
+									((Damageable) entity).setHealth(health);
+									if (entity.getType() == EntityType.GIANT) {
+										EntityEquipment armour = ((LivingEntity) entity).getEquipment();
+										String config = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Items");
+										String[] s = config.split(":");
+										
+										float rate = 0f;
+										try {
+											rate = Float.parseFloat(Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate"));
+										} catch (Exception e){
+											rate = 0;
+										}
+										
+										try {
+											for (int i = 0; i < s.length; i++) {
+												Material m = Material.getMaterial(s[i].toUpperCase());
+												ItemStack item = new ItemStack(m);
+												if (i == 0) {
+													armour.setHelmet(item);
+													armour.setHelmetDropChance(rate); 
+												} else if (i == 1) {
+													armour.setChestplate(item);
+													armour.setChestplateDropChance(rate); 
+												} else if (i == 2) {
+													armour.setLeggings(item);
+													armour.setLeggingsDropChance(rate); 
+												} else if (i == 3) {
+													armour.setBoots(item);
+													armour.setBootsDropChance(rate); 
+												} else if (i == 4) {
+													armour.setItemInHand(item);
+													armour.setItemInHandDropChance(rate);
+												}
+											}
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
+									}
 								}
 								return true;
 							}
 							if(args[1].equalsIgnoreCase("slime")){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-								String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
-								String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
+								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
+								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Slime");
 								int size;
 								double health;
 								try {
@@ -144,9 +194,9 @@ public class Commands implements CommandExecutor {
 							if(args[1].equalsIgnoreCase("jockey")){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-								String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
-								String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
-								String string3 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
+								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
+								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Slime");
+								String string3 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Zombie");
 								int size;
 								double giantHealth;
 								double slimeHealth;
@@ -164,8 +214,10 @@ public class Commands implements CommandExecutor {
 									slime.setSize(size);
 									slime.setMaxHealth(slimeHealth);
 									slime.setHealth(slimeHealth);
-									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
-									giant.setMaxHealth(giantHealth);
+									EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+									 
+									Entity giant = SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
+									((Damageable) giant).setMaxHealth(giantHealth);
 									slime.setPassenger(giant);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
 								}
@@ -198,8 +250,8 @@ public class Commands implements CommandExecutor {
 							if((args[1].equalsIgnoreCase("lavaslime")) || (args[1].equalsIgnoreCase("magma_cube")) || (args[1].equalsIgnoreCase("magma"))|| (args[1].equalsIgnoreCase("magmacube"))){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-								String string = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Size");
-								String string2 = API.getFileHandler().getProperty(Files.MAGMACUBE, "Magma Cube Configuration.Magma Cube Stats.Health");
+								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
+								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Lava Slime");
 								int size;
 								double health;
 								try {
@@ -247,12 +299,10 @@ public class Commands implements CommandExecutor {
 						}
 					}
 					return true;
-				}*/
+				}
 				if (args[0].equalsIgnoreCase("version")){
-					if((player.hasPermission("giants.version")) || (player.isOp())){
-						PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
-						player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " is currently Enabled!");
-					}
+					PluginDescriptionFile pdf = Bukkit.getPluginManager().getPlugin("Giants").getDescription();
+					player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + pdf.getName() + " Version " + pdf.getVersion() + " is currently Enabled!");
 					return true;
 				}
 				else {

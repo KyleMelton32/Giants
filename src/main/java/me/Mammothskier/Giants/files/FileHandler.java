@@ -178,8 +178,8 @@ public class FileHandler {
 				entities.set("Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate", new Float(8.5));
 // Drops
 				entities.set("Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(loadDefaultDrop("Giant Zombie")));
-				entities.set("Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(loadDefaultDrop("Giant Slime")));
-				entities.set("Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(loadDefaultDrop("Giant Lava Slime")));
+				entities.set("Entities Configuration.Stats.Drops.Giant Slime", Arrays.asList(loadDefaultDrop("Giant Slime")));
+				entities.set("Entities Configuration.Stats.Drops.Giant Lava Slime", Arrays.asList(loadDefaultDrop("Giant Lava Slime")));
 // BarAPI
 				entities.set("Entities Configuration.Stats.BarAPI.Display Name.Giant Zombie", "&2Giant Zombie");
 				entities.set("Entities Configuration.Stats.BarAPI.Display Name.Giant Slime", "&2Giant Slime Size {size}");
