@@ -5,7 +5,6 @@ import java.util.List;
 
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.entity.nms.EntityCreator;
 import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.Location;
@@ -65,7 +64,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -81,7 +80,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -97,7 +96,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -113,7 +112,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -129,7 +128,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -145,7 +144,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -161,7 +160,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -177,7 +176,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -193,7 +192,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -209,7 +208,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 						
 					} else {
@@ -224,7 +223,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -240,7 +239,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -256,7 +255,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -272,7 +271,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -288,7 +287,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -304,7 +303,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -320,7 +319,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								
@@ -336,7 +335,7 @@ public class SpawnEvent extends Event{
 						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
 								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
 					if (entityType.equals(EntityType.GIANT)) {
-						EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+						Entities.createGiant(loc, SpawnReason.NATURAL);
 						 
 							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
 								

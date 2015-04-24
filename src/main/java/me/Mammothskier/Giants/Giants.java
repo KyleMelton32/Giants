@@ -23,7 +23,7 @@ public class Giants extends JavaPlugin {
 	public void onEnable() {
 		
 		String version = NMSUtils.getBukkitVersion();
-/*		if ("v1_7_R3".equals(version)) { //TODO Implement multiple versions
+		if ("v1_7_R3".equals(version)) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_7_R3 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_7_R3.CustomEntityType.registerEntities();
@@ -35,7 +35,7 @@ public class Giants extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R1 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R1.CustomEntityType.registerEntities();
-		} else */if ("v1_8_R2".equals(version)) {
+		} else if ("v1_8_R2".equals(version)) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R2 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.registerEntities();
@@ -61,14 +61,14 @@ public class Giants extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		String version = NMSUtils.getBukkitVersion();/*//TODO Implement multiple versions
+		String version = NMSUtils.getBukkitVersion();
 		if ("v1_7_R3".equals(version)) {
 			me.Mammothskier.Giants.entity.nms.v1_7_R3.CustomEntityType.unregisterEntities();
 		} else if ("v1_7_R4".equals(version)) {
 			me.Mammothskier.Giants.entity.nms.v1_7_R4.CustomEntityType.unregisterEntities();
 		} else if ("v1_8_R1".equals(version)) {
 			me.Mammothskier.Giants.entity.nms.v1_8_R1.CustomEntityType.unregisterEntities();
-		} else */if ("v1_8_R2".equals(version)) {
+		} else if ("v1_8_R2".equals(version)) {
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.unregisterEntities();
 		}
 	}

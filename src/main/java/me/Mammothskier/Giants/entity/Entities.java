@@ -21,6 +21,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.events.SpawnEvent;
 import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.util.NMSUtils;
 
 public class Entities implements Listener {
 	private static Giants _giants;
@@ -147,6 +148,26 @@ public class Entities implements Listener {
 					}
 					
 				}
+			}
+		}
+	}
+	
+	public static void createGiant (Location location, SpawnReason reason) {
+		String version = NMSUtils.getBukkitVersion();
+		if (Entities.GiantZombie == true) {
+			switch (version) {
+			case("v1_7_R3"):
+				me.Mammothskier.Giants.entity.nms.v1_7_R3.EntityCreator.createEntity(location, reason);
+				break;
+			case("v1_7_R4"):
+				me.Mammothskier.Giants.entity.nms.v1_7_R4.EntityCreator.createEntity(location, reason);
+				break;
+			case("v1_8_R1"):
+				me.Mammothskier.Giants.entity.nms.v1_8_R1.EntityCreator.createEntity(location, reason);
+				break;
+			case("v1_8_R2"):
+				me.Mammothskier.Giants.entity.nms.v1_8_R2.EntityCreator.createEntity(location, reason);
+				break;
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 package me.Mammothskier.Giants;
 
-import me.Mammothskier.Giants.entity.nms.EntityCreator;
+import me.Mammothskier.Giants.entity.Entities;
 import me.Mammothskier.Giants.events.SpawnEvent;
 import me.Mammothskier.Giants.files.Files;
 
@@ -75,8 +75,9 @@ public class Commands implements CommandExecutor {
 								
 								if(args.length ==  2){
 									Location loc = (Location) player.getEyeLocation();
-									Location location = loc;
-									entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									Entities.createGiant(loc, SpawnReason.NATURAL);
+									 
+									entity = (Giant) SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned");
 								}
 								if(args.length == 5){
@@ -97,7 +98,7 @@ public class Commands implements CommandExecutor {
 									location.setZ(locz);
 									Location loc = location;
 									
-									EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+									Entities.createGiant(loc, SpawnReason.NATURAL);
 									 
 									entity = (Giant) SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
 									
@@ -214,7 +215,7 @@ public class Commands implements CommandExecutor {
 									slime.setSize(size);
 									slime.setMaxHealth(slimeHealth);
 									slime.setHealth(slimeHealth);
-									EntityCreator.createGiant(loc, SpawnReason.NATURAL);
+									Entities.createGiant(loc, SpawnReason.NATURAL);
 									 
 									Entity giant = SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
 									((Damageable) giant).setMaxHealth(giantHealth);
