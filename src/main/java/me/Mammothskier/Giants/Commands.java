@@ -51,7 +51,7 @@ public class Commands implements CommandExecutor {
 						if ((player.hasPermission("giants.reload")) || (player.isOp())) {
 							Giants.getFileHandler().loadFiles();
 							player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "Giants config file reloaded.");
-							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + player + "has reloaded the giants config");
+							Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants]" + ChatColor.GREEN + player.getName() + "has reloaded the giants config");
 							_giants.log.info("Giants config file reloaded.");
 						} else {
 							sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
