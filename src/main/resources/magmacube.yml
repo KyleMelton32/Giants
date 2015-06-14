@@ -1,0 +1,43 @@
+Magma Cube Configuration:
+  File Version: Version
+  Spawn Settings:
+    Chance: 10
+    Worlds:
+    - world
+    - world_nether
+    - world_the_end
+  Magma Cube Stats:
+    Size: 12
+    Health: 100
+    Experience: 5
+    Drops:
+    - 1-0-0;1;100/100;4-12;GIANT STONE;Dropped by a Giant Magma Cube
+  Damage Settings:
+    Arrows:
+      Damage done by arrow: true
+    Block Damage:
+      Allow Suffocation: false
+      Allow Cacti Damage: false
+  Attack Mechanisms:
+    Lightning Attack: false
+    Stomp Attack:
+      Enabled: false
+      Explosion Power: 1
+      Light Fire: false
+    Lava Attack: false
+    Kick Attack:
+      Enabled: false
+      Kick Height: 1
+    Fire Attack:
+      Enabled: false
+      Ticks for Target: 100
+      Ticks for Magma Cube: 100
+    Throw Boulder Attack:
+      Enabled: false
+      Block Damage: 1
+  Sounds:
+    Fire Attack: true
+    Throw Boulder Attack: true
+    Kick Attack: true
+    Lava Attack: true
+    Death: true
