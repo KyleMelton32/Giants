@@ -1,0 +1,35 @@
+name: Giants
+main: me.Mammothskier.Giants.Giants
+version: ${project.build.version}
+author: Mammothskier
+softdepend: [BarAPI]
+
+commands:
+    giants:
+        description: Shows list of commands.
+
+permissions:
+    giants.*:
+        description: Gives all permissions.
+        default: false
+        children:
+            giants.reload: true
+            giants.debug: true
+            giants.spawn: true
+            giants.version: true
+            giants.barAPI: true
+    giants.reload:
+        description: Reloads the config file.
+        default: false
+    giants.debug:
+        description: Shows Debug messages.
+        default: false
+    giants.spawn:
+        description: Spawns a Giant at the given location.
+        default: false
+    giants.version:
+        description: Displays the version of the plugin running on the server.
+        default: false
+    giants.barAPI:
+        description: Allows access to the barAPI features.
+        default: false	

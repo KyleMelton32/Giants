@@ -14,7 +14,6 @@ tmp/
 .classpath
 .settings/
 .loadpath
-target/
 
 # External tool builders
 .externalToolBuilders/
