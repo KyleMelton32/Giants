@@ -12,4 +12,20 @@
   	<module>v1_8_R1</module>
   	<module>v1_7_R4</module>
   </modules>
+  <repositories>
+    <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+    </repository>
+    
+    <repository>
+      <id>confuser-repo</id>
+      <url>http://ci.frostcast.net/plugin/repository/everything</url>
+    </repository>
+
+    <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/groups/public</url>
+    </repository>
+  </repositories>
 </project>
