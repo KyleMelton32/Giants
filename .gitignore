@@ -14,9 +14,7 @@ tmp/
 .classpath
 .settings/
 .loadpath
-v5/
-v6/
-v7/
+target/
 
 # External tool builders
 .externalToolBuilders/
