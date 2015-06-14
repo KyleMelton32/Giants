@@ -8,8 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ghast;
+import org.bukkit.entity.Giant;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.EventHandler;
@@ -17,17 +21,20 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.events.JockeySpawnEvent;
 import me.Mammothskier.Giants.events.SpawnEvent;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.util.NMSUtils;
 
 public class Entities implements Listener {
 	private static Giants _giants;
-	public static boolean GiantZombie;
-	public static boolean GiantSlime;
-	public static boolean GiantLavaSlime;
+	public static boolean GiantZombie = false;
+	public static boolean GiantSlime = false;
+	public static boolean GiantLavaSlime = false;
+	public static boolean GiantJockey = false;
 	
 	public Entities(Giants giants) {
 		_giants = giants;
@@ -37,7 +44,7 @@ public class Entities implements Listener {
 		new GiantListeners(_giants);
 		new SlimeListeners(_giants);
 		new MagmaCubeListeners(_giants);
-		
+		jockeySpawner();
 	}
 	
 	@EventHandler (priority = EventPriority.NORMAL)
@@ -144,6 +151,7 @@ public class Entities implements Listener {
 					//spawngiant = 1;
 					if (spawngiant == 1) {
 						SpawnEvent SE = new SpawnEvent(location, spawn);
+						Bukkit.getServer().getPluginManager().callEvent(SE);
 						event.setCancelled(true);
 					}
 					
@@ -194,7 +202,7 @@ public class Entities implements Listener {
 	}
 
 	public static boolean isGiantZombie(Entity entity) {
-		return entity.getType() == EntityType.GIANT;
+		return entity.getType() == EntityType.GIANT ? true : false;
 	}
 	
 	public static boolean isGiantSlime(Entity entity) {
@@ -216,18 +224,40 @@ public class Entities implements Listener {
 	}
 	
 	public static boolean isGiantJockey(Entity entity) {
-		//TODO JOCKEY
+		switch (entity.getType()) {
+		case GIANT:
+			if ((isGiantSlime(entity.getVehicle())) || (isGiantLavaSlime(entity.getVehicle())) || (entity.getVehicle().getType() == EntityType.GHAST)) {
+				return true;
+			}
+			break;
+		case SLIME:
+			if ((isGiantSlime(entity)) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+				return true;
+			}
+			break;
+		case MAGMA_CUBE:
+			if ((isGiantLavaSlime(entity)) && (entity.getPassenger().getType() == EntityType.GIANT)) {
+				return true;
+			}
+			break;
+		case GHAST:	
+			if (entity.getPassenger().getType() == EntityType.GIANT) {
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
 		return false;
 	}
 	
 	public static boolean isGiantJockeyMount(Entity entity) {
-		//TODO JOCKEY
-		return false;
+		return (isGiantJockey(entity) && isGiantZombie(entity.getPassenger()));
 	}
 	
 	public static boolean isGiantJockeyRider(Entity entity) {
 		//TODO JOCKEY
-		return false;
+		return (isGiantJockey(entity) && isGiantZombie(entity));
 	}
 	
 	public static List<EntityType> getEntitySpawnReplacements(EntityType type) {
@@ -292,5 +322,30 @@ public class Entities implements Listener {
 		if (isGiantLavaSlime(entity))
 			return true;
 		return false;
+	}
+	
+	private void jockeySpawner() {
+		if (GiantJockey == true) {
+			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		    scheduler.scheduleSyncRepeatingTask(_giants, new Runnable() {
+		    	
+		        @Override
+		        public void run() {
+		            for (World world : _giants.getServer().getWorlds()) {
+		            	for (Entity entity : world.getEntities()) {
+		            		if ((entity instanceof Slime) || (entity instanceof MagmaCube) || (entity instanceof Ghast)) {
+		            			for (Entity entity2 : entity.getNearbyEntities(15, 12, 15)) {
+			            			if ((entity2 instanceof Giant) && (entity.getPassenger() == null) && (entity2.getVehicle() == null)) {
+			            				Entity passenger = entity2;
+			            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
+			    						Bukkit.getServer().getPluginManager().callEvent(JSE);
+			            			}
+			            		}
+		            		}
+		            	}
+		            }
+		        }
+		    }, 0L, 20L);
+		}
 	}
 }

@@ -57,6 +57,7 @@ public class Giants extends JavaPlugin {
 		this.getCommand("giants").setExecutor(new Commands(this));
 		new Entities(this);
 		fileHandler = new FileHandler(this);
+		updateEntities();
 	}
 	
 	@Override
@@ -83,5 +84,26 @@ public class Giants extends JavaPlugin {
 
 	public static FileHandler getFileHandler() {
 		return fileHandler;
+	}
+	
+	public static void updateEntities() {
+		if (Entities.GiantZombie == true && getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("false")) 
+			Entities.GiantZombie = false;
+		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true")) {
+			Entities.GiantSlime = true;
+		} else {
+			Entities.GiantSlime = false;
+		}
+		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true")) {
+			Entities.GiantLavaSlime = true;
+		} else {
+			Entities.GiantLavaSlime = false;
+		}
+		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
+			Entities.GiantLavaSlime = true;
+		} else {
+			Entities.GiantLavaSlime = false;
+		}		
+		
 	}
 }
