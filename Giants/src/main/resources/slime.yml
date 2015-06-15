@@ -1,0 +1,47 @@
+Slime Configuration:
+  File Version: Version
+  Spawn Settings:
+    Chance: 10
+    Worlds:
+    - world
+    - world_nether
+    - world_the_end
+  Slime Stats:
+    Size: 12
+    Health: 100
+    Experience: 5
+    Drops:
+    - 1-0-0;1;100/100;4-12;GIANT STONE;Dropped by a Giant Slime
+  Damage Settings:
+    Arrows:
+      Damage done by arrow: 10
+    Fire:
+      Allow Fire Damage: true
+    Block Damage:
+      Allow Suffocation: false
+      Allow Cacti Damage: false
+  Attack Mechanisms:
+    Lightning Attack: false
+    Stomp Attack:
+      Enabled: false
+      Explosion Power: 1
+      Light Fire: false
+    Kick Attack:
+      Enabled: false
+      Kick Height: 1
+    Fire Attack:
+      Enabled: false
+      Ticks for Target: 100
+      Ticks for Slime: 100
+    Throw Boulder Attack:
+      Enabled: false
+      Block Damage: 1
+    Poison Attack:
+      Enabled: true
+      length: 5
+  Sounds:
+    Stomp Attack: true
+    Fire Attack: true
+    Throw Boulder Attack: true
+    Kick Attack: true
+    Death: true
