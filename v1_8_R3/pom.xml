@@ -9,7 +9,7 @@
   <parent>
     <groupId>me.Mammothskier</groupId>
     <artifactId>Giants-Parent</artifactId>
-    <version>7.0-SNAPSHOT</version>
+    <version>7.0-Beta</version>
   </parent>
   
   <dependencies>
