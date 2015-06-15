@@ -63,8 +63,17 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+							<filters>
+                               <filter>
+                                    <artifact>me.Mammothskier:Giants*</artifact>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                               </filter>
+                            </filters>
                             <artifactSet>
                                 <includes>
+									<artifact>me.Mammothskier:Giants*</artifact>
                                     <include>org.mcstats.bukkit:metrics</include>
                                 </includes>
                             </artifactSet>
