@@ -233,7 +233,7 @@ public class MagmaCubeListeners implements Listener {
 						if (s > 4){
 							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
 								player.setVelocity(new Vector(0, height, 0));
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds.Kick Attack").equalsIgnoreCase("true")) {
+								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
 									player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
 								}
 							}

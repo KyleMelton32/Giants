@@ -126,7 +126,7 @@ public class SlimeListeners implements Listener {
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
 								fireball.setYield(bDamage);
-								if (Giants.getProperty(Files.CONFIG, "Slime Configuration.Sounds").equalsIgnoreCase("true")) {
+								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
 									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
 								}
 							}
