@@ -292,7 +292,7 @@ public class Commands implements CommandExecutor {
 								return true;
 							}
 							else {
-								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise giant, slime, magmacube and jockey.");
+								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise zombie, slime, lavaslime and jockey.");
 							}
 						}
 						else {
