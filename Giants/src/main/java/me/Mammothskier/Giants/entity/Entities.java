@@ -1,6 +1,7 @@
 package me.Mammothskier.Giants.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +36,10 @@ public class Entities implements Listener {
 	public static boolean GiantSlime = false;
 	public static boolean GiantLavaSlime = false;
 	public static boolean GiantJockey = false;
+	
+	public static final EntityType[] zombieReplacements = {EntityType.ZOMBIE, EntityType.MUSHROOM_COW, EntityType.PIG_ZOMBIE, EntityType.ENDERMAN};
+	public static final EntityType[] slimeReplacements = {EntityType.ZOMBIE,EntityType.MUSHROOM_COW, EntityType.PIG_ZOMBIE, EntityType.SLIME, EntityType.ENDERMAN};
+	public static final EntityType[] lavaSlimeReplacements = {EntityType.PIG_ZOMBIE, EntityType.ZOMBIE, EntityType.MAGMA_CUBE, EntityType.ENDERMAN, EntityType.BLAZE};
 	
 	public Entities(Giants giants) {
 		_giants = giants;
@@ -240,17 +245,28 @@ public class Entities implements Listener {
 	}
 	
 	public static boolean isGiantJockeyRider(Entity entity) {
-		//TODO JOCKEY
 		return (isGiantJockey(entity) && isGiantZombie(entity));
 	}
 	
 	public static List<EntityType> getEntitySpawnReplacements(EntityType type) {
-
 		List<EntityType> list = new ArrayList<EntityType>();
-		list.add(EntityType.ZOMBIE);
-		list.add(EntityType.ENDERMAN);
+		switch (type) {
+		case GIANT:
+			for (EntityType t : zombieReplacements) list.add(t);
+			break;
+		case SLIME:
+			for (EntityType t : slimeReplacements) list.add(t);
+			break;
+		case MAGMA_CUBE:
+			for (EntityType t : lavaSlimeReplacements) list.add(t);
+			break;
+		default:
+			break;
+		}
+		
 		return list;
 	}
+	
 	public static List<String> getGiantSpawnWorlds(EntityType entityType) {
 		switch (entityType) {
 		case GIANT:
