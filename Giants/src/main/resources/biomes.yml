@@ -1,77 +1,64 @@
-Slime Configuration:
-  File Version: Version
+Giants Configuration:
+  File Version: ${project.build.version}
   Biome Settings:
     Swampland:
-      Swampland: true
-      Swampland Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Forest:
-      Forest: true
-      Forest Hills: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Taiga:
-      Taiga: true
-      Taiga Hills: true
-      Taiga Mountains: true
-      Cold Taiga: true
-      Cold Taiga Hills: true
-      Cold Taiga Mountains: true
-      Mega Taiga: true
-      Mega Taiga Hills: true
-      Mega Spruce Taiga: true
-      Mega Spruce Taiga Hills: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Plains:
-      Plains: true
-      Ice Plains: true
-      Ice Plains Spikes: true
-      Sunflower Plains: true
-    Ocean:
-      Ocean: false
-      Deep Ocean: false
-      Frozen Ocean: true
-    River:
-      River: true
-      Frozen River: true
-    Beach:
-      Beach: true
-      Stone Beach: true
-      Cold Beach: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Extreme Hills:
-      Extreme Hills: true
-      Extreme Hills Plus: true
-      Extreme Hills Mountains: true
-      Extreme Hills Plus Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Mushroom Island:
-      Mushroom Island: true
-      Mushroom Shore: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Desert:
-      Desert: true
-      Desert Hills: true
-      Desert Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Jungle:
-      Jungle: true
-      Jungle Hills: true
-      Jungle Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Birch Forest:
-      Birch Forest: true
-      Birch Forest Hills: true
-      Birch Forest Mountains: true
-      Birch Forest Hills Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Savanna:
-      Savanna: true
-      Savanna Mountains: true
-      Savanna Plateau: true
-      Savanna Plateau Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Roofed Forest:
-      Roofed Forest: true
-      Roofed Forest Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Mesa:
-      Mesa: true
-      Mesa Bryce: true
-      Mesa Plateau: true
-      Mesa Plateau Forest: true
-      Mesa Plateau Mountains: true
-      Mesa Plateau Forest Mountains: true
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
     Other:
-      Small Mountains: true
-      Ice Mountains: true
-      Hell: false
-      Sky: false
+      Small Mountains:
+      - Giant Zombie
+      - Giant Slime
+      - Giant Lava Slime
+      Ice Mountains:
+      - Giant Zombie
+      - Giant Slime
+      - Giant Lava Slime
+      Ocean: ''
+      River: ''
+      Hell: '- Giant Lava Slime'
+      Sky: ''

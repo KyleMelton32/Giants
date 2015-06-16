@@ -1,0 +1,22 @@
+Giants Configuration:
+  File Version: ${project.build.version}
+  Biome Settings:
+    Swampland: true
+    Forest: true
+    Taiga: true
+    Plains: true
+    Extreme Hills: true
+    Mushroom Island: true
+    Desert: true
+    Jungle: true
+    Birch Forest: true
+    Savanna: true
+    Roofed Forest: true
+    Mesa: true
+    Other:
+      Small Mountains: true
+      Ice Mountains: true
+      Ocean: false
+      River: false
+      Hell: true
+      Sky: true
