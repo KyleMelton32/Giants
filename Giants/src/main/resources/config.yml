@@ -1,0 +1,17 @@
+Giants Configuration:
+  File Version: ${project.build.version}
+  Dependencies:
+    BarAPI: false
+  Entities:
+    Giant Zombie: true
+    Giant Slime: false
+    Giant Lava Slime: false
+    Giant Jockey:
+      Warning:
+        Bugs: This entity of Giants is extremely experimental and does not have many features. Bugs may be present.
+        Files: Config files for this entity will NOT load unless enabled.
+        Enabled: true
+  Sounds: true
+  Debug Mode:
+    Enabled: false
+    Debug Message: '&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z'

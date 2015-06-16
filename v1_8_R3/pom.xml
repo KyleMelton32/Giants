@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>Giants for v1_8_R3</name>
+  <artifactId>Giants-v1_8_R3</artifactId>
+  <version>v1</version>
+  <packaging>jar</packaging>
+  
+  <parent>
+    <groupId>me.Mammothskier</groupId>
+    <artifactId>Giants-Parent</artifactId>
+    <version>7.0</version>
+  </parent>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>craftbukkit</artifactId>
+      <version>1.8.7-R0.1-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+</project>

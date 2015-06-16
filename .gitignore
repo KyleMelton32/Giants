@@ -14,6 +14,12 @@ tmp/
 .classpath
 .settings/
 .loadpath
+target/
+Giants/target/
+v1_7_R3/target/
+v1_7_R4/target/
+v1_8_R1/target/
+v1_8_R2/target/
 
 # External tool builders
 .externalToolBuilders/
