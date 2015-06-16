@@ -1,0 +1,6 @@
+Jockey Configuration:
+  Spawn Settings:
+    Worlds:
+    - world
+    - world_nether
+    - world_the_end

@@ -1,0 +1,64 @@
+Giants Configuration:
+  File Version: ${project.build.version}
+  Biome Settings:
+    Swampland:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Forest:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Taiga:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Plains:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Extreme Hills:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Mushroom Island:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Desert:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Jungle:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Birch Forest:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Savanna:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Roofed Forest:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Mesa:
+    - Giant Zombie
+    - Giant Slime
+    - Giant Lava Slime
+    Other:
+      Small Mountains:
+      - Giant Zombie
+      - Giant Slime
+      - Giant Lava Slime
+      Ice Mountains:
+      - Giant Zombie
+      - Giant Slime
+      - Giant Lava Slime
+      Ocean: ''
+      River: ''
+      Hell: '- Giant Lava Slime'
+      Sky: ''
