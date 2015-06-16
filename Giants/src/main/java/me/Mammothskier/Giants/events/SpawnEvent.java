@@ -51,7 +51,7 @@ public class SpawnEvent extends Event{
 		if (entityType == EntityType.SLIME && !Entities.GiantSlime) {
 			setCancelled(true);
 		}
-		if (entityType == EntityType.MAGMA_CUBE && ! Entities.GiantLavaSlime) {
+		if (entityType == EntityType.MAGMA_CUBE && !Entities.GiantLavaSlime) {
 			setCancelled(true);
 		}
 		

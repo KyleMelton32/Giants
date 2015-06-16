@@ -79,7 +79,7 @@ public class MagmaCubeListeners implements Listener {
 				MagmaCube magmacube = (MagmaCube) event.getEntity();
 				s = magmacube.getSize();
 				if (s > 4){
-					if (Giants.getProperty(Files.ATTACKS, "Magma Cube Configuration.Attack Mechanisms.Lightning Attack").contains("Giant Lava Slime")) {
+					if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack").contains("Giant Lava Slime")) {
 						try {
 							target.getLocation().getWorld().strikeLightning(target.getLocation());
 						} catch (Exception e) {

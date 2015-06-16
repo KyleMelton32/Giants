@@ -97,10 +97,12 @@ public class Commands implements CommandExecutor {
 									location.setY(locy);
 									location.setZ(locz);
 									Location loc = location;
-									
-									Entities.createGiant(loc, SpawnReason.NATURAL);
-									 
-									entity = (Giant) SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
+									if (Entities.GiantZombie == true) {
+										Entities.createGiant(loc, SpawnReason.NATURAL);
+										entity = (Giant) SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
+									} else {
+										entity = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
+									}
 									
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
 								}

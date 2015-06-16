@@ -59,20 +59,23 @@ public class Giants extends JavaPlugin {
 	public static void updateEntities() {
 		if (Entities.GiantZombie == true && getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("false")) 
 			Entities.GiantZombie = false;
+		
 		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true")) {
-			Entities.GiantSlime = true;
+			Entities.GiantSlime = true; 
 		} else {
 			Entities.GiantSlime = false;
 		}
+		
 		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true")) {
 			Entities.GiantLavaSlime = true;
 		} else {
 			Entities.GiantLavaSlime = false;
 		}
+		
 		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
-			Entities.GiantLavaSlime = true;
+			Entities.GiantJockey = true;
 		} else {
-			Entities.GiantLavaSlime = false;
+			Entities.GiantJockey = false;
 		}		
 		
 	}

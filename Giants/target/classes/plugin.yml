@@ -1,6 +1,6 @@
 name: Giants
 main: me.Mammothskier.Giants.Giants
-version: 7.0-SNAPSHOT-b0-DEFAULT
+version: 7.0-Beta-b0-DEFAULT
 author: Mammothskier
 softdepend: [BarAPI]
 

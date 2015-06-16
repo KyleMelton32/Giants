@@ -52,7 +52,7 @@ public class Entities implements Listener {
 	}
 	
 	@EventHandler (priority = EventPriority.NORMAL)
-	public void onSpawnEvent(CreatureSpawnEvent event) {
+	public void onSpawnEvent (CreatureSpawnEvent event) {
 		Entity entity = (Entity) event.getEntity();
 		EntityType type = event.getEntityType();
 		SpawnReason spawnReason = event.getSpawnReason();
@@ -61,104 +61,108 @@ public class Entities implements Listener {
 			return;
 		}
 		
-		if ((spawnReason == SpawnReason.NATURAL)) {
+		if (type == EntityType.SLIME || type == EntityType.MAGMA_CUBE && ((Slime) entity).getSize() == 4) return;
+		
+		if ((spawnReason == SpawnReason.NATURAL || spawnReason == SpawnReason.SPAWNER) && isASpawnReplacement(type)) {
 			Random rand = new Random();
 
-			EntityType spawn;
-			int i = rand.nextInt(3);
-			if (i== 0)
-				spawn = EntityType.GIANT;
-			else if (i == 1)
-				spawn = EntityType.SLIME;
-			else 
-				spawn = EntityType.MAGMA_CUBE;
-			
-			if (!isEnabled(spawn))
+			EntityType spawn = null;
+			int i = -1;
+			while (spawn == null) {
+				i = rand.nextInt(3);
+				if (i== 0 && isASpawnReplacementFor(type, EntityType.GIANT)) {
+					spawn = EntityType.GIANT;
+				} else if (i == 1 && isASpawnReplacementFor(type, EntityType.SLIME)) {
+					spawn = EntityType.SLIME;
+				} else if (i == 2 && isASpawnReplacementFor(type, EntityType.MAGMA_CUBE)){ 
+					spawn = EntityType.MAGMA_CUBE;
+				}
+			}
+			if (!isEnabled(spawn)) {
 				return;
+			}
+			
+			String string = "";
+			if (spawn.equals(EntityType.GIANT)) {
+				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Zombie");
+			} else if (spawn.equals(EntityType.SLIME)) {
+				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Slime");
+			} else if (spawn.equals(EntityType.MAGMA_CUBE)) {
+				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Lava Slime");
+			}
+			
+			Float sRate;
+			try {
+				sRate = Float.parseFloat(string);
+			} catch (NumberFormatException e) {
+				sRate = 10f;
+			}
+			
+			if (rand.nextFloat()*100 < sRate) {
+				Location location = entity.getLocation();
+				double x = location.getX();
+				double y = location.getY();
+				double z = location.getZ();
 
-			if (getEntitySpawnReplacements(spawn).contains(type)) {
-				String string = "";
-				if (spawn.equals(EntityType.GIANT)) {
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Zombie");
-				} else if (spawn.equals(EntityType.SLIME)) {
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Slime");
-				} else if (spawn.equals(EntityType.MAGMA_CUBE)) {
-					string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Lava Slime");
-				}
+				int x2 = (int) x;
+				int y2 = (int) y;
+				int z2 = (int) z;
+
+				int spawngiant  = 1;
+				double checkcount = 1;
+
+				String s;
+				int size;
 				
-				Float sRate;
-				try {
-					sRate = Float.parseFloat(string);
-				} catch (NumberFormatException e) {
-					sRate = 10f;
+				//Comment out this next line to allow random spawning.
+				//spawn = EntityType.GIANT;
+				
+				switch (spawn) {
+				case GIANT:
+					while (checkcount <= 15) {
+						if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
+							spawngiant = 0;
+						}
+						checkcount++;
+					}
+					break;
+				case SLIME:
+					s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
+					try {
+						size = Integer.parseInt(s);
+					} catch (Exception e) {
+						size = 12;
+					}
+					while (checkcount <= size) {
+						if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
+							spawngiant = 0;
+						}
+						checkcount++;
+					}
+					break;
+				case MAGMA_CUBE:
+					s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
+					try {
+						size = Integer.parseInt(s);
+					} catch (Exception e) {
+						size = 12;
+					}
+					while (checkcount <= size) {
+						if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
+							spawngiant = 0;
+						}
+						checkcount++;
+					}
+					break;
+				default:
+					break;
 				}
-				float chance = 100 - sRate;
-
-				double choice = rand.nextInt(100) < chance ? 1 : 0;
-				if (choice == 0) {
-					Location location = event.getEntity().getLocation();
-					double x = location.getX();
-					double y = location.getY();
-					double z = location.getZ();
-
-					int x2 = (int) x;
-					int y2 = (int) y;
-					int z2 = (int) z;
-
-					int spawngiant  = 1;
-					double checkcount = 0.01;
-
-					String s;
-					int size;
-					
-					//Comment out this next line to allow random spawning.
-					//spawn = EntityType.GIANT;
-					
-					switch (spawn) {
-					case GIANT:
-						while (checkcount <= 15) {
-							if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
-								spawngiant = 0;
-							}
-							checkcount++;
-						}
-					case SLIME:
-						s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
-						try {
-							size = Integer.parseInt(s);
-						} catch (Exception e) {
-							size = 12;
-						}
-						while (checkcount <= size) {
-							if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
-								spawngiant = 0;
-							}
-							checkcount++;
-						}
-					case MAGMA_CUBE:
-						s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
-						try {
-							size = Integer.parseInt(s);
-						} catch (Exception e) {
-							size = 12;
-						}
-						while (checkcount <= size) {
-							if (entity.getWorld().getBlockAt(new Location(entity.getWorld(), x2, y2 + checkcount, z2)).getType() != Material.AIR) {
-								spawngiant = 0;
-							}
-							checkcount++;
-						}
-					default:
-						break;
-					}
-					//Commment out the following line to enable chance of spawning.
-					//spawngiant = 1;
-					if (spawngiant == 1) {
-						SpawnEvent SE = new SpawnEvent(location, spawn);
-						Bukkit.getServer().getPluginManager().callEvent(SE);
-						event.setCancelled(true);
-					}
-					
+				//Commment out the following line to enable chance of spawning.
+				//spawngiant = 1;
+				if (spawngiant == 1) {
+					SpawnEvent SE = new SpawnEvent(location, spawn);
+					Bukkit.getServer().getPluginManager().callEvent(SE);
+					event.setCancelled(true);
 				}
 			}
 		}
@@ -170,17 +174,21 @@ public class Entities implements Listener {
 	
 	private boolean isEnabled(EntityType spawn) {
 		boolean enabled = false;
+		if (spawn == null) {
+			return false;
+		}
 		switch (spawn) {
 		case GIANT:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("true"))
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("true") && GiantZombie == true)
 				enabled = true;
 			break;
 		case SLIME:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true"))
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true") && GiantSlime == true)
 				enabled = true;
 			break;
 		case MAGMA_CUBE:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true"))
+			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true") && GiantLavaSlime == true)
+				
 				enabled = true;
 			break;
 		default:
@@ -345,5 +353,34 @@ public class Entities implements Listener {
 		        }
 		    }, 0L, 20L);
 		}
+	}
+	
+	private boolean isASpawnReplacement(EntityType entityType) {
+		for (EntityType e : zombieReplacements) 
+			if (e == entityType) return true;
+		for (EntityType e : slimeReplacements) 
+			if (e == entityType) return true;
+		for (EntityType e : lavaSlimeReplacements) 
+			if (e == entityType) return true;
+		return false;
+	}
+	
+	private boolean isASpawnReplacementFor(EntityType replacement, EntityType entityType) {
+		if (entityType == null) return false;
+		switch(entityType) {
+		case GIANT:
+			for (EntityType e : zombieReplacements) 
+				if (e == replacement) return true;
+		case SLIME:
+			for (EntityType e : slimeReplacements) 
+				if (e == replacement) return true;
+		case MAGMA_CUBE:
+			for (EntityType e : lavaSlimeReplacements) 
+				if (e == replacement) return true;
+		
+		default:
+			break;
+		}
+		return false;
 	}
 }
