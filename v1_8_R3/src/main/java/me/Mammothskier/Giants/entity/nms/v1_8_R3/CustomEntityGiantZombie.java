@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.craftbukkit.v1_8_R3.util.UnsafeList;
 
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Files;
 import net.minecraft.server.v1_8_R3.EntityGiantZombie;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.EntityIronGolem;
@@ -61,9 +63,16 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
 	@Override
     protected void initAttributes() {
         super.initAttributes();
+        String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Speed.Giant Zombie");
+        double speed = 1;
+        try {
+        	speed = Double.parseDouble(string);
+        } catch (Exception e) {
+        	speed = 1;
+        }
         this.getAttributeInstance(GenericAttributes.FOLLOW_RANGE).setValue(35D);
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(100.0D);
-        this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.5D);
+        this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.23000000417232513D * speed);
         this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).setValue(50.0D);
     }
 	
@@ -71,7 +80,6 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
         this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0D, true));
         this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
         this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
-        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] { EntityPigZombie.class}));
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false));
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));

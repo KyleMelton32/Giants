@@ -6,15 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-<<<<<<< HEAD:src/main/java/me/Mammothskier/Giants/utils/DropsManager.java
-import org.bukkit.ChatColor;
-=======
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
->>>>>>> origin/master:Giants/src/main/java/me/Mammothskier/Giants/entity/DropsManager.java
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
@@ -38,6 +34,7 @@ public class DropsManager implements Listener {
 	@EventHandler
 	public void onGiantDrops(EntityDeathEvent event) throws IOException{
 		Entity entity = event.getEntity();
+		boolean enabled = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Drops.Enable Drop Manager").equalsIgnoreCase("true");
 		
 
 		if (Entities.isGiantZombie(entity)) {
@@ -54,7 +51,7 @@ public class DropsManager implements Listener {
 			}
 			event.setDroppedExp(exp);
 			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
 				return;
 			}
 			
@@ -77,7 +74,7 @@ public class DropsManager implements Listener {
 			}
 			event.setDroppedExp(exp);
 			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Slime");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
 				return;
 			}
 			
@@ -103,7 +100,7 @@ public class DropsManager implements Listener {
 			}
 			event.setDroppedExp(exp);
 			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Lava Slime");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
 				return;
 			}
 

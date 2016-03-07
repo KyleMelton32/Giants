@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.Mammothskier</groupId>
@@ -10,8 +11,9 @@
 		<module>v1_8_R1</module>
 		<module>v1_8_R2</module>
 		<module>v1_8_R3</module>
+    	<module>v1_9_R1</module>
 		<module>Giants</module>
-    </modules>
+  </modules>
   <repositories>
     <repository>
       <id>spigot-repo</id>

@@ -31,7 +31,7 @@ public class FileHandler {
 		loadDefaultDrop("MagmaCube");
 	}
 	
-	private String loadVersion() {		
+	public String loadVersion() {		
 		PluginDescriptionFile pdf = _giants.getDescription();
 		String version = pdf.getVersion();
 		if (version == null) {
@@ -40,22 +40,22 @@ public class FileHandler {
 		return version;
 	}
 
-	public List<String> loadWorlds() {
+	public static List<String> loadWorlds() {
 		List<String> worldList = new ArrayList<String>();
-		for (World w : _giants.getServer().getWorlds()) {
+		for (World w : Bukkit.getServer().getWorlds()) {
 			worldList.add(w.getName());
 		}
 		return worldList;
 	}
 	
-	private boolean checkDependencies(String plugin) {
+	public static boolean checkDependencies(String plugin) {
 		if (Bukkit.getPluginManager().getPlugin(plugin) != null) {
 			return true;
 		}
 		return false;
 	}
 
-	private String[] loadDefaultDrop(String arg) {
+	static String[] loadDefaultDrop(String arg) {
 		String[] drops = null;
 		switch(arg){
 			case "Giant Zombie":
@@ -73,7 +73,7 @@ public class FileHandler {
 		return drops;
 	}
 	
-	private List<String> loadEntities() {
+	public static List<String> loadEntities() {
 		List<String> list = new ArrayList<String>();
 		list.add("Giant Zombie");
 		list.add("Giant Slime");
@@ -164,6 +164,8 @@ public class FileHandler {
 // Size
 				entities.set("Entities Configuration.Spawn Settings.Size.Giant Slime", new Integer(12));
 				entities.set("Entities Configuration.Spawn Settings.Size.Giant Lava Slime", new Integer(12));
+// Speed
+				entities.set("Entities Configuration.Stats.Speed.Giant Zombie", new Integer(3));
 // Health
 				entities.set("Entities Configuration.Stats.Health.Giant Zombie", new Integer(100));
 				entities.set("Entities Configuration.Stats.Health.Giant Slime", new Integer(100));
@@ -177,6 +179,7 @@ public class FileHandler {
 						new String("chainmail_helmet:chainmail_chestplate:chainmail_leggings:chainmail_boots:diamond_sword"));
 				entities.set("Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate", new Float(8.5));
 // Drops
+				entities.set("Entities Configuration.Stats.Drops.Enable Drop Manager", true);
 				entities.set("Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(loadDefaultDrop("Giant Zombie")));
 				entities.set("Entities Configuration.Stats.Drops.Giant Slime", Arrays.asList(loadDefaultDrop("Giant Slime")));
 				entities.set("Entities Configuration.Stats.Drops.Giant Lava Slime", Arrays.asList(loadDefaultDrop("Giant Lava Slime")));
@@ -279,6 +282,7 @@ public class FileHandler {
 		}
 	}
 
+	@Deprecated
 	public String getProperty(Files file, String path) {
 		FileConfiguration conf = _configurations.get(file);
 
@@ -291,7 +295,7 @@ public class FileHandler {
 		}
 		return null;
 	}
-
+	@Deprecated
 	public List<String> getPropertyList(Files file, String path) {
 		FileConfiguration conf = _configurations.get(file);
 
@@ -302,5 +306,56 @@ public class FileHandler {
 			conf.set(path, null);
 		}
 		return null;
+	}
+	
+	/**
+	 * Gets the property that is saved at the value location.
+	 * @param ConfigValues value.
+	 * @return String property from the config file the value is saved in.
+	 */
+	public String getProperty(ConfigValues value) {
+		FileConfiguration config = _configurations.get(value.getFile());
+		if (config != null) {
+			String property = config.getString(value.getKey(), "NULL");
+			
+			if (!property.equalsIgnoreCase("NULL"))
+				return property;
+			config.set(value.getKey(), value.getValue());
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the property list that is saved at the value location.
+	 * @param ConfigValues value.
+	 * @return List<String> propertylist from the config file the value is saved in.
+	 */
+	public List<String> getPropertyList(ConfigValues value) {
+		FileConfiguration config = _configurations.get(value.getFile());
+		if (config != null) {
+			List<String> property = config.getStringList(value.getKey());
+			
+			if (!property.contains("NULL"))
+				return property;
+			config.set(value.getKey(), value.getValue());
+		}
+		return null;
+	}
+	
+	/**
+	 * Changes the property value at the value location.
+	 * @param value - the value to change
+	 * @param newValue the value to put in place of the current value
+	 */
+	public void setProperty(ConfigValues value, Object newValue) {
+		FileConfiguration config = _configurations.get(value.getFile());
+		if (config != null) {
+			config.set(value.getKey(), newValue);
+			try {
+				config.save(new File(value.getFile().getPath()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

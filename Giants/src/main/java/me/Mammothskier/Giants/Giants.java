@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import me.Mammothskier.Giants.entity.Entities;
+import me.Mammothskier.Giants.files.ConfigValues;
 import me.Mammothskier.Giants.files.FileHandler;
 import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.util.Metrics;
@@ -44,12 +45,22 @@ public class Giants extends JavaPlugin {
 		NMSUtils.unregisterEntities();
 	}
 
+	@Deprecated
 	public static String getProperty(Files file, String path) {
 		return fileHandler.getProperty(file, path);
 	}
 	
+	@Deprecated
 	public static List<String> getPropertyList(Files file, String path) {
 		return fileHandler.getPropertyList(file, path);
+	}
+
+	public static String getProperty(ConfigValues value) {
+		return fileHandler.getProperty(value);
+	}
+	
+	public static List<String> getPropertyList(ConfigValues values) {
+		return fileHandler.getPropertyList(values);
 	}
 
 	public static FileHandler getFileHandler() {
@@ -57,22 +68,22 @@ public class Giants extends JavaPlugin {
 	}
 	
 	public static void updateEntities() {
-		if (Entities.GiantZombie == true && getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("false")) 
+		if (Entities.GiantZombie == true && getProperty(ConfigValues.zombieBoolean).equalsIgnoreCase("false")) 
 			Entities.GiantZombie = false;
 		
-		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true")) {
+		if (getProperty(ConfigValues.slimeBoolean).equalsIgnoreCase("true")) {
 			Entities.GiantSlime = true; 
 		} else {
 			Entities.GiantSlime = false;
 		}
 		
-		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true")) {
+		if (getProperty(ConfigValues.lavaSlimeBoolean).equalsIgnoreCase("true")) {
 			Entities.GiantLavaSlime = true;
 		} else {
 			Entities.GiantLavaSlime = false;
 		}
 		
-		if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
+		if (getProperty(ConfigValues.jockeyBoolean).equalsIgnoreCase("true")) {
 			Entities.GiantJockey = true;
 		} else {
 			Entities.GiantJockey = false;

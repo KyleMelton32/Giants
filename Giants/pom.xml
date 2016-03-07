@@ -3,7 +3,7 @@
   <parent>
     <groupId>me.Mammothskier</groupId>
     <artifactId>Giants-Parent</artifactId>
-    <version>7.0</version>
+    <version>7.0-Beta</version>
   </parent>
   <artifactId>Giants</artifactId>
   
@@ -77,6 +77,19 @@
     <dependency>
       <groupId>me.Mammothskier</groupId>
       <artifactId>Giants-v1_8_R3</artifactId>
+      <version>v1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.bukkit</groupId>
+          <artifactId>craftbukkit</artifactId>
+        </exclusion>
+      </exclusions>
+      <optional>true</optional>
+    </dependency>
+    
+        <dependency>
+      <groupId>me.Mammothskier</groupId>
+      <artifactId>Giants-v1_9_R1</artifactId>
       <version>v1</version>
       <exclusions>
         <exclusion>

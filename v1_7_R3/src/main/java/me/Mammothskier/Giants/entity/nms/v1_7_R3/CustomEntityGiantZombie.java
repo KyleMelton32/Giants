@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.craftbukkit.v1_7_R3.util.UnsafeList;
 
+import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.files.Files;
 import net.minecraft.server.v1_7_R3.EntityGiantZombie;
 import net.minecraft.server.v1_7_R3.EntityHuman;
 import net.minecraft.server.v1_7_R3.EntityIronGolem;
@@ -60,9 +62,16 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
 	@Override
     protected void aC() {
         super.aW();
+        String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Speed.Giant Zombie");
+        double speed = 1;
+        try {
+        	speed = Double.parseDouble(string);
+        } catch (Exception e) {
+        	speed = 1;
+        }
         this.getAttributeInstance(GenericAttributes.b).setValue(35D);
         this.getAttributeInstance(GenericAttributes.a).setValue(100.0D);
-        this.getAttributeInstance(GenericAttributes.d).setValue(0.5D);
+        this.getAttributeInstance(GenericAttributes.d).setValue(0.23000000417232513D * speed);
         this.getAttributeInstance(GenericAttributes.e).setValue(50.0D);
     }
 	

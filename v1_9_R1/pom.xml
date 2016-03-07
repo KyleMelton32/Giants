@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <name>Giants for v1_8_R2</name>
-  <artifactId>Giants-v1_8_R2</artifactId>
+  <name>Giants for v1_9_R1</name>
+  <artifactId>Giants-v1_9_R1</artifactId>
   <version>v1</version>
   <packaging>jar</packaging>
   
@@ -15,16 +15,11 @@
   <dependencies>
     <dependency>
       <groupId>org.bukkit</groupId>
-      <artifactId>bukkit</artifactId>
-      <version>1.8.3-R0.1-SNAPSHOT</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
-      <version>1.8.3-R0.1-SNAPSHOT</version>
+      <version>1.9-R0.1-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
+    
     <dependency>
       <groupId>me.Mammothskier</groupId>
       <artifactId>Giants</artifactId>
@@ -37,12 +32,6 @@
       </exclusions>
       <optional>true</optional>
     </dependency>
+    
   </dependencies>
-  
-  <repositories>
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-    </repository>
-  </repositories>
 </project>

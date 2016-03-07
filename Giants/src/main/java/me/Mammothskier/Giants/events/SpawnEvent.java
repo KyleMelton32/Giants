@@ -60,290 +60,75 @@ public class SpawnEvent extends Event{
 			
 			if (biome.toString().toLowerCase().contains("Swampland".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Swampland");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Forest".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Forest");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Taiga".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Taiga");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Plains".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Plains");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Extreme_Hills".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Extreme Hills");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Mushroom".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Mushroom Island");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Desert".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Desert");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Jungle".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Jungle");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Birch".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Birch Forest");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Savanna".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Savanna");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-						
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Roofed_Forest".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Roofed Forest");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Mesa".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Mesa");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Small_Mountains".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Small Mountains");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Ice_Mountains".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Ice Mountains");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Ocean".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Ocean");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("River".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.River");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Hell".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Hell");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 			if (biome.toString().toLowerCase().contains("Sky".toLowerCase())) {
 				List<String> l = Giants.getPropertyList(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Sky");
-				if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
-						(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
-								(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
-					if (entityType.equals(EntityType.GIANT)) {
-						Entities.createGiant(loc, SpawnReason.NATURAL);
-						 
-							entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
-								
-					} else {
-						entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
-						((Slime) entity).setSize(size);
-					}
-				}
+				entity = spawnMob(entityType, l, loc, size);
 			}
 
 			Entities.callSpawnDebug(entity);
@@ -390,6 +175,23 @@ public class SpawnEvent extends Event{
 				}
 			}
 		}
+	}
+	
+	private Entity spawnMob(EntityType entityType, List<String> l, Location loc, int size) {
+		if ((entityType.equals(EntityType.GIANT) && l.contains("Giant Zombie")) ||
+				(entityType.equals(EntityType.SLIME) && l.contains("Giant Slime")) ||
+						(entityType.equals(EntityType.MAGMA_CUBE) && l.contains("Giant Lava Slime"))) {
+			if (entityType.equals(EntityType.GIANT)) {
+				Entities.createGiant(loc, SpawnReason.NATURAL);
+				 
+					entity = getGiantZombie(getNearbyEntities(loc, 10), loc);
+						
+			} else {
+				entity = (Slime) loc.getWorld().spawnEntity(location, entityType);
+				((Slime) entity).setSize(size);
+			}
+		}
+		return entity;
 	}
 	public void setCancelled(boolean cancel) {
 		cancelled = cancel;

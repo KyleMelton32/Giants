@@ -2,7 +2,7 @@ package me.Mammothskier.Giants;
 
 import me.Mammothskier.Giants.entity.Entities;
 import me.Mammothskier.Giants.events.SpawnEvent;
-import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.files.ConfigValues;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -66,7 +66,7 @@ public class Commands implements CommandExecutor {
 								Giant entity = null;
 								double health;
 								
-								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Zombie");
+								String string = Giants.getProperty(ConfigValues.zombieHealth);
 								try {
 									health = Double.parseDouble(string);
 								} catch (Exception e) {
@@ -112,12 +112,12 @@ public class Commands implements CommandExecutor {
 									((Damageable) entity).setHealth(health);
 									if (entity.getType() == EntityType.GIANT) {
 										EntityEquipment armour = ((LivingEntity) entity).getEquipment();
-										String config = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Items");
+										String config = Giants.getProperty(ConfigValues.zombieArmour);
 										String[] s = config.split(":");
 										
 										float rate = 0f;
 										try {
-											rate = Float.parseFloat(Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate"));
+											rate = Float.parseFloat(Giants.getProperty(ConfigValues.armourDropRate));
 										} catch (Exception e){
 											rate = 0;
 										}
@@ -153,8 +153,8 @@ public class Commands implements CommandExecutor {
 							if(args[1].equalsIgnoreCase("slime")){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
-								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Slime");
+								String string = Giants.getProperty(ConfigValues.slimeSize);
+								String string2 = Giants.getProperty(ConfigValues.slimeHealth);
 								int size;
 								double health;
 								try {
@@ -197,15 +197,9 @@ public class Commands implements CommandExecutor {
 							if(args[1].equalsIgnoreCase("jockey")){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-<<<<<<< HEAD:src/main/java/me/Mammothskier/Giants/Commands.java
-								String string = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Size");
-								String string2 = API.getFileHandler().getProperty(Files.SLIME, "Slime Configuration.Slime Stats.Health");
-								String string3 = API.getFileHandler().getProperty(Files.GIANT, "Giant Configuration.Giant Stats.Health");
-=======
-								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
-								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Slime");
-								String string3 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Zombie");
->>>>>>> origin/master:Giants/src/main/java/me/Mammothskier/Giants/Commands.java
+								String string = Giants.getProperty(ConfigValues.slimeSize);
+								String string2 = Giants.getProperty(ConfigValues.slimeHealth);
+								String string3 = Giants.getProperty(ConfigValues.zombieHealth);
 								int size;
 								double giantHealth;
 								double slimeHealth;
@@ -223,15 +217,10 @@ public class Commands implements CommandExecutor {
 									slime.setSize(size);
 									slime.setMaxHealth(slimeHealth);
 									slime.setHealth(slimeHealth);
-<<<<<<< HEAD:src/main/java/me/Mammothskier/Giants/Commands.java
-									Giant giant = (Giant) loc.getWorld().spawnEntity(location, EntityType.GIANT);
-									giant.setMaxHealth(giantHealth);
-=======
 									Entities.createGiant(loc, SpawnReason.NATURAL);
 									 
 									Entity giant = SpawnEvent.getGiantZombie(SpawnEvent.getNearbyEntities(loc, 10), loc);
 									((Damageable) giant).setMaxHealth(giantHealth);
->>>>>>> origin/master:Giants/src/main/java/me/Mammothskier/Giants/Commands.java
 									slime.setPassenger(giant);
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant Jockey has been spawned");
 								}
@@ -264,8 +253,8 @@ public class Commands implements CommandExecutor {
 							if((args[1].equalsIgnoreCase("lavaslime")) || (args[1].equalsIgnoreCase("magma_cube")) || (args[1].equalsIgnoreCase("magma"))|| (args[1].equalsIgnoreCase("magmacube"))){
 								Location loc = (Location) player.getEyeLocation();
 								Location location = loc;
-								String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
-								String string2 = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Health.Giant Lava Slime");
+								String string = Giants.getProperty(ConfigValues.lavaSlimeSize);
+								String string2 = Giants.getProperty(ConfigValues.lavaSlimeHealth);
 								int size;
 								double health;
 								try {
@@ -305,11 +294,7 @@ public class Commands implements CommandExecutor {
 								return true;
 							}
 							else {
-<<<<<<< HEAD:src/main/java/me/Mammothskier/Giants/Commands.java
-								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise giant, slime, magmacube and jockey.");
-=======
 								player.sendMessage(ChatColor.RED + "Unknown Entity Type! I recognise zombie, slime, lavaslime and jockey.");
->>>>>>> origin/master:Giants/src/main/java/me/Mammothskier/Giants/Commands.java
 							}
 						}
 						else {

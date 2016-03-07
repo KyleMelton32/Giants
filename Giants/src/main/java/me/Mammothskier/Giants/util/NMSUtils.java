@@ -49,6 +49,9 @@ public class NMSUtils {
 			case("v1_8_R3"):
 				me.Mammothskier.Giants.entity.nms.v1_8_R3.EntityCreator.createEntity(location, reason);
 				break;
+			case("v1_9_R1"):
+				me.Mammothskier.Giants.entity.nms.v1_8_R3.EntityCreator.createEntity(location, reason);
+				break;
 			}
 		}
 	}
@@ -72,9 +75,13 @@ public class NMSUtils {
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.registerEntities();
 		} else if ("v1_8_R3".equals(version)) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R2 found. Enabling Giant Zombies.");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_8_R3 found. Enabling Giant Zombies.");
 			Entities.GiantZombie = true;
 			me.Mammothskier.Giants.entity.nms.v1_8_R3.CustomEntityType.registerEntities();
+		} else if ("v1_9_R1".equals(version)) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + "Minecraft server version v1_9_R1 found. Enabling Giant Zombies.");
+			Entities.GiantZombie = true;
+			me.Mammothskier.Giants.entity.nms.v1_9_R1.CustomEntityType.registerEntities();
 		} else {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.RED + "Minecraft server version " + version + "does not support Giant Zombies.Disabling Giant Zombies");
 			Entities.GiantZombie = false;
