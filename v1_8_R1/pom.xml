@@ -19,6 +19,12 @@
       <version>1.8-R0.1-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
-    
   </dependencies>
+  
+  <repositories>
+    <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
 </project>

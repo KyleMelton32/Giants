@@ -19,13 +19,12 @@
       <version>1.7.9-R0.2</version>
       <type>jar</type>
     </dependency>
-    
-    <dependency>
-      <groupId>org.bukkit</groupId>
-      <artifactId>craftbukkit</artifactId>
-      <version>1.7.9-R0.2</version>
-      <type>jar</type>
-    </dependency>
-    
   </dependencies>
+  
+  <repositories>
+      <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/groups/public</url>
+    </repository>
+  </repositories>
 </project>
