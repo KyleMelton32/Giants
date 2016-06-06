@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import me.Mammothskier.Giants.Files.ConfigValues;
+import me.Mammothskier.Giants.Files.FileHandler;
+import me.Mammothskier.Giants.Files.Files;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.files.ConfigValues;
-import me.Mammothskier.Giants.files.FileHandler;
-import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.util.Metrics;
 import me.Mammothskier.Giants.util.NMSUtils;
 
@@ -36,7 +36,7 @@ public class Giants extends JavaPlugin {
 		
 		this.getCommand("giants").setExecutor(new Commands(this));
 		new Entities(this);
-		fileHandler = new FileHandler(this);
+		fileHandler = new FileHandler();
 		updateEntities();
 	}
 	

@@ -1,8 +1,8 @@
 package me.Mammothskier.Giants;
 
+import me.Mammothskier.Giants.Files.ConfigValues;
 import me.Mammothskier.Giants.entity.Entities;
 import me.Mammothskier.Giants.events.SpawnEvent;
-import me.Mammothskier.Giants.files.ConfigValues;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

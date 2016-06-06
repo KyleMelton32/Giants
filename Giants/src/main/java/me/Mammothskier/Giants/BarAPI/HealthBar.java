@@ -14,8 +14,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.Files.Files;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.files.Files;
 import me.confuser.barapi.BarAPI;
 
 public class HealthBar implements Listener {

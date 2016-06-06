@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
@@ -24,9 +23,9 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.Files.ConfigValues;
 import me.Mammothskier.Giants.events.JockeySpawnEvent;
 import me.Mammothskier.Giants.events.SpawnEvent;
-import me.Mammothskier.Giants.files.Files;
 import me.Mammothskier.Giants.util.NMSUtils;
 
 public class Entities implements Listener {
@@ -39,6 +38,8 @@ public class Entities implements Listener {
 	public static final EntityType[] zombieReplacements = {EntityType.ZOMBIE, EntityType.MUSHROOM_COW, EntityType.PIG_ZOMBIE, EntityType.ENDERMAN};
 	public static final EntityType[] slimeReplacements = {EntityType.ZOMBIE,EntityType.MUSHROOM_COW, EntityType.PIG_ZOMBIE, EntityType.SLIME, EntityType.ENDERMAN};
 	public static final EntityType[] lavaSlimeReplacements = {EntityType.PIG_ZOMBIE, EntityType.ZOMBIE, EntityType.MAGMA_CUBE, EntityType.ENDERMAN, EntityType.BLAZE};
+	
+	public static ArrayList<Entity> giantEntities = new ArrayList<Entity>();
 	
 	public Entities(Giants giants) {
 		_giants = giants;
@@ -84,11 +85,11 @@ public class Entities implements Listener {
 			
 			String string = "";
 			if (spawn.equals(EntityType.GIANT)) {
-				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Zombie");
+				string = Giants.getProperty(ConfigValues.zombieChance);
 			} else if (spawn.equals(EntityType.SLIME)) {
-				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Slime");
+				string = Giants.getProperty(ConfigValues.slimeChance);
 			} else if (spawn.equals(EntityType.MAGMA_CUBE)) {
-				string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Lava Slime");
+				string = Giants.getProperty(ConfigValues.lavaSlimeChance);
 			}
 			
 			Float sRate;
@@ -127,7 +128,7 @@ public class Entities implements Listener {
 					}
 					break;
 				case SLIME:
-					s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
+					s = Giants.getProperty(ConfigValues.slimeSize);
 					try {
 						size = Integer.parseInt(s);
 					} catch (Exception e) {
@@ -141,7 +142,7 @@ public class Entities implements Listener {
 					}
 					break;
 				case MAGMA_CUBE:
-					s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
+					s = Giants.getProperty(ConfigValues.lavaSlimeSize);
 					try {
 						size = Integer.parseInt(s);
 					} catch (Exception e) {
@@ -179,15 +180,15 @@ public class Entities implements Listener {
 		}
 		switch (spawn) {
 		case GIANT:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Zombie").equalsIgnoreCase("true") && GiantZombie == true)
+			if (Giants.getProperty(ConfigValues.zombieBoolean).equalsIgnoreCase("true") && GiantZombie == true)
 				enabled = true;
 			break;
 		case SLIME:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Slime").equalsIgnoreCase("true") && GiantSlime == true)
+			if (Giants.getProperty(ConfigValues.slimeBoolean).equalsIgnoreCase("true") && GiantSlime == true)
 				enabled = true;
 			break;
 		case MAGMA_CUBE:
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime").equalsIgnoreCase("true") && GiantLavaSlime == true)
+			if (Giants.getProperty(ConfigValues.lavaSlimeBoolean).equalsIgnoreCase("true") && GiantLavaSlime == true)
 				
 				enabled = true;
 			break;
@@ -277,24 +278,24 @@ public class Entities implements Listener {
 	public static List<String> getGiantSpawnWorlds(EntityType entityType) {
 		switch (entityType) {
 		case GIANT:
-			return Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Zombie");
+			return Giants.getPropertyList(ConfigValues.zombieWorlds);
 		case SLIME:
-			return Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Slime");
+			return Giants.getPropertyList(ConfigValues.slimeWorlds);
 		case MAGMA_CUBE:
-			return Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Lava Slime");
+			return Giants.getPropertyList(ConfigValues.lavaslimeWorlds);
 		default:
 			return null;
 		}
 	}
 	
 	public static List<String> getJockeySpawnWorlds() {
-		return Giants.getPropertyList(Files.JOCKEY, "Jockey Configuration.Spawn Settings.Worlds");
+		return Giants.getPropertyList(ConfigValues.jockeyWorlds);
 	}
 	
 	public static void callSpawnDebug(Entity entity) {
 		if (entity == null) 
 			return;
-		if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Debug Mode.Enabled").equalsIgnoreCase("true")) {
+		if (Giants.getProperty(ConfigValues.debugBoolean).equalsIgnoreCase("true")) {
 			for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 				if (player.hasPermission("giants.debug") || player.hasPermission("giants.*") || player.isOp()) {
 					String x = String.valueOf(Math.round(entity.getLocation().getX()));
@@ -337,19 +338,17 @@ public class Entities implements Listener {
 		    scheduler.scheduleSyncRepeatingTask(_giants, new Runnable() {
 		    	
 		        public void run() {
-		            for (World world : _giants.getServer().getWorlds()) {
-		            	for (Entity entity : world.getEntities()) {
-		            		if ((entity instanceof Slime) || (entity instanceof MagmaCube) || (entity instanceof Ghast)) {
-		            			for (Entity entity2 : entity.getNearbyEntities(15, 12, 15)) {
-			            			if ((entity2 instanceof Giant) && (entity.getPassenger() == null) && (entity2.getVehicle() == null)) {
-			            				Entity passenger = entity2;
-			            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
-			    						Bukkit.getServer().getPluginManager().callEvent(JSE);
-			            			}
-			            		}
+	            	for (Entity entity : giantEntities) {
+	            		if ((entity instanceof Slime) || (entity instanceof MagmaCube) || (entity instanceof Ghast)) {
+	            			for (Entity entity2 : entity.getNearbyEntities(15, 12, 15)) {
+		            			if ((entity2 instanceof Giant) && (entity.getPassenger() == null) && (entity2.getVehicle() == null)) {
+		            				Entity passenger = entity2;
+		            				JockeySpawnEvent JSE = new JockeySpawnEvent(entity, passenger);
+		    						Bukkit.getServer().getPluginManager().callEvent(JSE);
+		            			}
 		            		}
-		            	}
-		            }
+	            		}
+	            	}
 		        }
 		    }, 0L, 20L);
 		}

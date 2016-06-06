@@ -2,7 +2,7 @@ package me.Mammothskier.Giants.entity;
 
 import java.util.Random;
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.Files.ConfigValues;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -18,6 +18,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class GiantListeners implements Listener {
@@ -30,8 +32,8 @@ public class GiantListeners implements Listener {
 	
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
-		String ticks1 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
-		String ticks2 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant");
+		String ticks1 = Giants.getProperty(ConfigValues.fireAttackTargetTicks);
+		String ticks2 = Giants.getProperty(ConfigValues.fireAttackGiantTicks);
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int ticksTarget;
@@ -47,9 +49,9 @@ public class GiantListeners implements Listener {
 		if ((entity instanceof LivingEntity)) {
 			if (Entities.isGiantZombie(entity)) {
 				if(!(target == null)){
-					if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled").contains("Giant Zombie")) {
-						if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-							target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+					if (Giants.getPropertyList(ConfigValues.fireAttack).contains("Giant Zombie")) {
+						if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+							target.getLocation().getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT , 1, 0);
 						}
 						try {
 							event.getTarget().setFireTicks(ticksTarget);
@@ -71,7 +73,7 @@ public class GiantListeners implements Listener {
 
 		if ((entity instanceof LivingEntity)) {
 			if (Entities.isGiantZombie(entity)) {
-				if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack").contains("Giant Zombie")) {
+				if (Giants.getPropertyList(ConfigValues.lightningAttack).contains("Giant Zombie")) {
 					try {
 						target.getLocation().getWorld().strikeLightning(target.getLocation());
 					} catch (Exception e) {
@@ -93,9 +95,9 @@ public class GiantListeners implements Listener {
 			if (Entities.isGiantZombie(entity)) {
 				Location spawnLocation = entity.getLocation();
 				Location loc = spawnLocation;
-				if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Enabled").contains("Giant Zombie")) {
-					String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Zombies to Spawn");
-					String config2 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Health");
+				if (Giants.getPropertyList(ConfigValues.shrapnelAttack).contains("Giant Zombie")) {
+					String config = Giants.getProperty(ConfigValues.shrapnelAttackZombies);
+					String config2 = Giants.getProperty(ConfigValues.shrapnelAttackHealth);
 					try {
 						Amt = Integer.parseInt(config);
 						Health = Double.parseDouble(config2);
@@ -103,13 +105,13 @@ public class GiantListeners implements Listener {
 						Amt = 3;
 						Health = 20;
 					}
-					if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")){
+					if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")){
 						if (target instanceof LivingEntity){
-							target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
+							target.getLocation().getWorld().playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE , 1, 0);
 						}
 					}
 					for (int i = 1; i <= Amt; i++){
-						if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies").equalsIgnoreCase("true")) {
+						if (Giants.getProperty(ConfigValues.shrapnelAttackBabies).equalsIgnoreCase("true")) {
 							Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
 							((Zombie) e).setBaby(true);
 							((Damageable) e).setMaxHealth(Health);
@@ -144,8 +146,8 @@ public class GiantListeners implements Listener {
 				}
 				if (inRange == true) {
 					if (chance == 50) {
-						if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").contains("Giant Zombie")) {
-							String config = Giants.getProperty(Files.ATTACKS,  "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+						if (Giants.getPropertyList(ConfigValues.boulderAttack).contains("Giant Zombie")) {
+							String config = Giants.getProperty(ConfigValues.bouldAttackBlockDamage);
 							try {
 								bDamage = Integer.parseInt(config);
 							} catch (Exception e) {
@@ -155,8 +157,8 @@ public class GiantListeners implements Listener {
 							Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 							fireball.setShooter((LivingEntity) entity);
 							fireball.setYield(bDamage);
-							if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-								player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
+							if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 0);
 							}
 						}
 					}
@@ -168,8 +170,8 @@ public class GiantListeners implements Listener {
 	@EventHandler
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled").contains("Giant Zombie")) {
-			String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+		if (Giants.getPropertyList(ConfigValues.kickAttack).contains("Giant Zombie")) {
+			String config = Giants.getProperty(ConfigValues.kickAttackHeight);
 			double height;
 
 			try {
@@ -188,8 +190,8 @@ public class GiantListeners implements Listener {
 					if (Entities.isGiantZombie(entity)) {
 						if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
 							player.setVelocity(new Vector(0, height, 0));
-							if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-								player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+							if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+								player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 1, 0);
 							}
 						}
 					}
@@ -204,7 +206,7 @@ public class GiantListeners implements Listener {
 		boolean fire = false;
 		float power = 1.0f;
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled").contains("Giant Zombie")) {
+		if (Giants.getPropertyList(ConfigValues.stompAttack).contains("Giant Zombie")) {
 			Random pick = new Random();
 			int chance = 0;
 			for (int counter = 1; counter <= 1; counter++) {
@@ -214,12 +216,11 @@ public class GiantListeners implements Listener {
 				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
 					if (Entities.isGiantZombie(entity)) {
 						if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
-							String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Explosion Power");
-							if (Giants.getProperty(Files.ATTACKS,
-									"Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire").equalsIgnoreCase("true")) {
+							String config = Giants.getProperty(ConfigValues.stompAttackPower);
+							if (Giants.getProperty(ConfigValues.stompAttackFire).equalsIgnoreCase("true")) {
 								fire = true;
 							}
-							if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
+							if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
 								sound = true;
 							}
 							
@@ -231,7 +232,7 @@ public class GiantListeners implements Listener {
 							Location location = player.getLocation();
 							location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), power, fire);
 							if (sound == true){
-								location.getWorld().playSound(location, Sound.FIREWORK_LARGE_BLAST, 1, 0);
+								location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_LARGE_BLAST, 1, 0);
 							}
 						}
 					}
@@ -244,11 +245,11 @@ public class GiantListeners implements Listener {
 	public void zombiesOnDeath(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		if (Entities.isGiantZombie(entity)) {
-			if(Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Enabled").contains("Giant Zombie")){
+			if(Giants.getProperty(ConfigValues.zombiesOnDeath).equalsIgnoreCase("true")){
 				Location spawnLocation = entity.getLocation();
 				Location loc = spawnLocation;
-				String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn");
-				String config2 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Health");
+				String config = Giants.getProperty(ConfigValues.zombiesOnDeathZombies);
+				String config2 = Giants.getProperty(ConfigValues.zombiesOnDeathHealth);
 				int zombAmt;
 				double zombHealth;
 				
@@ -260,7 +261,7 @@ public class GiantListeners implements Listener {
 					zombHealth = 20;
 				}
 				for (int i = 1; i <= zombAmt; i++){
-					if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies").equalsIgnoreCase("true")) {
+					if (Giants.getProperty(ConfigValues.zombiesOnDeathBabies).equalsIgnoreCase("true")) {
 						Entity e = loc.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
 						((Zombie) e).setBaby(true);
 						((Damageable) e).setMaxHealth(zombHealth);
@@ -273,6 +274,32 @@ public class GiantListeners implements Listener {
 					}
 				}
 				
+			}
+		}
+	}
+	
+	@EventHandler
+	public void poisonAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (Giants.getPropertyList(ConfigValues.poisonAttack).contains("Giant Zombie")){
+			Random pick = new Random();
+			int chance = 0;
+			double length;
+			String config = Giants.getProperty(ConfigValues.poisonAttackLength);
+			try {
+				length = Double.parseDouble(config);
+			} catch (Exception e) {
+				length = 5;
+			}
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (Entities.isGiantZombie(entity)) {
+						player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (length*20), 3));
+					}
+				}
 			}
 		}
 	}

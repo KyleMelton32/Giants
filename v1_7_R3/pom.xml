@@ -9,7 +9,7 @@
   <parent>
     <groupId>me.Mammothskier</groupId>
     <artifactId>Giants-Parent</artifactId>
-    <version>7.0</version>
+    <version>7.1-SNAPSHOT</version>
   </parent>
   
   <dependencies>
@@ -27,17 +27,5 @@
       <type>jar</type>
     </dependency>
     
-    <dependency>
-      <groupId>me.Mammothskier</groupId>
-      <artifactId>Giants</artifactId>
-      <version>7.0-Beta</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.bukkit</groupId>
-          <artifactId>craftbukkit</artifactId>
-        </exclusion>
-      </exclusions>
-      <optional>true</optional>
-    </dependency>
   </dependencies>
 </project>

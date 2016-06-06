@@ -3,7 +3,7 @@ package me.Mammothskier.Giants.entity;
 import java.util.Random;
 
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.Files.ConfigValues;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,6 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class MagmaCubeListeners implements Listener {
@@ -29,8 +31,8 @@ public class MagmaCubeListeners implements Listener {
 
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
-		String ticks1 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
-		String ticks2 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Magma Cube");
+		String ticks1 = Giants.getProperty(ConfigValues.fireAttackTargetTicks);
+		String ticks2 = Giants.getProperty(ConfigValues.fireAttackGiantTicks);
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int ticksTarget;
@@ -47,12 +49,12 @@ public class MagmaCubeListeners implements Listener {
 		if ((entity instanceof LivingEntity)) {
 			if (Entities.isGiantLavaSlime(entity)) {
 				if(!(target == null)){
-					if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled").contains("Giant Lava Slime")) {
+					if (Giants.getPropertyList(ConfigValues.fireAttack).contains("Giant Lava Slime")) {
 						MagmaCube magmacube = (MagmaCube) event.getEntity();
 						s = magmacube.getSize();
 						if (s > 4){
-							if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-								target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+							if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+								target.getLocation().getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 1, 0);
 							}
 							try {
 								event.getTarget().setFireTicks(ticksTarget);
@@ -79,7 +81,7 @@ public class MagmaCubeListeners implements Listener {
 				MagmaCube magmacube = (MagmaCube) event.getEntity();
 				s = magmacube.getSize();
 				if (s > 4){
-					if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack").contains("Giant Lava Slime")) {
+					if (Giants.getProperty(ConfigValues.lightningAttack).contains("Giant Lava Slime")) {
 						try {
 							target.getLocation().getWorld().strikeLightning(target.getLocation());
 						} catch (Exception e) {
@@ -102,11 +104,11 @@ public class MagmaCubeListeners implements Listener {
 			MagmaCube magmacube = (MagmaCube) event.getEntity();
 			s = magmacube.getSize();
 			if (s > 4){
-				if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lava Attack").contains("Giant Lava Slime")) {
+				if (Giants.getPropertyList(ConfigValues.lavaAttack).contains("Giant Lava Slime")) {
 					target.getLocation().getBlock().setType(Material.LAVA);
-					if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-						target.getLocation().getWorld().playSound(target.getLocation(), Sound.EXPLODE, 1, 0);
-						target.getLocation().getWorld().playSound(target.getLocation(), Sound.LAVA_POP, 1, 0);
+					if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE , 1, 0);
+						target.getLocation().getWorld().playSound(target.getLocation(), Sound.BLOCK_LAVA_POP, 1, 0);
 					}
 				}
 			}
@@ -119,7 +121,7 @@ public class MagmaCubeListeners implements Listener {
 		boolean fire = false;
 		float power = 1.0f;
 		Player player = event.getPlayer();
-		if (Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled").equalsIgnoreCase("true")) {
+		if (Giants.getProperty(ConfigValues.stompAttack).equalsIgnoreCase("true")) {
 			Random pick = new Random();
 			int chance = 0;
 			int s;
@@ -133,12 +135,11 @@ public class MagmaCubeListeners implements Listener {
 						s = magmacube.getSize();
 						if (s > 4){
 							if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
-								String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Explosion Power");
-								if (Giants.getProperty(Files.ATTACKS, 
-										"Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire").equalsIgnoreCase("true")) {
+								String config = Giants.getProperty(ConfigValues.stompAttackPower);
+								if (Giants.getProperty(ConfigValues.stompAttackFire).equalsIgnoreCase("true")) {
 									fire = true;
 								}
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
 									sound = true;
 								}
 								
@@ -151,7 +152,7 @@ public class MagmaCubeListeners implements Listener {
 								Location location = player.getLocation();
 								location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), power, fire);
 								if (sound == true){
-									location.getWorld().playSound(location, Sound.FIREWORK_LARGE_BLAST, 1, 0);
+									location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_LARGE_BLAST, 1, 0);
 								}
 							}
 						}
@@ -183,8 +184,8 @@ public class MagmaCubeListeners implements Listener {
 					}
 					if (inRange == true) {
 						if (chance == 50) {
-							if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").contains("Giant Lava Slime")) {
-								String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+							if (Giants.getPropertyList(ConfigValues.boulderAttack).contains("Giant Lava Slime")) {
+								String config = Giants.getProperty(ConfigValues.bouldAttackBlockDamage);
 								try {
 									bDamage = Integer.parseInt(config);
 								} catch (Exception e) {
@@ -195,8 +196,8 @@ public class MagmaCubeListeners implements Listener {
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
 								fireball.setYield(bDamage);
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 0);
 								}
 							}
 						}
@@ -209,9 +210,9 @@ public class MagmaCubeListeners implements Listener {
 	@EventHandler
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled").contains("Giant Lava Slime")) {
+		if (Giants.getPropertyList(ConfigValues.kickAttack).contains("Giant Lava Slime")) {
 			int s;
-			String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+			String config = Giants.getProperty(ConfigValues.kickAttackHeight);
 			double height;
 
 			try {
@@ -233,11 +234,37 @@ public class MagmaCubeListeners implements Listener {
 						if (s > 4){
 							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
 								player.setVelocity(new Vector(0, height, 0));
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-									player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 1, 0);
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void poisonAttack(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (Giants.getPropertyList(ConfigValues.poisonAttack).contains("Giant Lava Slime")){
+			Random pick = new Random();
+			int chance = 0;
+			double length;
+			String config = Giants.getProperty(ConfigValues.poisonAttackLength);
+			try {
+				length = Double.parseDouble(config);
+			} catch (Exception e) {
+				length = 5;
+			}
+			for (int counter = 1; counter <= 1; counter++) {
+				chance = 1 + pick.nextInt(100);
+			}
+			if (chance == 50) {
+				for (Entity entity : player.getNearbyEntities(3, 2, 3)) {
+					if (Entities.isGiantLavaSlime(entity)) {
+						player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (length*20), 3));
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-package me.Mammothskier.Giants.files;
+package me.Mammothskier.Giants.Files;
 
 public enum Files {
 	CONFIG("plugins/Giants/config.yml"),

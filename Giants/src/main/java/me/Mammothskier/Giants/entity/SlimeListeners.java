@@ -3,7 +3,7 @@ package me.Mammothskier.Giants.entity;
 import java.util.Random;
 
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Files;
+import me.Mammothskier.Giants.Files.ConfigValues;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -39,7 +39,7 @@ public class SlimeListeners implements Listener {
 				Slime slime = (Slime) event.getEntity();
 				s = slime.getSize();
 				if (s > 4){
-					if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack").contains("Giant Slime")) {
+					if (Giants.getPropertyList(ConfigValues.lightningAttack).contains("Giant Slime")) {
 						try {
 							target.getLocation().getWorld().strikeLightning(target.getLocation());
 						} catch (Exception e) {
@@ -54,8 +54,8 @@ public class SlimeListeners implements Listener {
 	
 	@EventHandler
 	public void onFireAttack(EntityTargetEvent event) {
-		String ticks1 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Target");
-		String ticks2 = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Slime");
+		String ticks1 = Giants.getProperty(ConfigValues.fireAttackTargetTicks);
+		String ticks2 = Giants.getProperty(ConfigValues.fireAttackGiantTicks);
 		Entity entity = event.getEntity();
 		Entity target = event.getTarget();
 		int ticksTarget;
@@ -75,9 +75,9 @@ public class SlimeListeners implements Listener {
 				s = slime.getSize();
 				if (s > 4){
 					if(!(target == null)){
-						if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled").contains("Giant Slime")) {
-							if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-								target.getLocation().getWorld().playSound(target.getLocation(), Sound.FIRE, 1, 0);
+						if (Giants.getPropertyList(ConfigValues.fireAttack).contains("Giant Slime")) {
+							if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+								target.getLocation().getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 1, 0);
 							}
 							try {
 								event.getTarget().setFireTicks(ticksTarget);
@@ -115,8 +115,8 @@ public class SlimeListeners implements Listener {
 					}
 					if (inRange == true) {
 						if (chance == 50) {
-							if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled").contains("Giant Slime")) {
-								String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage");
+							if (Giants.getPropertyList(ConfigValues.boulderAttack).contains("Giant Slime")) {
+								String config = Giants.getProperty(ConfigValues.bouldAttackBlockDamage);
 								try {
 									bDamage = Integer.parseInt(config);
 								} catch (Exception e) {
@@ -126,8 +126,8 @@ public class SlimeListeners implements Listener {
 								Fireball fireball = entity.getWorld().spawn(((LivingEntity) entity).getEyeLocation().add(direction.getX(), direction.getY() - 5, direction.getZ()), Fireball.class);
 								fireball.setShooter((LivingEntity) entity);
 								fireball.setYield(bDamage);
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-									player.getLocation().getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 0);
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 0);
 								}
 							}
 						}
@@ -140,8 +140,8 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void onKickAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled").contains("Giant Slime")) {
-			String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height");
+		if (Giants.getPropertyList(ConfigValues.kickAttack).contains("Giant Slime")) {
+			String config = Giants.getProperty(ConfigValues.kickAttackHeight);
 			double height;
 			int s;
 
@@ -164,8 +164,8 @@ public class SlimeListeners implements Listener {
 						if (s > 4){
 							if (entity.getNearbyEntities(5, 5, 5).contains(player)) {
 								player.setVelocity(new Vector(0, height, 0));
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-									player.getLocation().getWorld().playSound(player.getLocation(), Sound.LAVA_POP, 1, 0);
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+									player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 1, 0);
 								}
 							}
 						}
@@ -181,7 +181,7 @@ public class SlimeListeners implements Listener {
 		boolean fire = false;
 		float power = 1.0f;
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled").contains("Giant Slime")) {
+		if (Giants.getPropertyList(ConfigValues.stompAttack).contains("Giant Slime")) {
 			Random pick = new Random();
 			int chance = 0;
 			int s;
@@ -195,12 +195,11 @@ public class SlimeListeners implements Listener {
 						s = slime.getSize();
 						if (s > 4){
 							if (entity.getNearbyEntities(3, 2, 3).contains(player)) {
-								String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Explosion Power");
-								if (Giants.getProperty(Files.ATTACKS,
-										"Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire").equalsIgnoreCase("true")) {
+								String config = Giants.getProperty(ConfigValues.stompAttackPower);
+								if (Giants.getProperty(ConfigValues.stompAttackFire).equalsIgnoreCase("true")) {
 									fire = true;
 								}
-								if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
+								if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
 									sound = true;
 								}
 								
@@ -212,7 +211,7 @@ public class SlimeListeners implements Listener {
 								Location location = player.getLocation();
 								location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), power, fire);
 								if (sound == true){
-									location.getWorld().playSound(location, Sound.FIREWORK_LARGE_BLAST, 1, 0);
+									location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_LARGE_BLAST, 1, 0);
 								}
 							}
 						}
@@ -225,11 +224,11 @@ public class SlimeListeners implements Listener {
 	@EventHandler
 	public void poisonAttack(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (Giants.getPropertyList(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack").contains("Giant Slime")){
+		if (Giants.getPropertyList(ConfigValues.poisonAttack).contains("Giant Slime")){
 			Random pick = new Random();
 			int chance = 0;
 			double length;
-			String config = Giants.getProperty(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack.length");
+			String config = Giants.getProperty(ConfigValues.poisonAttackLength);
 			try {
 				length = Double.parseDouble(config);
 			} catch (Exception e) {

@@ -1,4 +1,4 @@
-package me.Mammothskier.Giants.files;
+package me.Mammothskier.Giants.Files;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public enum ConfigValues {
 	/**
 	 * These file values will go in the config.yml file.
 	 */
-	dependencies(Files.CONFIG, "Giants Configuration.Dependencies.BarAPI", FileHandler.checkDependencies("BarAPI")),
+	dependencies(Files.CONFIG, "Giants Configuration.Dependencies.BarAPI", FileSetup.checkDependencies("BarAPI")),
 	zombieBoolean(Files.CONFIG,"Giants Configuration.Entities.Giant Zombie", true),
 	slimeBoolean(Files.CONFIG, "Giants Configuration.Entities.Giant Slime", false),
 	lavaSlimeBoolean(Files.CONFIG, "Giants Configuration.Entities.Giant Lava Slime", false),
@@ -30,20 +30,20 @@ public enum ConfigValues {
 	/**
 	 * These file values will go in the biome.yml file.
 	 */
-	biomeSwampland(Files.BIOMES,"Giants Configuration.Biome Settings.Swampland", FileHandler.loadEntities()),
-	biomeForest(Files.BIOMES, "Giants Configuration.Biome Settings.Forest", FileHandler.loadEntities()),
-	biomeTaiga(Files.BIOMES, "Giants Configuration.Biome Settings.Taiga", FileHandler.loadEntities()),
-	biomePlains(Files.BIOMES, "Giants Configuration.Biome Settings.Plains", FileHandler.loadEntities()),
-	biomeExtremeHills(Files.BIOMES, "Giants Configuration.Biome Settings.Extreme Hills", FileHandler.loadEntities()),
-	biomeMushroomIsland(Files.BIOMES, "Giants Configuration.Biome Settings.Mushroom Island", FileHandler.loadEntities()),
-	biomeDesert(Files.BIOMES, "Giants Configuration.Biome Settings.Desert", FileHandler.loadEntities()),
-	biomeJungle(Files.BIOMES, "Giants Configuration.Biome Settings.Jungle", FileHandler.loadEntities()),
-	biomeBirchForest(Files.BIOMES, "Giants Configuration.Biome Settings.Birch Forest", FileHandler.loadEntities()),
-	biomeSavanna(Files.BIOMES, "Giants Configuration.Biome Settings.Savanna", FileHandler.loadEntities()),
-	biomeRoofedForest(Files.BIOMES, "Giants Configuration.Biome Settings.Roofed Forest",FileHandler.loadEntities()),
-	biomeMesa(Files.BIOMES, "Giants Configuration.Biome Settings.Mesa",FileHandler.loadEntities()),
-	biomeSmallMountains(Files.BIOMES,"Giants Configuration.Biome Settings.Other.Small Mountains",FileHandler.loadEntities()),
-	biomeIceMountains(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Ice Mountains",FileHandler.loadEntities()),
+	biomeSwampland(Files.BIOMES,"Giants Configuration.Biome Settings.Swampland", FileSetup.loadEntities()),
+	biomeForest(Files.BIOMES, "Giants Configuration.Biome Settings.Forest", FileSetup.loadEntities()),
+	biomeTaiga(Files.BIOMES, "Giants Configuration.Biome Settings.Taiga", FileSetup.loadEntities()),
+	biomePlains(Files.BIOMES, "Giants Configuration.Biome Settings.Plains", FileSetup.loadEntities()),
+	biomeExtremeHills(Files.BIOMES, "Giants Configuration.Biome Settings.Extreme Hills", FileSetup.loadEntities()),
+	biomeMushroomIsland(Files.BIOMES, "Giants Configuration.Biome Settings.Mushroom Island", FileSetup.loadEntities()),
+	biomeDesert(Files.BIOMES, "Giants Configuration.Biome Settings.Desert", FileSetup.loadEntities()),
+	biomeJungle(Files.BIOMES, "Giants Configuration.Biome Settings.Jungle", FileSetup.loadEntities()),
+	biomeBirchForest(Files.BIOMES, "Giants Configuration.Biome Settings.Birch Forest", FileSetup.loadEntities()),
+	biomeSavanna(Files.BIOMES, "Giants Configuration.Biome Settings.Savanna", FileSetup.loadEntities()),
+	biomeRoofedForest(Files.BIOMES, "Giants Configuration.Biome Settings.Roofed Forest",FileSetup.loadEntities()),
+	biomeMesa(Files.BIOMES, "Giants Configuration.Biome Settings.Mesa",FileSetup.loadEntities()),
+	biomeSmallMountains(Files.BIOMES,"Giants Configuration.Biome Settings.Other.Small Mountains",FileSetup.loadEntities()),
+	biomeIceMountains(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Ice Mountains",FileSetup.loadEntities()),
 	biomeOcean(Files.BIOMES, "Giants Configuration.Biome Settings.Other.Ocean", ""),
 	biomeRiver(Files.BIOMES, "Giants Configuration.Biome Settings.Other.River", ""),
 	biomeHell(Files.BIOMES,"Giants Configuration.Biome Settings.Other.Hell", "- Giant Lava Slime"),
@@ -53,9 +53,13 @@ public enum ConfigValues {
 	 * These file values will go in the entities.yml file.
 	 */
 //Worlds
-	zombieWorld(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Zombie", FileHandler.loadWorlds()),
-	slimeWorld(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Slime", FileHandler.loadWorlds()),
-	lavaslimeWorld(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Lava Slime", FileHandler.loadWorlds()),
+	zombieWorlds(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Zombie", FileSetup.loadWorlds()),
+	slimeWorlds(Files.ENTITIES, "Entities Configuration.Spawn Settings.Worlds.Giant Slime", FileSetup.loadWorlds()),
+	lavaslimeWorlds(Files.ENTITIES, "Entities Configuration.Spawn Settings.World.Giant Lava Slime", FileSetup.loadWorlds()),
+//Spawn chance
+	zombieChance(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Zombie", new Integer(10)),
+	slimeChance(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Slime", new Integer(10)),
+	lavaSlimeChance(Files.ENTITIES, "Entities Configuration.Spawn Settings.Chance.Giant Lava Slime", new Integer(10)),
 //Size
 	slimeSize(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime", new Integer(12)),
 	lavaSlimeSize(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime", new Integer(12)),
@@ -75,9 +79,9 @@ public enum ConfigValues {
 	armourDropRate(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate", new Float(8.5)),
 //Drops
 	dropManager(Files.ENTITIES, "Entities Configuration.Stats.Drops.Enable Drop Manager", true),
-	zombieDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(FileHandler.loadDefaultDrop("Giant Zombie"))),
-	slimeDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Slime", Arrays.asList(FileHandler.loadDefaultDrop("Giant Slime"))),
-	lavaSlimeDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Lava Slime", Arrays.asList(FileHandler.loadDefaultDrop("Giant Lava Slime"))),
+	zombieDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(FileSetup.loadDefaultDrop("Giant Zombie"))),
+	slimeDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Slime", Arrays.asList(FileSetup.loadDefaultDrop("Giant Slime"))),
+	lavaSlimeDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Lava Slime", Arrays.asList(FileSetup.loadDefaultDrop("Giant Lava Slime"))),
 //BarAPI
 	zombieBarAPI(Files.ENTITIES, "Entities Configuration.Stats.BarAPI.Display Name.Giant Zombie", "&2Giant Zombie"),
 	slimeBarAPI(Files.ENTITIES, "Entities Configuration.Stats.BarAPI.Display Name.Giant Slime", "&2Giant Slime Size {size}"),
@@ -100,17 +104,17 @@ public enum ConfigValues {
 	/**
 	 * These file values will go in attacks.yml
 	 */
-	lightningAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack", FileHandler.loadEntities()),
-	stompAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled", FileHandler.loadEntities()),
+	lightningAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lightning Attack", FileSetup.loadEntities()),
+	stompAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Enabled", FileSetup.loadEntities()),
 	stompAttackPower(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Explosion Power", new Integer(1)),
-	stompAttackFire(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire", FileHandler.loadEntities()),
-	lavaAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lava Attack", FileHandler.loadEntities()),
-	kickAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled", FileHandler.loadEntities()),
+	stompAttackFire(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Stomp Attack.Light Fire", FileSetup.loadEntities()),
+	lavaAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Lava Attack", FileSetup.loadEntities()),
+	kickAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Enabled", FileSetup.loadEntities()),
 	kickAttackHeight(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Kick Attack.Kick Height", new Integer(1)),
-	fireAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled", FileHandler.loadEntities()),
+	fireAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Enabled", FileSetup.loadEntities()),
 	fireAttackTargetTicks(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Target", new Integer(100)),
 	fireAttackGiantTicks(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Fire Attack.Ticks for Giant", new Integer(100)),
-	bouldAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled", FileHandler.loadEntities()),
+	boulderAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Enabled", FileSetup.loadEntities()),
 	bouldAttackBlockDamage(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Throw Boulder Attack.Block Damage", new Integer(1)),
 	shrapnelAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Enabled", Arrays.asList("Giant Zombie")),
 	shrapnelAttackBabies(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Shrapnel Attack.Baby Zombies", false),
@@ -120,30 +124,32 @@ public enum ConfigValues {
 	zombiesOnDeathBabies(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false),
 	zombiesOnDeathZombies(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5)),
 	zombiesOnDeathHealth(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Health", new Integer(20)),
+	poisonAttack(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack", FileSetup.loadEntities()),
+	poisonAttackLength(Files.ATTACKS, "Attacks Configuration.Attack Mechanisms.Poison Attack.length", "10.0"),
 	
 	/**
 	 * These file values will go in jockey.yml
 	 */
 	jockeyWarning(Files.JOCKEY, "Jockey Configuration", new String("This entity of Giants is extremely experimental and does not have many features")),
-	jockeyWorlds(Files.JOCKEY, "Jockey Configuration.Spawn Settings.Worlds", FileHandler.loadWorlds()),
+	jockeyWorlds(Files.JOCKEY, "Jockey Configuration.Spawn Settings.Worlds", FileSetup.loadWorlds()),
 	
 	/**
 	 * The file values will go in jockey/biomes.yml
 	 */
-	jockeyBiomeSwampland(Files.JOCKEYBIOMES,"Giants Configuration.Biome Settings.Swampland", FileHandler.loadEntities()),
-	jockeyBiomeForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Forest", FileHandler.loadEntities()),
-	jockeyBiomeTaiga(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Taiga", FileHandler.loadEntities()),
-	jockeyBiomePlains(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Plains", FileHandler.loadEntities()),
-	jockeyBiomeExtremeHills(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Extreme Hills", FileHandler.loadEntities()),
-	jockeyBiomeMushroomIsland(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Mushroom Island", FileHandler.loadEntities()),
-	jockeyBiomeDesert(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Desert", FileHandler.loadEntities()),
-	jockeyBiomeJungle(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Jungle", FileHandler.loadEntities()),
-	jockeyBiomeBirchForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Birch Forest", FileHandler.loadEntities()),
-	jockeyBiomeSavanna(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Savanna", FileHandler.loadEntities()),
-	jockeyBiomeRoofedForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Roofed Forest",FileHandler.loadEntities()),
-	jockeyBiomeMesa(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Mesa",FileHandler.loadEntities()),
-	jockeyBiomeSmallMountains(Files.JOCKEYBIOMES,"Giants Configuration.Biome Settings.Other.Small Mountains",FileHandler.loadEntities()),
-	jockeyBiomeIceMountains(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Other.Ice Mountains",FileHandler.loadEntities()),
+	jockeyBiomeSwampland(Files.JOCKEYBIOMES,"Giants Configuration.Biome Settings.Swampland", FileSetup.loadEntities()),
+	jockeyBiomeForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Forest", FileSetup.loadEntities()),
+	jockeyBiomeTaiga(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Taiga", FileSetup.loadEntities()),
+	jockeyBiomePlains(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Plains", FileSetup.loadEntities()),
+	jockeyBiomeExtremeHills(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Extreme Hills", FileSetup.loadEntities()),
+	jockeyBiomeMushroomIsland(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Mushroom Island", FileSetup.loadEntities()),
+	jockeyBiomeDesert(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Desert", FileSetup.loadEntities()),
+	jockeyBiomeJungle(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Jungle", FileSetup.loadEntities()),
+	jockeyBiomeBirchForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Birch Forest", FileSetup.loadEntities()),
+	jockeyBiomeSavanna(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Savanna", FileSetup.loadEntities()),
+	jockeyBiomeRoofedForest(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Roofed Forest",FileSetup.loadEntities()),
+	jockeyBiomeMesa(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Mesa",FileSetup.loadEntities()),
+	jockeyBiomeSmallMountains(Files.JOCKEYBIOMES,"Giants Configuration.Biome Settings.Other.Small Mountains",FileSetup.loadEntities()),
+	jockeyBiomeIceMountains(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Other.Ice Mountains",FileSetup.loadEntities()),
 	jockeyBiomeOcean(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Other.Ocean", ""),
 	jockeyBiomeRiver(Files.JOCKEYBIOMES, "Giants Configuration.Biome Settings.Other.River", ""),
 	jockeyBiomeHell(Files.JOCKEYBIOMES,"Giants Configuration.Biome Settings.Other.Hell", "- Giant Lava Slime"),

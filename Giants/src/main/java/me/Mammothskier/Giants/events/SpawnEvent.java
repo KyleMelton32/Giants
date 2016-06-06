@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.Mammothskier.Giants.Giants;
+import me.Mammothskier.Giants.Files.Files;
 import me.Mammothskier.Giants.entity.Entities;
-import me.Mammothskier.Giants.files.Files;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,7 +27,7 @@ public class SpawnEvent extends Event{
 	private Location location;
 	private static final HandlerList handlers = new HandlerList();
 	
-	public SpawnEvent(Location loc, EntityType entityType) {
+public SpawnEvent(Location loc, EntityType entityType) {
 		location = loc;
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ());
 		double health = 100;

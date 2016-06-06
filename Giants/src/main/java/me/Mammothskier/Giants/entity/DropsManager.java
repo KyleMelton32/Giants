@@ -1,14 +1,12 @@
 package me.Mammothskier.Giants.entity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import me.Mammothskier.Giants.Giants;
-import me.Mammothskier.Giants.files.Files;
-
+import me.Mammothskier.Giants.Files.ConfigValues;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -30,88 +28,6 @@ public class DropsManager implements Listener {
 		_giants = giants;
 		_giants.getServer().getPluginManager().registerEvents(this, giants);
 	}
-	
-	@EventHandler
-	public void onGiantDrops(EntityDeathEvent event) throws IOException{
-		Entity entity = event.getEntity();
-		boolean enabled = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Drops.Enable Drop Manager").equalsIgnoreCase("true");
-		
-
-		if (Entities.isGiantZombie(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Zombie");
-			int exp;
-
-			try {
-				exp = Integer.parseInt(string);
-			} catch (Exception e) {
-				exp = 5;
-			}
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
-			}
-			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
-				return;
-			}
-			
-			List<ItemStack> drops = new ArrayList<ItemStack>();
-			drops = setDrop(entity, newDrop);
-
-			event.getDrops().addAll(drops);
-		}
-		if (Entities.isGiantSlime(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Slime");
-			int exp;
-
-			try {
-				exp = Integer.parseInt(string);
-			} catch (Exception e) {
-				exp = 5;
-			} 
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 0);
-			}
-			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Slime");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
-				return;
-			}
-			
-			List<ItemStack> drops = new ArrayList<ItemStack>();
-
-			drops = setDrop(entity, newDrop);
-
-			event.getDrops().addAll(drops);
-		}
-		
-
-		if (Entities.isGiantLavaSlime(entity)) {
-			String string = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Lava Slime");
-			int exp;
-
-			try {
-				exp = Integer.parseInt(string);
-			} catch (Exception e) {
-				exp = 5;
-			}
-			if (Giants.getProperty(Files.CONFIG, "Giants Configuration.Sounds").equalsIgnoreCase("true")) {
-				entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
-			}
-			event.setDroppedExp(exp);
-			List<String> newDrop = Giants.getPropertyList(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Lava Slime");
-			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]") || enabled == false) {
-				return;
-			}
-
-			List<ItemStack> drops = new ArrayList<ItemStack>();
-
-			drops = setDrop(entity, newDrop);
-
-			event.getDrops().addAll(drops);
-		}
-	}
-	
 	
 	public static List<ItemStack> setDrop(Entity entity, List<String> newDrop) {
 		List<ItemStack> drops = new ArrayList<ItemStack>();
@@ -522,5 +438,42 @@ public class DropsManager implements Listener {
 				break;
 		}
 		return drops;
+	}
+	
+	@EventHandler
+	public void onEntityDeath(EntityDeathEvent event) {
+		Entity entity = event.getEntity();
+		if (Entities.giantEntities.remove(entity) && Giants.getProperty(ConfigValues.dropManager).equalsIgnoreCase("true")) {
+			String experience;
+			List<String> newDrop;
+			if (Entities.isGiantZombie(entity)) {
+				experience = Giants.getProperty(ConfigValues.zombieExperience);
+				newDrop = Giants.getPropertyList(ConfigValues.zombieDrops);
+			} else if (Entities.isGiantSlime(entity)) {
+				experience = Giants.getProperty(ConfigValues.slimeExperience);
+				newDrop = Giants.getPropertyList(ConfigValues.slimeDrops);
+			} else if (Entities.isGiantLavaSlime(entity)) {
+				experience = Giants.getProperty(ConfigValues.lavaSlimeExperience);
+				newDrop = Giants.getPropertyList(ConfigValues.lavaSlimeDrops);
+			} else {
+				return;
+			}
+			
+			try {
+				event.setDroppedExp(Integer.parseInt(experience));
+			} catch ( Exception e) {
+				event.setDroppedExp(5);
+			}
+			
+			if (newDrop == null || newDrop.contains("") || newDrop.toString().equalsIgnoreCase("[]")) {
+				return;
+			}
+			if (Giants.getProperty(ConfigValues.soundsBoolean).equalsIgnoreCase("true")) {
+				entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ENDERDRAGON_DEATH, 1, 0);
+			}
+			
+			setDrop(entity, newDrop);
+			
+		}
 	}
 }

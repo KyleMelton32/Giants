@@ -3,10 +3,12 @@
   <parent>
     <artifactId>Giants-Parent</artifactId>
     <groupId>me.Mammothskier</groupId>
-    <version>7.0-Beta</version>
+    <version>7.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>Giants</artifactId>
+  <name>Giants</name>
+  <version>7.1-Beta</version>
   <repositories>
     <repository>
       <id>spigot-repo</id>

@@ -50,7 +50,7 @@ public class NMSUtils {
 				me.Mammothskier.Giants.entity.nms.v1_8_R3.EntityCreator.createEntity(location, reason);
 				break;
 			case("v1_9_R1"):
-				me.Mammothskier.Giants.entity.nms.v1_8_R3.EntityCreator.createEntity(location, reason);
+				me.Mammothskier.Giants.entity.nms.v1_9_R1.EntityCreator.createEntity(location, reason);
 				break;
 			}
 		}
@@ -100,6 +100,9 @@ public class NMSUtils {
 			me.Mammothskier.Giants.entity.nms.v1_8_R2.CustomEntityType.unregisterEntities();
 		} else if ("v1_8_R3".equals(version)) {
 			me.Mammothskier.Giants.entity.nms.v1_8_R3.CustomEntityType.unregisterEntities();
+		} else if ("v1_9_R1".equals(version)) {
+			me.Mammothskier.Giants.entity.nms.v1_9_R1.CustomEntityType.unregisterEntities();
 		}
+		
 	}
 }
