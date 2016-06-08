@@ -78,6 +78,14 @@ public class FileHandler {
 				Config.set("Giants Configuration.Sounds", true);
 				Config.set("Giants Configuration.Debug Mode.Enabled", false);
 				Config.set("Giants Configuration.Debug Mode.Debug Message", "&2A {entity} has spawned at X:&F%X &2Y:&F%Y &2Z:&F%Z");*/
+				for (ConfigValues value : ConfigValues.values()) {
+					if (value.getFile() == Files.CONFIG) {
+						if (!value.isList())
+							Config.set(value.getKey(), value.getValue());
+						else 
+							Config.set(value.getKey(), value.getValues());
+					}
+				}
 				try {
 					Config.save(file);
 				} catch (IOException e) {
@@ -105,6 +113,14 @@ public class FileHandler {
 				Biomes.set("Giants Configuration.Biome Settings.Other.River", "");
 				Biomes.set("Giants Configuration.Biome Settings.Other.Hell", "- Giant Lava Slime");
 				Biomes.set("Giants Configuration.Biome Settings.Other.Sky", "");*/
+				for (ConfigValues value : ConfigValues.values()) {
+					if (value.getFile() == Files.BIOMES) {
+						if (!value.isList())
+							Biomes.set(value.getKey(), value.getValue());
+						else 
+							Biomes.set(value.getKey(), value.getValues());
+					}
+				}
 				try {
 					Biomes.save(file);
 				} catch (IOException e) {
@@ -160,6 +176,14 @@ public class FileHandler {
 				entities.set("Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Zombie", false);
 				entities.set("Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Slime", false);
 				entities.set("Entities Configuration.Damage Settings.Block Damage.Allow Cacti Damage.Giant Lava Slime", false);*/
+				for (ConfigValues value : ConfigValues.values()) {
+					if (value.getFile() == Files.ENTITIES) {
+						if (!value.isList())
+							entities.set(value.getKey(), value.getValue());
+						else 
+							entities.set(value.getKey(), value.getValues());
+					}
+				}
 				try {
 					entities.save(file);
 				} catch (IOException e) {
@@ -190,6 +214,14 @@ public class FileHandler {
 				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Baby Zombies", false);
 				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Zombies to Spawn", new Integer(5));
 				attacks.set("Attacks Configuration.Attack Mechanisms.Spawn Zombies On Death.Health", new Integer(20));*/
+				for (ConfigValues value : ConfigValues.values()) {
+					if (value.getFile() == Files.ATTACKS) {
+						if (!value.isList())
+							attacks.set(value.getKey(), value.getValue());
+						else 
+							attacks.set(value.getKey(), value.getValues());
+					}
+				}
 				try {
 					attacks.save(file);
 				} catch (IOException e) {
@@ -202,6 +234,14 @@ public class FileHandler {
 					Jockey.set("Jockey Configuration.File Version", FileSetup.loadVersion());
 					Jockey.set("Jockey Configuration", new String("This entity of Giants is extremely experimental and does not have many features"));
 					Jockey.set("Jockey Configuration.Spawn Settings.Worlds", loadWorlds());
+					for (ConfigValues value : ConfigValues.values()) {
+						if (value.getFile() == Files.JOCKEY) {
+							if (!value.isList())
+								Jockey.set(value.getKey(), value.getValue());
+							else 
+								Jockey.set(value.getKey(), value.getValues());
+						}
+					}
 					try {
 						Jockey.save(file);
 					} catch (IOException e) {
@@ -212,7 +252,7 @@ public class FileHandler {
 			case JOCKEYBIOMES:
 				if (getProperty(Files.CONFIG, "Giants Configuration.Entities.Giant Jockey.Warning.Enabled").equalsIgnoreCase("true")) {
 					YamlConfiguration JockeyBiomes = YamlConfiguration.loadConfiguration(file);
-					JockeyBiomes.set("Giants Configuration.File Version", FileSetup.loadVersion());
+/*					JockeyBiomes.set("Giants Configuration.File Version", FileSetup.loadVersion());
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Swampland", true);
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Forest", true);
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Taiga", true);
@@ -230,7 +270,15 @@ public class FileHandler {
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Other.Ocean", false);
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Other.River", false);
 					JockeyBiomes.set("Giants Configuration.Biome Settings.Other.Hell", true);
-					JockeyBiomes.set("Giants Configuration.Biome Settings.Other.Sky", true);
+					JockeyBiomes.set("Giants Configuration.Biome Settings.Other.Sky", true);*/
+					for (ConfigValues value : ConfigValues.values()) {
+						if (value.getFile() == Files.JOCKEYBIOMES) {
+							if (!value.isList())
+								JockeyBiomes.set(value.getKey(), value.getValue());
+							else 
+								JockeyBiomes.set(value.getKey(), value.getValues());
+						}
+					}
 					try {
 						JockeyBiomes.save(file);
 					} catch (IOException e) {
@@ -275,6 +323,8 @@ public class FileHandler {
 	 * @return String property from the config file the value is saved in.
 	 */
 	public String getProperty(ConfigValues value) {
+		if (value == ConfigValues.soundsBoolean)
+			return "false";
 		FileConfiguration config = _configurations.get(value.getFile());
 		if (config != null) {
 			String property = config.getString(value.getKey(), "NULL");

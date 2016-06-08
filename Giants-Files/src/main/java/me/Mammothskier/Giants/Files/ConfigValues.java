@@ -159,12 +159,14 @@ public enum ConfigValues {
 	private final Files _files;
 	private final String _value;
 	private final List<String> _values;
+	private final boolean list;
 	
 	private ConfigValues(Files file, String key, String value) {
 		_files = file;
 		_key = key;
 		_value= value;
 		_values = null;
+		list = false;
 	}
 	
 	private ConfigValues(Files file, String key, int value) {
@@ -172,6 +174,7 @@ public enum ConfigValues {
 		_key = key;
 		_value= value + "";
 		_values = null;
+		list = false;
 	}
 	
 	private ConfigValues(Files file, String key, float value) {
@@ -179,6 +182,7 @@ public enum ConfigValues {
 		_key = key;
 		_value= value + "";
 		_values = null;
+		list = false;
 	}
 	
 	private ConfigValues(Files file, String key, boolean value) {
@@ -186,6 +190,7 @@ public enum ConfigValues {
 		_key = key;
 		_value = value == true ? "true" : "false";
 		_values = null;
+		list = false;
 	}
 	
 	private ConfigValues(String key, String value) {
@@ -193,13 +198,15 @@ public enum ConfigValues {
 		_key = key;
 		_value= value;
 		_values = null;
+		list = false;
 	}
 	
 	private ConfigValues(Files file, String key, List<String> value) {
 		_files = file;
 		_key = key;
 		_values= value;
-		_value = _values.get(0);
+		_value = null;
+		list = true;
 	}
 	
 	public String getKey() {
@@ -226,6 +233,13 @@ public enum ConfigValues {
 			return null;
 		}
 		return version;
+	}
+
+	/**
+	 * @return the list
+	 */
+	public boolean isList() {
+		return list;
 	}
 
 }
