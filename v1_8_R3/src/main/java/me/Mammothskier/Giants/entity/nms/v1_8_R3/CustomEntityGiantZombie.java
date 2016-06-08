@@ -7,7 +7,6 @@ import org.bukkit.craftbukkit.v1_8_R3.util.UnsafeList;
 import net.minecraft.server.v1_8_R3.EntityGiantZombie;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.EntityIronGolem;
-import net.minecraft.server.v1_8_R3.EntityPigZombie;
 import net.minecraft.server.v1_8_R3.EntitySkeleton;
 import net.minecraft.server.v1_8_R3.EntityVillager;
 import net.minecraft.server.v1_8_R3.PathfinderGoalFloat;
@@ -21,10 +20,12 @@ import net.minecraft.server.v1_8_R3.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R3.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R3.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R3.World;
+import net.minecraft.server.v1_8_R3.BlockPosition;
 import net.minecraft.server.v1_8_R3.GenericAttributes;
 
 public class CustomEntityGiantZombie extends EntityGiantZombie {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public CustomEntityGiantZombie(World world) {
 		super(world);
 		try {
@@ -74,6 +75,7 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
         this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).setValue(50.0D);
     }
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void n() {
         this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0D, true));
         this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
@@ -82,4 +84,8 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false));
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
+	
+	public float a(BlockPosition position) {
+		return 0.5F - this.world.o(position);
+	}
 }

@@ -21,6 +21,7 @@ import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
+import net.minecraft.server.v1_8_R2.BlockPosition;
 
 public class CustomEntityGiantZombie extends EntityGiantZombie {
 
@@ -84,4 +85,8 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false));
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
+    
+	public float a(BlockPosition position) {
+		return 0.5F - this.world.o(position);
+	}
 }

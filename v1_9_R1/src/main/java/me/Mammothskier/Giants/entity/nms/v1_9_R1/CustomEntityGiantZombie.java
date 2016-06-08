@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.v1_9_R1.util.UnsafeList;
 
 import me.Mammothskier.Giants.Files.ConfigValues;
 import me.Mammothskier.Giants.Files.FileHandler;
+import net.minecraft.server.v1_9_R1.BlockPosition;
 import net.minecraft.server.v1_9_R1.DataWatcher;
 import net.minecraft.server.v1_9_R1.DataWatcherObject;
 import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
@@ -88,4 +89,8 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
 			this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false)); // Spigot
 		this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget<EntityIronGolem>(this, EntityIronGolem.class, true));
     }
+	
+	public float a(BlockPosition position) {
+		return 0.5F - this.world.n(position);
+	}
 }
