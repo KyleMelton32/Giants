@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	
   <modules>
-    <module>Giants-Files</module>
+    <module>files</module>
 	<module>v1_7_R3</module>
 	<module>v1_7_R4</module>
 	<module>v1_8_R1</module>
@@ -17,7 +17,7 @@
     <module>v1_9_R1</module>
     <module>v1_9_R2</module>
     <module>v1_10_R1</module>
-    <module>Giants</module>
+    <module>plugin</module>
   </modules>
 	
   <repositories>

@@ -3,6 +3,7 @@ package me.Mammothskier.Giants.events;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.Mammothskier.Giants.Files.ConfigValues;
 import me.Mammothskier.Giants.Giants;
 import me.Mammothskier.Giants.Files.Files;
 import me.Mammothskier.Giants.entity.Entities;
@@ -10,6 +11,7 @@ import me.Mammothskier.Giants.entity.Entities;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -34,10 +36,7 @@ public SpawnEvent(Location loc, EntityType entityType) {
 		int size = 0;
 		
 		if (entityType.equals(EntityType.SLIME) || entityType.equals(EntityType.MAGMA_CUBE)) {
-			String s;
-			if (entityType.equals(EntityType.SLIME)) 
-				s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Slime");
-			else s = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Spawn Settings.Size.Giant Lava Slime");
+			String s = entityType.equals(EntityType.SLIME) ? Giants.getProperty(ConfigValues.slimeSize) : Giants.getProperty(ConfigValues.lavaSlimeSize);
 			
 			try {
 				size = Integer.parseInt(s);
@@ -137,44 +136,43 @@ public SpawnEvent(Location loc, EntityType entityType) {
 				((Damageable) entity).setMaxHealth(health);
 				((Damageable) entity).setHealth(health);
 				if (entity.getType() == EntityType.GIANT) {
-					EntityEquipment armour = ((LivingEntity) entity).getEquipment();
-					String config = Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Items");
-					String[] s = config.split(":");
-					
-					float rate = 0f;
-					try {
-						rate = Float.parseFloat(Giants.getProperty(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate"));
-					} catch (Exception e){
-						rate = 0;
-					}
-					
-					try {
-						for (int i = 0; i < s.length; i++) {
-							Material m = Material.getMaterial(s[i].toUpperCase());
-							ItemStack item = new ItemStack(m);
-							if (i == 0) {
-								armour.setHelmet(item);
-								armour.setHelmetDropChance(rate); 
-							} else if (i == 1) {
-								armour.setChestplate(item);
-								armour.setChestplateDropChance(rate); 
-							} else if (i == 2) {
-								armour.setLeggings(item);
-								armour.setLeggingsDropChance(rate); 
-							} else if (i == 3) {
-								armour.setBoots(item);
-								armour.setBootsDropChance(rate); 
-							} else if (i == 4) {
-								armour.setItemInHand(item);
-								armour.setItemInHandDropChance(rate);
-							}
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					EntityEquipment entityArmour = ((LivingEntity) entity).getEquipment();
+
+					float dropChance = 0;
+					entityArmour.setHelmet(parseArmour(ConfigValues.zombieHelmet, dropChance));
+					entityArmour.setHelmetDropChance(dropChance);
+					entityArmour.setChestplate(parseArmour(ConfigValues.zombieChestPlate, dropChance));
+					entityArmour.setChestplateDropChance(dropChance);
+					entityArmour.setLeggings(parseArmour(ConfigValues.zombieLeggings, dropChance));
+					entityArmour.setLeggingsDropChance(dropChance);
+					entityArmour.setBoots(parseArmour(ConfigValues.zombieBoots, dropChance));
+					entityArmour.setBootsDropChance(dropChance);
+					entityArmour.setItemInMainHand(parseArmour(ConfigValues.zombieMainHand, dropChance));
+					entityArmour.setItemInMainHandDropChance(dropChance);
 				}
 			}
 		}
+	}
+
+	private ItemStack parseArmour(ConfigValues value, float dropRate) {
+		String string = Giants.getProperty(value);
+		String[] split = string.split(" ");
+		ItemStack itemStack = null;
+		for (String each : split) {
+			if (each.contains("item:")) {
+				Material material = Material.getMaterial(each.split(":")[1].toUpperCase());
+				itemStack = new ItemStack(material);
+				continue;
+			} else if (each.contains("name:") && itemStack != null) {
+				itemStack.getItemMeta().setDisplayName(each.split(":")[1]);
+				continue;
+			} else if (each.contains("dropRate:")) {
+				dropRate = Float.parseFloat(each.split(":")[1]);
+			}
+			String[] enchant = each.split(":");
+			itemStack.addEnchantment(Enchantment.getByName(enchant[0].toUpperCase()), Integer.parseInt(enchant[1]));
+		}
+		return itemStack;
 	}
 	
 	private Entity spawnMob(EntityType entityType, List<String> l, Location loc, int size) {

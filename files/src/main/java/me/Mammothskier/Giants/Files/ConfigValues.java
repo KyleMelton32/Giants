@@ -1,5 +1,6 @@
 package me.Mammothskier.Giants.Files;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,9 +75,16 @@ public enum ConfigValues {
 	slimeExperience(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Slime", new Integer(5)),
 	lavaSlimeExperience(Files.ENTITIES, "Entities Configuration.Stats.Experience.Giant Lava Slime", new Integer(5)),
 //Armour
-	zombieArmour(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Items", 
-			new String("chainmail_helmet:chainmail_chestplate:chainmail_leggings:chainmail_boots:diamond_sword")),
-	armourDropRate(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Equipped Item Drop Rate", new Float(8.5)),
+	zombieHelmet(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Helmet",
+			new String("diamond_helmet protection:1 unbreaking:1 aqua_affinity:1 projectile_protection:4 name:'Giant Helmet' dropRate:8.5")),
+	zombieChestPlate(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.ChestPlate",
+			new String("diamond_chestplate protection:1 unbreaking:1 fire_protection:1 blast_protection:1 projectile_protection:4 name:'Giant ChestPlate' dropRate:8.5")),
+	zombieLeggings(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Leggings",
+			new String("diamond_leggings protection:1 unbreaking:1 fire_protection:1 blast_protection:1 projectile_protection:4 name:'Giant Leggings' dropRate:8.5")),
+	zombieBoots(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.Boots",
+			new String("diamond_boots protection:1 unbreaking:1 fire_protection:1 blast_protection:1 projectile_protection:4 name:'Giant Boots' dropRate:8.5")),
+	zombieMainHand(Files.ENTITIES, "Entities Configuration.Stats.Equipped Armour.Giant Zombie.MainHand",
+			new String("diamond_sword sharpness:1 fire_aspect:1 unbreaking:1 knockback:1 smite:1 name:'Giant Sword' dropRate:8.5")),
 //Drops
 	dropManager(Files.ENTITIES, "Entities Configuration.Stats.Drops.Enable Drop Manager", true),
 	zombieDrops(Files.ENTITIES, "Entities Configuration.Stats.Drops.Giant Zombie", Arrays.asList(FileSetup.loadDefaultDrop("Giant Zombie"))),
@@ -161,34 +169,10 @@ public enum ConfigValues {
 	private final List<String> _values;
 	private final boolean list;
 	
-	private ConfigValues(Files file, String key, String value) {
-		_files = file;
-		_key = key;
-		_value= value;
-		_values = null;
-		list = false;
-	}
-	
-	private ConfigValues(Files file, String key, int value) {
+	private ConfigValues(Files file, String key, Serializable value) {
 		_files = file;
 		_key = key;
 		_value= value + "";
-		_values = null;
-		list = false;
-	}
-	
-	private ConfigValues(Files file, String key, float value) {
-		_files = file;
-		_key = key;
-		_value= value + "";
-		_values = null;
-		list = false;
-	}
-	
-	private ConfigValues(Files file, String key, boolean value) {
-		_files = file;
-		_key = key;
-		_value = value == true ? "true" : "false";
 		_values = null;
 		list = false;
 	}
