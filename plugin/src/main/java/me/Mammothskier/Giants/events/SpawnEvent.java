@@ -154,7 +154,7 @@ public SpawnEvent(Location loc, EntityType entityType) {
 		}
 	}
 
-	private ItemStack parseArmour(ConfigValues value, float dropRate) {
+	public static ItemStack parseArmour(ConfigValues value, float dropRate) {
 		String string = Giants.getProperty(value);
 		String[] split = string.split(" ");
 		ItemStack itemStack = null;

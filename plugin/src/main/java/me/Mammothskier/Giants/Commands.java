@@ -106,46 +106,24 @@ public class Commands implements CommandExecutor {
 									
 									player.sendMessage(ChatColor.AQUA + "[Giants] " + ChatColor.GREEN + "A Giant has been spawned at x:" + locx + " y:" + locy + "z:" + locz);
 								}
-								
+
 								if (entity != null) {
-									((Damageable) entity).setMaxHealth(health);
-									((Damageable) entity).setHealth(health);
+									entity.setMaxHealth(health);
+									entity.setHealth(health);
 									if (entity.getType() == EntityType.GIANT) {
-										EntityEquipment armour = ((LivingEntity) entity).getEquipment();
-										String config = Giants.getProperty(ConfigValues.zombieArmour);
-										String[] s = config.split(":");
-										
-										float rate = 0f;
-										try {
-											rate = Float.parseFloat(Giants.getProperty(ConfigValues.armourDropRate));
-										} catch (Exception e){
-											rate = 0;
-										}
-										
-										try {
-											for (int i = 0; i < s.length; i++) {
-												Material m = Material.getMaterial(s[i].toUpperCase());
-												ItemStack item = new ItemStack(m);
-												if (i == 0) {
-													armour.setHelmet(item);
-													armour.setHelmetDropChance(rate); 
-												} else if (i == 1) {
-													armour.setChestplate(item);
-													armour.setChestplateDropChance(rate); 
-												} else if (i == 2) {
-													armour.setLeggings(item);
-													armour.setLeggingsDropChance(rate); 
-												} else if (i == 3) {
-													armour.setBoots(item);
-													armour.setBootsDropChance(rate); 
-												} else if (i == 4) {
-													armour.setItemInHand(item);
-													armour.setItemInHandDropChance(rate);
-												}
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
+										EntityEquipment entityArmour = ((LivingEntity) entity).getEquipment();
+
+										float dropChance = 0;
+										entityArmour.setHelmet(SpawnEvent.parseArmour(ConfigValues.zombieHelmet, dropChance));
+										entityArmour.setHelmetDropChance(dropChance);
+										entityArmour.setChestplate(SpawnEvent.parseArmour(ConfigValues.zombieChestPlate, dropChance));
+										entityArmour.setChestplateDropChance(dropChance);
+										entityArmour.setLeggings(SpawnEvent.parseArmour(ConfigValues.zombieLeggings, dropChance));
+										entityArmour.setLeggingsDropChance(dropChance);
+										entityArmour.setBoots(SpawnEvent.parseArmour(ConfigValues.zombieBoots, dropChance));
+										entityArmour.setBootsDropChance(dropChance);
+										entityArmour.setItemInMainHand(SpawnEvent.parseArmour(ConfigValues.zombieMainHand, dropChance));
+										entityArmour.setItemInMainHandDropChance(dropChance);
 									}
 								}
 								return true;
