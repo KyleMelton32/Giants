@@ -230,3 +230,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+v1_10_R1/dependency-reduced-pom.xml
+v1_9_R2/dependency-reduced-pom.xml
+v1_9_R1/dependency-reduced-pom.xml
+v1_8_R3/dependency-reduced-pom.xml
+v1_8_R2/dependency-reduced-pom.xml
+v1_8_R1/dependency-reduced-pom.xml
