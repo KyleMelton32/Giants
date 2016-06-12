@@ -30,14 +30,7 @@
           <artifactId>craftbukkit</artifactId>
         </exclusion>
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
   </dependencies>
-  
-  <repositories>
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-    </repository>
-  </repositories>
 </project>

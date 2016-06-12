@@ -36,7 +36,7 @@
           <artifactId>craftbukkit</artifactId>
         </exclusion>
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -53,7 +53,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>		
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -70,7 +70,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency> 
     
     <dependency>
@@ -87,7 +87,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -104,7 +104,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>   
         
     <dependency>
@@ -121,7 +121,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -138,7 +138,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -155,7 +155,7 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     
     <dependency>
@@ -172,16 +172,11 @@
           <artifactId>Giants-Files</artifactId>
         </exclusion>	
       </exclusions>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
   </dependencies>
   
   <repositories>
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-    </repository>
-    
     <repository>
       <id>confuser-repo</id>
       <url>http://ci.frostcast.net/plugin/repository/everything</url>
