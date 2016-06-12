@@ -30,7 +30,7 @@
           <artifactId>craftbukkit</artifactId>
         </exclusion>
       </exclusions>
-      <optional>false</optional>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
