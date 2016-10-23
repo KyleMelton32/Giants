@@ -2,14 +2,28 @@ package me.Mammothskier.Giants.entity.nms.v1_10_R1;
 
 import me.Mammothskier.Giants.Files.ConfigValues;
 import me.Mammothskier.Giants.Files.FileHandler;
-import net.minecraft.server.v1_10_R1.*;
+import net.minecraft.server.v1_10_R1.BlockPosition;
+import net.minecraft.server.v1_10_R1.EntityGiantZombie;
+import net.minecraft.server.v1_10_R1.EntityHuman;
+import net.minecraft.server.v1_10_R1.EntityIronGolem;
+import net.minecraft.server.v1_10_R1.EntityPigZombie;
+import net.minecraft.server.v1_10_R1.EntityVillager;
+import net.minecraft.server.v1_10_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_10_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_10_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_10_R1.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_10_R1.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_10_R1.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_10_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_10_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_10_R1.World;
+import net.minecraft.server.v1_10_R1.GenericAttributes;
 
 public class CustomEntityGiantZombie extends EntityGiantZombie {
 
-	private static final DataWatcherObject<Boolean> by = DataWatcher.a(CustomEntityGiantZombie.class, DataWatcherRegistry.h);
-
 	public CustomEntityGiantZombie (World world) {
 		super(world);
+
 	}
 
 	protected void r () {
@@ -26,9 +40,7 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
 		return 14.440001F;
 	}
 
-	public void a(boolean flag) {
-		this.getDataWatcher().set(CustomEntityGiantZombie.by, Boolean.valueOf(flag));
-	}
+
 
 	@Override
 	protected void initAttributes() {
