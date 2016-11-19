@@ -25,6 +25,8 @@ import net.minecraft.server.v1_9_R1.GenericAttributes;
 
 public class CustomEntityGiantZombie extends EntityGiantZombie {
 
+	private static final DataWatcherObject<Boolean> by = DataWatcher.a(CustomEntityGiantZombie.class, DataWatcherRegistry.h);
+
 	public CustomEntityGiantZombie (World world) {
 		super(world);
 
@@ -44,7 +46,9 @@ public class CustomEntityGiantZombie extends EntityGiantZombie {
         return 14.440001F;
     }
 
-
+	public void a(boolean flag) {
+		this.getDataWatcher().set(CustomEntityGiantZombie.by, Boolean.valueOf(flag));
+	}
 	
 	@Override
     protected void initAttributes() {
